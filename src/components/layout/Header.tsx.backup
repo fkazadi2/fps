@@ -1,0 +1,584 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { usePathname } from "next/navigation";
+
+// Structure de navigation avec sous-menus
+const navigation = [
+  { name: "Accueil", href: "/", submenu: [] },
+  {
+    name: "Notre raison d'être",
+    href: "/a-propos",
+    submenu: [
+      { name: "Notre histoire", href: "/a-propos/histoire" },
+      { name: "Nos missions", href: "/a-propos/mission" },
+      { name: "Organisation", href: "/a-propos/gouvernance" },
+      { name: "Cadre juridique", href: "/a-propos/juridique" },
+    ],
+  },
+  {
+    name: "Plateau technique",
+    href: "/plateau-technique",
+    submenu: [
+      { name: "Infrastructures sanitaires", href: "/plateau-technique/infrastructures" },
+      { name: "Dotation en médicaments", href: "/plateau-technique/medicaments" },
+      { name: "Dotation en équipements", href: "/plateau-technique/equipements" },
+      { name: "Banque de sang", href: "/plateau-technique/banque-de-sang" },
+      { name: "Classification des ESS", href: "/plateau-technique/classification-ess" },
+    ],
+  },
+  {
+    name: "Gouvernance Santé",
+    href: "/gouvernance-sante",
+    submenu: [
+      { name: "Capacitation Du personnel de santé", href: "/gouvernance-sante/capacitation" },
+      { name: "Qualité des soins", href: "/gouvernance-sante/qualite-soins" },
+      { name: "Système des références", href: "/gouvernance-sante/systeme-references" },
+      { name: "Recherche médicale", href: "/gouvernance-sante/recherche-medicale" },
+    ],
+  },
+  {
+    name: "Médecine traditionnelle",
+    href: "/medecine-traditionnelle",
+    submenu: [
+      { name: "Réglementation", href: "/medecine-traditionnelle/reglementation" },
+      { name: "Formation des praticiens", href: "/medecine-traditionnelle/formation-praticiens" },
+      { name: "Promotion des initiatives locales en santé", href: "/medecine-traditionnelle/promotion-initiatives" },
+    ],
+  },
+  {
+    name: "Publications",
+    href: "/publications",
+    submenu: [
+      { name: "Appel d'offre", href: "/publications/appel-offre" },
+      { name: "Offre d'emploi", href: "/publications/offre-emploi" },
+      { name: "Rapports & Documentations", href: "/publications/rapports-documentations" },
+    ],
+  },
+  {
+    name: "Centre de Presse",
+    href: "/centre-presse",
+    submenu: [
+      { name: "Presse", href: "/centre-presse/presse" },
+      { name: "Galerie Photo", href: "/centre-presse/galerie" },
+      { name: "Événements", href: "/centre-presse/evenements" },
+    ],
+  },
+
+];
+
+export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSubmenu, setActiveSubmenu] = useState<number | null>(null);
+  const [mobileActiveSubmenu, setMobileActiveSubmenu] = useState<number | null>(null);
+  const [isMenuHovered, setIsMenuHovered] = useState(false);
+  const [contactsDropdownOpen, setContactsDropdownOpen] = useState(false);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const currentPath = usePathname();
+
+  // Gestion de l'ouverture des sous-menus pour desktop uniquement
+  const handleSubmenuToggle = (index: number) => {
+    if (activeSubmenu === index) {
+      setActiveSubmenu(null);
+    } else {
+      setActiveSubmenu(index);
+    }
+  };
+
+  // Gestion des sous-menus mobiles (complètement séparée)
+  const toggleMobileSubmenu = (index: number) => {
+    setMobileActiveSubmenu(mobileActiveSubmenu === index ? null : index);
+  };
+
+  // Ouvrir le sous-menu au survol
+  const handleMouseEnter = (index: number) => {
+    // Annuler tout délai de fermeture en cours
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    
+    setIsMenuHovered(true);
+    setActiveSubmenu(index);
+  };
+
+  // Préparer à fermer le sous-menu, mais avec un délai plus long pour une meilleure UX
+  const handleMenuMouseLeave = () => {
+    setIsMenuHovered(false);
+    
+    // Ajouter un délai avant de fermer pour permettre au curseur d'entrer dans le sous-menu
+    closeTimeoutRef.current = setTimeout(() => {
+      if (!isMenuHovered) {
+        setActiveSubmenu(null);
+      }
+    }, 500); // Augmentation du délai à 500ms pour une meilleure UX
+  };
+
+  // Quand la souris entre dans le sous-menu
+  const handleSubmenuMouseEnter = () => {
+    // Annuler tout délai de fermeture en cours
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    
+    setIsMenuHovered(true);
+  };
+
+  // Gérer les clics en dehors du menu pour fermer les sous-menus
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      
+      // Vérifier si le clic est dans le menu principal
+      if (menuRef.current && !menuRef.current.contains(target)) {
+        setActiveSubmenu(null);
+      }
+      
+      // Vérifier si le clic est dans le dropdown Contacts
+      const contactsDropdown = document.querySelector('.contacts-dropdown');
+      const contactsButton = document.querySelector('.contacts-button');
+      
+      if (contactsDropdown && !contactsDropdown.contains(target) && 
+          contactsButton && !contactsButton.contains(target)) {
+        setContactsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <header className="fixed w-full z-50 shadow-lg">
+      {/* Bande supérieure redessinée */}
+      <div className="bg-gradient-to-r from-white via-gray-50 to-white border-b-2 border-[var(--accent)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          {/* Logo et nom */}
+          <div className="flex items-center group">
+            <Link href="/" className="flex items-center">
+              <div className="relative">
+                <div className="absolute inset-0 bg-[var(--primary)] opacity-20 rounded-full blur-lg group-hover:opacity-30 transition-opacity"></div>
+                <Image 
+                  src="/images/logo-fps.jpg" 
+                  alt="Logo FPS" 
+                  width={60} 
+                  height={60} 
+                  className="rounded-full ring-4 ring-white shadow-xl transform group-hover:scale-105 transition-transform duration-300 relative z-10"
+                />
+              </div>
+              <div className="ml-4">
+                <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] to-[var(--danger)] font-heading">
+                  Fonds de Promotion de la Santé
+                </div>
+                <div className="text-sm text-[var(--secondary)] font-semibold tracking-wide">
+                  République Démocratique du Congo 🇨🇩
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* Coordonnées et bouton Contacts */}
+          <div className="hidden md:flex items-center space-x-6">
+            <div className="flex space-x-6 text-sm">
+              <div className="group flex items-center px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">
+                <div className="p-2 bg-gradient-to-br from-[var(--primary)] to-blue-600 rounded-lg mr-2 group-hover:scale-110 transition-transform">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <span className="text-gray-700 font-medium">secretariat@fps.cd</span>
+              </div>
+              <div className="group flex items-center px-3 py-2 rounded-lg hover:bg-green-50 transition-colors">
+                <div className="p-2 bg-gradient-to-br from-green-500 to-green-600 rounded-lg mr-2 group-hover:scale-110 transition-transform">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <span className="text-gray-700 font-medium">+243 81 911 5812</span>
+              </div>
+            </div>
+            
+            {/* Bouton Contacts moderne */}
+            <div className="relative">
+              <div className="flex items-center bg-gradient-to-r from-[var(--danger)] to-red-600 hover:from-red-700 hover:to-red-800 rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:scale-105 contacts-button">
+                <Link
+                  href="/contacts"
+                  className="text-white px-5 py-3 text-sm font-bold"
+                >
+                  📞 Contacts
+                </Link>
+                <button
+                  className="text-white hover:text-gray-200 px-3 py-3 border-l border-white/30"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setContactsDropdownOpen(!contactsDropdownOpen);
+                  }}
+                >
+                  <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${contactsDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+              </div>
+              {contactsDropdownOpen && (
+                <div className="absolute right-0 z-50 mt-3 w-64 origin-top-right rounded-xl bg-white shadow-2xl border-2 border-[var(--accent)] overflow-hidden contacts-dropdown animate-slideDown">
+                  <div className="py-2">
+                    <Link
+                      href="/contacts/nous-visiter"
+                      className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:text-[var(--primary)] cursor-pointer transition-all group"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setContactsDropdownOpen(false);
+                      }}
+                    >
+                      <div className="p-2 bg-blue-100 rounded-lg group-hover:bg-[var(--primary)] transition-colors">
+                        <svg className="w-4 h-4 text-[var(--primary)] group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                      </div>
+                      <span className="font-semibold">Nous visiter</span>
+                    </Link>
+                    <Link
+                      href="/contacts/nous-ecrire"
+                      className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-green-50 hover:to-green-100 hover:text-green-700 cursor-pointer transition-all group"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setContactsDropdownOpen(false);
+                      }}
+                    >
+                      <div className="p-2 bg-green-100 rounded-lg group-hover:bg-green-600 transition-colors">
+                        <svg className="w-4 h-4 text-green-600 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <span className="font-semibold">Nous écrire</span>
+                    </Link>
+                    <Link
+                      href="/contacts/adresses-provinces"
+                      className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-purple-100 hover:text-purple-700 cursor-pointer transition-all group"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setContactsDropdownOpen(false);
+                      }}
+                    >
+                      <div className="p-2 bg-purple-100 rounded-lg group-hover:bg-purple-600 transition-colors">
+                        <svg className="w-4 h-4 text-purple-600 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                        </svg>
+                      </div>
+                      <span className="font-semibold">Nos adresses en provinces</span>
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bande de navigation principale avec Mega Menus */}
+      <div className="bg-gradient-to-r from-[var(--primary)] via-blue-700 to-[var(--secondary)] text-white relative shadow-lg">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8" aria-label="Global">
+          <div ref={menuRef} className="hidden lg:flex lg:gap-x-2 lg:flex-1 justify-center">
+            {navigation.map((item, index) => {
+              const isActive = currentPath === item.href || 
+                              (currentPath?.startsWith(item.href) && item.href !== "/");
+              
+              return (
+                <div 
+                  key={item.name} 
+                  className="relative group"
+                  onMouseLeave={handleMenuMouseLeave}
+                >
+                  {item.submenu.length > 0 ? (
+                    <>
+                      <button
+                        className={`flex items-center px-4 py-3 text-sm font-bold leading-6 text-white hover:text-[var(--accent)] transition-all rounded-lg hover:bg-white/10 ${isActive ? 'text-[var(--accent)] bg-white/10' : ''} font-heading`}
+                        onClick={() => handleSubmenuToggle(index)}
+                        onMouseEnter={() => handleMouseEnter(index)}
+                      >
+                        {item.name}
+                        <ChevronDown className={`ml-1.5 h-4 w-4 transition-transform duration-300 ${activeSubmenu === index ? 'rotate-180' : ''}`} />
+                      </button>
+                      
+                      {/* Indicateur actif */}
+                      {isActive && (
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--accent)] to-orange-400 rounded-t-full"></div>
+                      )}
+                      
+                      {/* Mega Menu avec Images */}
+                      {activeSubmenu === index && (
+                        <div 
+                          className="absolute left-1/2 transform -translate-x-1/2 z-50 mt-3 w-screen max-w-3xl origin-top rounded-2xl bg-white shadow-2xl border-2 border-[var(--accent)] overflow-hidden animate-slideDown"
+                          onMouseEnter={handleSubmenuMouseEnter}
+                          onMouseLeave={handleMenuMouseLeave}
+                        >
+                          <div className="p-6">
+                            {/* En-tête du mega menu */}
+                            <div className="mb-6 pb-4 border-b-2 border-gray-100">
+                              <h3 className="text-xl font-bold text-[var(--primary)] mb-1">
+                                {item.name}
+                              </h3>
+                              <p className="text-sm text-gray-600">
+                                Découvrez nos services et initiatives
+                              </p>
+                            </div>
+
+                            {/* Grille des sous-menus */}
+                            <div className="grid grid-cols-2 gap-4">
+                              {item.submenu.map((subItem, subIndex) => (
+                                <Link
+                                  key={subItem.name}
+                                  href={subItem.href}
+                                  className="group/item flex items-start gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 transition-all duration-300 border-2 border-transparent hover:border-[var(--accent)]"
+                                  onClick={() => setActiveSubmenu(null)}
+                                >
+                                  {/* Placeholder Image */}
+                                  <div className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-gradient-to-br from-[var(--primary)] to-[var(--danger)] relative group-hover/item:scale-110 transition-transform duration-300">
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                      <svg className="w-10 h-10 text-white opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                      </svg>
+                                    </div>
+                                    {/* Badge numéro */}
+                                    <div className="absolute top-1 right-1 w-6 h-6 bg-white rounded-full flex items-center justify-center text-xs font-bold text-[var(--primary)]">
+                                      {subIndex + 1}
+                                    </div>
+                                  </div>
+
+                                  {/* Contenu */}
+                                  <div className="flex-1">
+                                    <h4 className={`font-bold text-gray-900 mb-1 group-hover/item:text-[var(--primary)] transition-colors ${currentPath === subItem.href ? 'text-[var(--danger)]' : ''}`}>
+                                      {subItem.name}
+                                    </h4>
+                                    <p className="text-xs text-gray-600 line-clamp-2">
+                                      En savoir plus sur {subItem.name.toLowerCase()}
+                                    </p>
+                                    {/* Flèche */}
+                                    <div className="mt-2 flex items-center text-[var(--primary)] text-xs font-semibold opacity-0 group-hover/item:opacity-100 transition-opacity">
+                                      Découvrir
+                                      <svg className="w-3 h-3 ml-1 transform group-hover/item:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                      </svg>
+                                    </div>
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <div className="relative">
+                      <Link
+                        href={item.href}
+                        className={`px-4 py-3 text-sm font-bold leading-6 text-white hover:text-[var(--accent)] transition-all block rounded-lg hover:bg-white/10 ${isActive ? 'text-[var(--accent)] bg-white/10' : ''} font-heading`}
+                      >
+                        {item.name}
+                      </Link>
+                      {isActive && (
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--accent)] to-orange-400 rounded-t-full"></div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="flex lg:hidden">
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-xl p-3 text-white bg-white/10 hover:bg-white/20 transition-all transform hover:scale-105"
+              onClick={() => setMobileMenuOpen(true)}
+            >
+              <span className="sr-only">Ouvrir le menu</span>
+              <Menu className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+        </nav>
+        {/* Ligne divisée en bas du header : dégradés modernes */}
+        <div className="absolute bottom-0 left-0 w-[70%] h-1 bg-gradient-to-r from-[var(--accent)] to-yellow-500"></div>
+        <div className="absolute bottom-0 right-0 w-[30%] h-1 bg-gradient-to-l from-[var(--danger)] to-red-600"></div>
+      </div>
+
+      {/* Styles pour les animations */}
+      <style jsx>{`
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-slideDown {
+          animation: slideDown 0.3s ease-out;
+        }
+      `}</style>
+      
+      {/* Mobile menu moderne */}
+      <div className={`fixed inset-0 z-50 ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+        <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gradient-to-br from-white via-gray-50 to-blue-50 px-6 py-6 sm:max-w-sm shadow-2xl">
+          <div className="flex items-center justify-between pb-6 border-b-2 border-[var(--accent)]">
+            <Link href="/" className="flex items-center group" onClick={() => setMobileMenuOpen(false)}>
+              <div className="relative">
+                <div className="absolute inset-0 bg-[var(--primary)] opacity-20 rounded-full blur-md group-hover:opacity-30 transition-opacity"></div>
+                <Image 
+                  src="/images/logo-fps.jpg" 
+                  alt="Logo FPS" 
+                  width={50} 
+                  height={50} 
+                  className="rounded-full ring-2 ring-white shadow-lg relative z-10"
+                />
+              </div>
+              <div className="ml-3">
+                <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] to-[var(--danger)]">
+                  FPS
+                </span>
+                <div className="text-xs text-gray-600">Menu</div>
+              </div>
+            </Link>
+            <button
+              type="button"
+              className="p-2.5 rounded-xl bg-gradient-to-r from-[var(--danger)] to-red-600 text-white hover:from-red-700 hover:to-red-800 transition-all transform hover:scale-110"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <span className="sr-only">Fermer le menu</span>
+              <X className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+          <div className="mt-6 flow-root">
+            <div className="space-y-3 py-6">
+              {/* Section Contacts pour mobile */}
+              <div className="space-y-2 mb-4">
+                <div className="flex w-full items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-red-50 to-red-100 border-2 border-red-200">
+                  <div className="p-2 bg-gradient-to-r from-[var(--danger)] to-red-600 rounded-lg">
+                    <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  </div>
+                  <button
+                    className="flex-grow text-left font-bold text-[var(--danger)]"
+                    onClick={() => setMobileActiveSubmenu(mobileActiveSubmenu === -1 ? null : -1)}
+                  >
+                    Contacts
+                  </button>
+                  <ChevronDown 
+                    className={`h-5 w-5 transform text-[var(--danger)] transition-transform duration-300 ${mobileActiveSubmenu === -1 ? 'rotate-180' : ''}`}
+                    onClick={() => setMobileActiveSubmenu(mobileActiveSubmenu === -1 ? null : -1)}
+                  />
+                </div>
+                {mobileActiveSubmenu === -1 && (
+                  <div className="ml-4 space-y-2 py-2 animate-slideDown">
+                    <Link
+                      href="/contacts/nous-visiter"
+                      className="flex items-center gap-3 px-4 py-3 rounded-lg bg-white hover:bg-blue-50 transition-colors border border-gray-200"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      </svg>
+                      <span className="font-semibold text-gray-700">Nous visiter</span>
+                    </Link>
+                    <Link
+                      href="/contacts/nous-ecrire"
+                      className="flex items-center gap-3 px-4 py-3 rounded-lg bg-white hover:bg-green-50 transition-colors border border-gray-200"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      <span className="font-semibold text-gray-700">Nous écrire</span>
+                    </Link>
+                    <Link
+                      href="/contacts/adresses-provinces"
+                      className="flex items-center gap-3 px-4 py-3 rounded-lg bg-white hover:bg-purple-50 transition-colors border border-gray-200"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <svg className="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                      </svg>
+                      <span className="font-semibold text-gray-700">Nos adresses en provinces</span>
+                    </Link>
+                  </div>
+                )}
+              </div>
+                
+                {navigation.map((item, index) => {
+                  const isActive = currentPath === item.href || 
+                                  (currentPath?.startsWith(item.href) && item.href !== "/");
+                  
+                  return (
+                    <div key={item.name} className="space-y-2">
+                      {item.submenu.length > 0 ? (
+                        <>
+                          <div className={`flex w-full items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive ? 'bg-gradient-to-r from-blue-50 to-blue-100 border-2 border-blue-200' : 'bg-white border-2 border-gray-200 hover:border-[var(--accent)]'}`}>
+                            <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-[var(--primary)]' : 'bg-gray-300'}`}></div>
+                            <button
+                              className="flex-grow text-left font-bold text-[var(--primary)]"
+                              onClick={() => toggleMobileSubmenu(index)}
+                            >
+                              {item.name}
+                            </button>
+                            <ChevronDown 
+                              className={`h-5 w-5 transform text-[var(--primary)] transition-transform duration-300 ${mobileActiveSubmenu === index ? 'rotate-180' : ''}`}
+                              onClick={() => toggleMobileSubmenu(index)}
+                            />
+                          </div>
+                          {mobileActiveSubmenu === index && (
+                            <div className="ml-4 space-y-2 py-2 animate-slideDown">
+                              {item.submenu.map((subItem, subIndex) => (
+                                <Link
+                                  key={subItem.name}
+                                  href={subItem.href}
+                                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all border ${currentPath === subItem.href ? 'bg-gradient-to-r from-[var(--primary)] to-blue-600 text-white border-transparent' : 'bg-white hover:bg-gray-50 text-gray-700 border-gray-200'}`}
+                                  onClick={() => setMobileMenuOpen(false)}
+                                >
+                                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${currentPath === subItem.href ? 'bg-white text-[var(--primary)]' : 'bg-gray-100 text-gray-600'}`}>
+                                    {subIndex + 1}
+                                  </div>
+                                  <span className="font-semibold">{subItem.name}</span>
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all ${isActive ? 'bg-gradient-to-r from-[var(--primary)] to-blue-600 text-white' : 'bg-white text-[var(--primary)] hover:bg-gray-50 border-2 border-gray-200'}`}
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-white' : 'bg-gray-300'}`}></div>
+                          {item.name}
+                        </Link>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div 
+          className="fixed inset-0 z-40 bg-black/20" 
+          onClick={() => setMobileMenuOpen(false)}
+        ></div>
+      </div>
+    </header>
+  );
+} 

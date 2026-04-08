@@ -1,0 +1,97 @@
+/* Classes de couleur utilitaires pour remplacer les tons de bleu Tailwind par nos variables CSS */
+
+/* Textes */
+.text-fps-primary {
+  color: var(--primary);
+}
+
+.text-fps-secondary {
+  color: var(--secondary);
+}
+
+.text-fps-accent {
+  color: var(--accent);
+}
+
+.text-fps-danger {
+  color: var(--danger);
+}
+
+/* Arrière-plans */
+.bg-fps-primary {
+  background-color: var(--primary);
+}
+
+.bg-fps-primary-light {
+  background-color: rgba(0, 91, 176, 0.1); /* Version légère du bleu principal */
+}
+
+.bg-fps-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-fps-accent {
+  background-color: var(--accent);
+}
+
+.bg-fps-danger {
+  background-color: var(--danger);
+}
+
+.bg-fps-danger-light {
+  background-color: rgba(225, 0, 0, 0.1); /* Version légère du rouge */
+}
+
+/* Bordures */
+.border-fps-primary {
+  border-color: var(--primary);
+}
+
+.border-fps-secondary {
+  border-color: var(--secondary);
+}
+
+.border-fps-accent {
+  border-color: var(--accent);
+}
+
+.border-fps-danger {
+  border-color: var(--danger);
+}
+
+/* Hovers */
+.hover\:bg-fps-primary:hover {
+  background-color: var(--primary);
+}
+
+.hover\:bg-fps-primary-light:hover {
+  background-color: rgba(0, 91, 176, 0.1);
+}
+
+.hover\:bg-fps-danger:hover {
+  background-color: var(--danger);
+}
+
+.hover\:bg-fps-danger-dark:hover {
+  background-color: #c40000; /* Version plus foncée du rouge pour hover */
+}
+
+.hover\:text-fps-primary:hover {
+  color: var(--primary);
+}
+
+.hover\:text-fps-accent:hover {
+  color: var(--accent);
+}
+
+.hover\:text-fps-danger:hover {
+  color: var(--danger);
+}
+
+.hover\:border-fps-primary:hover {
+  border-color: var(--primary);
+}
+
+.hover\:border-fps-danger:hover {
+  border-color: var(--danger);
+} 

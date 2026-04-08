@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: fps_mongodb_dev
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./backup:/backup
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: fps_admin
+      MONGO_INITDB_ROOT_PASSWORD: fps_secure_2026
+      MONGO_INITDB_DATABASE: fps_website
+
+volumes:
+  mongodb_data:
+    driver: local
