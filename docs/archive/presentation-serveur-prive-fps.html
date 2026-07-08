@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FPS — Hébergement sur Serveur Privé (On-Premise)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --fps-blue: #003087;
+    --fps-blue-light: #0052cc;
+    --fps-green: #00875a;
+    --fps-gold: #f59e0b;
+    --fps-red: #dc2626;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-600: #4b5563;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0f1e;
+    color: #e2e8f0;
+    line-height: 1.6;
+  }
+
+  .slide {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  .slide-cover {
+    background: linear-gradient(135deg, #003087 0%, #001a4d 50%, #0a0f1e 100%);
+    align-items: center;
+    text-align: center;
+  }
+  .slide-cover::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,82,204,0.3) 0%, transparent 70%);
+  }
+
+  .logo-badge {
+    width: 100px; height: 100px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px; margin: 0 auto 32px;
+    box-shadow: 0 20px 60px rgba(245,158,11,0.4);
+    position: relative; z-index: 1;
+  }
+  .cover-tag {
+    display: inline-block;
+    background: rgba(245,158,11,0.2);
+    border: 1px solid rgba(245,158,11,0.5);
+    color: #f59e0b;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    position: relative; z-index: 1;
+  }
+  .cover-title {
+    font-size: 56px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .cover-title span { color: #f59e0b; }
+  .cover-subtitle {
+    font-size: 22px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 48px;
+    position: relative; z-index: 1;
+  }
+
+  .section-sep {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 40px;
+  }
+  .section-num {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, #0052cc, #003087);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 800; color: #fff;
+  }
+  .section-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .section-title span { color: #f59e0b; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .card-title { font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .card-desc { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+  /* ── Diagram On-Premise ── */
+  .infra-container {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 24px;
+    padding: 40px;
+    margin-top: 10px;
+  }
+  .infra-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .vps-box {
+    border: 2px dashed rgba(52,211,153,0.3);
+    border-radius: 24px;
+    padding: 30px;
+    width: 100%;
+    margin: 20px 0;
+    position: relative;
+    background: rgba(0,135,90,0.02);
+  }
+  .vps-label {
+    position: absolute;
+    top: -14px; left: 30px;
+    background: #0a0f1e;
+    padding: 2px 16px;
+    font-size: 12px; font-weight: 800; color: #34d399;
+    letter-spacing: 1px;
+  }
+
+  .nodes-row { display: flex; gap: 24px; justify-content: center; width: 100%; }
+  .node {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    min-width: 140px;
+  }
+  .node-icon { font-size: 24px; margin-bottom: 8px; }
+  .node-name { font-size: 13px; font-weight: 700; color: #fff; }
+  .node-tech { font-size: 10px; color: rgba(255,255,255,0.4); }
+
+  .connector { height: 30px; width: 2px; background: rgba(255,255,255,0.1); margin: 4px 0; }
+
+  .slide-number {
+    position: absolute; bottom: 30px; right: 40px;
+    color: rgba(255,255,255,0.1); font-size: 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="slide slide-cover">
+  <div class="logo-badge">🏢</div>
+  <div class="cover-tag">Solution d'Hébergement Interne</div>
+  <h1 class="cover-title">Déploiement sur <span>Serveur Privé</span></h1>
+  <p class="cover-subtitle">Fonds de Promotion pour la Santé — Souveraineté &amp; Sécurité des Données</p>
+  <div class="cover-date">Présenté le 16 mars 2026 — Configuration On-Premise</div>
+  <div class="slide-number">1 / 5</div>
+</div>
+
+<div class="slide">
+  <div class="section-sep">
+    <div class="section-num">01</div>
+    <h2 class="section-title">Pourquoi le <span>Serveur Privé ?</span></h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-title">Souveraineté des données</div>
+      <div class="card-desc">Toutes les données institutionnelles et les informations de santé restent physiquement dans les locaux de la société.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Sécurité Réseau</div>
+      <div class="card-desc">Intégration directe avec le firewall et les politiques de sécurité internes de la société (DMZ).</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Contrôle Total</div>
+      <div class="card-desc">Maîtrise complète des ressources matérielles, des sauvegardes internes et de la maintenance.</div>
+    </div>
+  </div>
+  <div class="slide-number">2 / 5</div>
+</div>
+
+<div class="slide">
+  <div class="section-sep">
+    <div class="section-num">02</div>
+    <h2 class="section-title">Organigramme <span>d'Infrastructure</span></h2>
+  </div>
+  <div class="infra-container">
+    <div class="infra-diagram">
+      <div class="node" style="border-color:#60a5fa; background:rgba(96,165,250,0.1);">
+        <div class="node-icon">🌍</div>
+        <div class="node-name">Utilisateurs Externes</div>
+        <div class="node-tech">Accès via Internet</div>
+      </div>
+      <div class="connector"></div>
+      <div class="node" style="border-color:#f87171; background:rgba(248,113,113,0.1);">
+        <div class="node-icon">🛡️</div>
+        <div class="node-name">Firewall Société</div>
+        <div class="node-tech">Filtrage DMZ / IPS</div>
+      </div>
+      
+      <div class="vps-box">
+        <span class="vps-label">SERVEUR PRIVÉ (Linux Ubuntu/Debian)</span>
+        <div class="nodes-row">
+          <div class="node">
+            <div class="node-icon">🔒</div>
+            <div class="node-name">Nginx Proxy</div>
+            <div class="node-tech">SSL/TLS Interne</div>
+          </div>
+          <div class="node" style="border-color:#6366f1; background:rgba(99,102,241,0.1);">
+            <div class="node-icon">▲</div>
+            <div class="node-name">Next.js 16</div>
+            <div class="node-tech">Port 3000 (PM2)</div>
+          </div>
+          <div class="node" style="border-color:#10b981; background:rgba(16,185,129,0.1);">
+            <div class="node-icon">🍃</div>
+            <div class="node-name">MongoDB 7.0</div>
+            <div class="node-tech">Docker / On-site</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="connector"></div>
+      <div class="nodes-row">
+        <div class="node">
+          <div class="node-icon">💾</div>
+          <div class="node-name">Backup Local</div>
+          <div class="node-tech">NAS / Stockage Interne</div>
+        </div>
+        <div class="node">
+          <div class="node-icon">⛓️</div>
+          <div class="node-name">Réseau Local (LAN)</div>
+          <div class="node-tech">Accès Administrateurs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">3 / 5</div>
+</div>
+
+<div class="slide">
+  <div class="section-sep">
+    <div class="section-num">03</div>
+    <h2 class="section-title">Configuration <span>Matérielle Requise</span></h2>
+  </div>
+  <div class="cards-grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="card">
+      <div class="card-title">Serveur Applicatif (Virtuel ou Physique)</div>
+      <div class="card-desc" style="line-height:2.2;">
+        • <strong>CPU:</strong> 4 cœurs minimum<br>
+        • <strong>RAM:</strong> 8 Go (16 Go recommandé)<br>
+        • <strong>SSD:</strong> 100 Go NVMe/SAS<br>
+        • <strong>OS:</strong> Ubuntu 22.04 LTS
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Sécurité &amp; Réseau</div>
+      <div class="card-desc" style="line-height:2.2;">
+        • <strong>Ports:</strong> 80, 443, 22 ouverts<br>
+        • <strong>SSL:</strong> Certificat institutionnel (.crt/.key)<br>
+        • <strong>DNS:</strong> Pointage vers IP locale / publique<br>
+        • <strong>VPN:</strong> Pour administration sécurisée
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">4 / 5</div>
+</div>
+
+<div class="slide" style="text-align:center;">
+  <h1 style="font-size:48px; font-weight:900; color:#fff; margin-bottom:20px;">Prêt pour l'Installation</h1>
+  <p style="font-size:18px; color:rgba(255,255,255,0.6); margin-bottom:40px;">Cette configuration assure une autonomie technologique complète pour le FPS.</p>
+  <div class="nodes-row">
+    <div class="node">✅ Setup DB Terminé</div>
+    <div class="node">✅ App Build Validé</div>
+    <div class="node">✅ Sécurité JWT Active</div>
+  </div>
+  <div class="slide-number">5 / 5</div>
+</div>
+
+</body>
+</html>
