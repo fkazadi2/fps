@@ -15,6 +15,7 @@ const navigation = {
     { name: "Notre raison d'être", href: "/a-propos" },
     { name: "Plateau technique", href: "/plateau-technique" },
     { name: "Gouvernance Santé", href: "/gouvernance-sante" },
+    { name: "Production locale des médicaments", href: "/ce-que-nous-faisons/production-locale" },
     { name: "Médecine traditionnelle", href: "/medecine-traditionnelle" },
     { name: "Publications", href: "/publications" },
     { name: "Centre de Presse", href: "/centre-presse" },
@@ -28,16 +29,14 @@ const navigation = {
     ],
     "Plateau technique": [
       { name: "Infrastructures sanitaires", href: "/plateau-technique/infrastructures" },
-      { name: "Dotation en médicaments", href: "/plateau-technique/medicaments" },
-      { name: "Dotation en équipements", href: "/plateau-technique/equipements" },
+      { name: "Financement en médicaments", href: "/plateau-technique/medicaments" },
+      { name: "Financement et dotation en équipements", href: "/plateau-technique/equipements" },
       { name: "Banque de sang", href: "/plateau-technique/banque-de-sang" },
-      { name: "Classification des ESS", href: "/plateau-technique/classification-ess" },
     ],
     "Gouvernance Santé": [
-      { name: "Capacitation Du personnel de santé", href: "/gouvernance-sante/capacitation" },
-      { name: "Qualité des soins", href: "/gouvernance-sante/qualite-soins" },
+      { name: "Financement du renforcement des capacités des ressources humaines du secteur santé", href: "/gouvernance-sante/capacitation" },
       { name: "Système des références", href: "/gouvernance-sante/systeme-references" },
-      { name: "Recherche médicale", href: "/gouvernance-sante/recherche-medicale" },
+      { name: "Recherche en médecine", href: "/gouvernance-sante/recherche-medicale" },
     ],
     "Médecine traditionnelle": [
       { name: "Réglementation", href: "/medecine-traditionnelle/reglementation" },
@@ -48,18 +47,16 @@ const navigation = {
       { name: "Offre d'emploi", href: "/publications/offre-emploi" },
       { name: "Appel d'offre", href: "/publications/appel-offre" },
       { name: "Rapports & Documentations", href: "/publications/rapports-documentations" },
-      { name: "Gouvernance & Statuts", href: "/publications/rapports-documentations?type=gouvernance" },
-      { name: "Bulletins d'Information", href: "/publications/rapports-documentations?type=bulletin" },
     ],
     "Centre de Presse": [
       { name: "Presse", href: "/centre-presse/presse" },
       { name: "Galerie Photo", href: "/centre-presse/galerie" },
       { name: "Événements", href: "/centre-presse/evenements" },
+      { name: "Direction de communication", href: "/centre-presse/direction-de-communication" },
     ],
     "Contacts": [
       { name: "Nous visiter", href: "/contacts/nous-visiter" },
-      { name: "Nous écrire", href: "/contacts/nous-ecrire" },
-      { name: "Nos adresses en provinces", href: "/contacts/adresses-provinces" },
+      { name: "Commissions provinciales FPS", href: "/contacts/adresses-provinces" },
     ],
   },
   social: [
@@ -172,7 +169,7 @@ export default function Footer() {
             </div>
 
             <p className="mt-2 text-sm text-blue-100">
-              Le Fonds de Promotion de la Santé (FPS) est un établissement public à caractère administratif créé par le Décret n° 22/13 du 09 avril 2022, pour contribuer à l&apos;amélioration de la santé publique en RDC.
+              Le Fonds de Promotion de la Santé (FPS) est un établissement public à caractère administratif créé par la Loi n°18/035 du 13 décembre 2018, pour contribuer à l&apos;amélioration de la santé publique en RDC.
             </p>
 
             <div className="mt-6">
@@ -182,7 +179,7 @@ export default function Footer() {
                   <Building className="h-4 w-4 text-[var(--accent)] mt-0.5 mr-2 flex-shrink-0" />
                   <div>
                     <p>16, Av. Lukusa,</p>
-                    <p>Imm Les Palmiers, Apt 2A,</p>
+                    <p>Imm Les Palmiers, Apt 3B,</p>
                     <p>Kinshasa-Gombe, RDC</p>
                   </div>
                 </div>

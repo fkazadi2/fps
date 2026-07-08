@@ -21,6 +21,7 @@ export default function Galerie() {
         <PageHeader 
           title="Galerie photo"
           description="Découvrez en images les événements et activités du FPS à travers la République Démocratique du Congo"
+          backgroundImage="/images/banners/centre-presse/galerie-photo.jpg"
           icon={Camera}
           variant="rose"
           breadcrumbs={[
@@ -29,12 +30,7 @@ export default function Galerie() {
           ]}
         />
 
-        {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
-          icon={Camera}
-          label="Médiathèque et Archives Photographiques du FPS"
-          variant="red"
-        />
+
 
         {/* Section de filtrage */}
         <section className="bg-white py-8 border-b">
@@ -175,7 +171,7 @@ export default function Galerie() {
                 </div>
                 <div className="p-4">
                   <p className="text-gray-600 mb-4">
-                    Briefing hebdomadaire de la Direction générale du FPS présidé par le DGE Marius MIKA ce 17.03.2025.
+                    Briefing hebdomadaire de la Direction générale du FPS présidé par le DGE Marius MIKA NYEMBO ce 17.03.2025.
                   </p>
                   <div className="flex justify-between items-center">
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--accent)]/20 text-[var(--secondary)]">
@@ -210,7 +206,7 @@ export default function Galerie() {
                 </div>
                 <div className="p-4">
                   <p className="text-gray-600 mb-4">
-                    Réunion hebdomadaire de la Direction générale du Fonds de Promotion de la Santé dirigée par le DGE Marius Mika. 27.01.2025
+                    Réunion hebdomadaire de la Direction générale du Fonds de Promotion de la Santé dirigée par le DG du FPS Marius MIKA NYEMBO. 27.01.2025
                   </p>
                   <div className="flex justify-between items-center">
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--accent)]/20 text-[var(--secondary)]">

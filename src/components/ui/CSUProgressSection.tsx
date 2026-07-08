@@ -144,10 +144,10 @@ export default function CSUProgressSection() {
             et des partenariats stratégiques dans toutes les provinces de la RDC.
           </p>
           <Link
-            href="/programmes"
+            href="/gouvernance-sante"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[var(--primary)] rounded-xl font-semibold hover:bg-opacity-90 transition-all transform hover:scale-105 shadow-2xl"
           >
-            Découvrir nos programmes
+            Gouvernance santé
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>

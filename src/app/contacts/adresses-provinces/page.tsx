@@ -9,22 +9,16 @@ export default function AdressesProvincesPage() {
     <MainLayout>
       <div className="bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
-          title="Nos adresses en provinces"
+        <PageHeader
+          title="Commissions provinciales FPS"
           description="Retrouvez les coordonnées de nos antennes provinciales à travers la RDC"
+          backgroundImage="/images/location.jpg"
           icon={Building}
           variant="slate"
           breadcrumbs={[
             { name: "Contacts", href: "/contacts" },
             { name: "Adresses Provinces", href: "/contacts/adresses-provinces" }
           ]}
-        />
-
-        {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
-          icon={Building}
-          label="Décentralisation et Présence Nationale du FPS"
-          variant="blue"
         />
 
         <div className="max-w-7xl mx-auto px-4 py-12">
@@ -63,13 +57,13 @@ export default function AdressesProvincesPage() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-fps-primary mb-8">Antennes provinciales</h2>
+          <h2 className="text-2xl font-bold text-fps-primary mb-8">Commissions provinciales</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {/* Antenne Bas-Congo */}
             <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-center mb-4">
                 <Building className="h-6 w-6 text-fps-primary mr-3" />
-                <h3 className="text-xl font-semibold text-fps-primary">Antenne Bas-Congo</h3>
+                <h3 className="text-xl font-semibold text-fps-primary">Commission Kongo-Central</h3>
               </div>
               <div className="space-y-3">
                 <div className="flex items-start">
@@ -81,7 +75,7 @@ export default function AdressesProvincesPage() {
                 </div>
                 <div className="flex items-center">
                   <Phone className="h-4 w-4 text-gray-500 mr-2" />
-                  <span className="text-sm text-gray-600">+243 XX XXX XXXX</span>
+                  <span className="text-sm text-gray-600">+243 819 115 812</span>
                 </div>
                 <div className="flex items-center">
                   <Mail className="h-4 w-4 text-gray-500 mr-2" />
@@ -94,7 +88,7 @@ export default function AdressesProvincesPage() {
             <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-center mb-4">
                 <Building className="h-6 w-6 text-fps-primary mr-3" />
-                <h3 className="text-xl font-semibold text-fps-primary">Antenne Bandundu</h3>
+                <h3 className="text-xl font-semibold text-fps-primary">Commission Kwilu</h3>
               </div>
               <div className="space-y-3">
                 <div className="flex items-start">
@@ -106,7 +100,7 @@ export default function AdressesProvincesPage() {
                 </div>
                 <div className="flex items-center">
                   <Phone className="h-4 w-4 text-gray-500 mr-2" />
-                  <span className="text-sm text-gray-600">+243 XX XXX XXXX</span>
+                  <span className="text-sm text-gray-600">+243 819 115 812</span>
                 </div>
                 <div className="flex items-center">
                   <Mail className="h-4 w-4 text-gray-500 mr-2" />
@@ -119,7 +113,7 @@ export default function AdressesProvincesPage() {
             <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-center mb-4">
                 <Building className="h-6 w-6 text-fps-primary mr-3" />
-                <h3 className="text-xl font-semibold text-fps-primary">Antenne Équateur</h3>
+                <h3 className="text-xl font-semibold text-fps-primary">Commission Équateur</h3>
               </div>
               <div className="space-y-3">
                 <div className="flex items-start">
@@ -131,7 +125,7 @@ export default function AdressesProvincesPage() {
                 </div>
                 <div className="flex items-center">
                   <Phone className="h-4 w-4 text-gray-500 mr-2" />
-                  <span className="text-sm text-gray-600">+243 XX XXX XXXX</span>
+                  <span className="text-sm text-gray-600">+243 819 115 812</span>
                 </div>
                 <div className="flex items-center">
                   <Mail className="h-4 w-4 text-gray-500 mr-2" />
@@ -144,7 +138,7 @@ export default function AdressesProvincesPage() {
             <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-center mb-4">
                 <Building className="h-6 w-6 text-fps-primary mr-3" />
-                <h3 className="text-xl font-semibold text-fps-primary">Antenne Kasaï Oriental</h3>
+                <h3 className="text-xl font-semibold text-fps-primary">Commission Kasaï Oriental</h3>
               </div>
               <div className="space-y-3">
                 <div className="flex items-start">
@@ -156,7 +150,7 @@ export default function AdressesProvincesPage() {
                 </div>
                 <div className="flex items-center">
                   <Phone className="h-4 w-4 text-gray-500 mr-2" />
-                  <span className="text-sm text-gray-600">+243 XX XXX XXXX</span>
+                  <span className="text-sm text-gray-600">+243 819 115 812</span>
                 </div>
                 <div className="flex items-center">
                   <Mail className="h-4 w-4 text-gray-500 mr-2" />
@@ -169,7 +163,7 @@ export default function AdressesProvincesPage() {
             <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-center mb-4">
                 <Building className="h-6 w-6 text-fps-primary mr-3" />
-                <h3 className="text-xl font-semibold text-fps-primary">Antenne Katanga</h3>
+                <h3 className="text-xl font-semibold text-fps-primary">Commission Haut-Katanga</h3>
               </div>
               <div className="space-y-3">
                 <div className="flex items-start">
@@ -181,7 +175,7 @@ export default function AdressesProvincesPage() {
                 </div>
                 <div className="flex items-center">
                   <Phone className="h-4 w-4 text-gray-500 mr-2" />
-                  <span className="text-sm text-gray-600">+243 XX XXX XXXX</span>
+                  <span className="text-sm text-gray-600">+243 819 115 812</span>
                 </div>
                 <div className="flex items-center">
                   <Mail className="h-4 w-4 text-gray-500 mr-2" />
@@ -194,7 +188,7 @@ export default function AdressesProvincesPage() {
             <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-center mb-4">
                 <Building className="h-6 w-6 text-fps-primary mr-3" />
-                <h3 className="text-xl font-semibold text-fps-primary">Antenne Orientale</h3>
+                <h3 className="text-xl font-semibold text-fps-primary">Commission Tshopo</h3>
               </div>
               <div className="space-y-3">
                 <div className="flex items-start">
@@ -206,7 +200,7 @@ export default function AdressesProvincesPage() {
                 </div>
                 <div className="flex items-center">
                   <Phone className="h-4 w-4 text-gray-500 mr-2" />
-                  <span className="text-sm text-gray-600">+243 XX XXX XXXX</span>
+                  <span className="text-sm text-gray-600">+243 819 115 812</span>
                 </div>
                 <div className="flex items-center">
                   <Mail className="h-4 w-4 text-gray-500 mr-2" />
@@ -223,22 +217,8 @@ export default function AdressesProvincesPage() {
               la population congolaise dans toutes les provinces du pays.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <h4 className="font-semibold text-blue-800 mb-2">Prochaines ouvertures</h4>
-                <ul className="text-blue-700 space-y-1">
-                  <li>• Nord-Kivu (Goma)</li>
-                  <li>• Sud-Kivu (Bukavu)</li>
-                  <li>• Maniema (Kindu)</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold text-blue-800 mb-2">Services disponibles</h4>
-                <ul className="text-blue-700 space-y-1">
-                  <li>• Information et orientation</li>
-                  <li>• Suivi des projets locaux</li>
-                  <li>• Coordination avec les ESS</li>
-                </ul>
-              </div>
+
+
             </div>
           </div>
         </div>

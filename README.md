@@ -1,118 +1,125 @@
-# FPS Website (Version localStorage)
+# FPS Website
 
-Site web du Fonds de Promotion de la Santé (FPS) de la République Démocratique du Congo, avec un CMS intégré utilisant localStorage pour le stockage des données (sans base de données requise).
+Site web du Fonds de Promotion de la Sante (FPS) de la Republique Democratique du Congo.
 
-## Caractéristiques
-
-- Site web informatif avec pages dynamiques
-- Système de gestion de contenu (CMS) intégré
-- Stockage des données dans le localStorage du navigateur (pas de MongoDB requis)
-- Authentification simplifiée
-- Interface d'administration complète
+Le projet est une application Next.js avec une interface publique, un espace d'administration, des contenus media, et une configuration MongoDB pour le developpement local via Docker.
 
 ## Technologies
 
-- [Next.js 15.3](https://nextjs.org/)
-- [React 19](https://react.dev/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- LocalStorage pour le stockage de données côté client
-- TypeScript pour le typage statique
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+- MongoDB / Mongoose
+- NextAuth
+- Cloudinary
+- Docker Compose pour MongoDB en local
 
-## Démarrage rapide
+## Demarrage local
 
-1. Cloner ce dépôt :
-```bash
-git clone https://github.com/votre-organisation/fps-website.git
-cd fps-website
-```
+1. Installer les dependances :
 
-2. Installer les dépendances :
 ```bash
 npm install
-# ou
-yarn install
 ```
 
-3. Démarrer le serveur de développement :
+2. Creer les fichiers d'environnement locaux :
+
+```bash
+cp .env.local.example .env.local
+cp .env.docker.example .env
+```
+
+3. Modifier les valeurs sensibles dans `.env.local` et `.env`.
+
+4. Demarrer MongoDB avec Docker :
+
+```bash
+docker compose up -d
+```
+
+5. Lancer le site :
+
 ```bash
 npm run dev
-# ou
-yarn dev
 ```
 
-4. Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur
+6. Ouvrir l'application :
 
-## Accès au CMS
+[http://localhost:3000](http://localhost:3000)
 
-Accédez à l'interface d'administration via :
-[http://localhost:3000/admin/auth/login](http://localhost:3000/admin/auth/login)
+## Scripts utiles
 
-**Identifiants par défaut** :
-- Email : `admin@fps.gouv.cd`
-- Mot de passe : `admin123`
-
-## Stockage des données avec localStorage
-
-Cette version du site utilise localStorage pour le stockage des données, ce qui présente plusieurs avantages :
-
-- **Pas de base de données requise** : Aucune installation ou configuration de MongoDB nécessaire
-- **Déploiement simplifié** : Fonctionne sur n'importe quel hébergement statique
-- **Développement facilité** : Parfait pour les environnements de test et de développement
-
-Pour plus d'informations sur l'utilisation du localStorage, consultez :
-- [Guide d'utilisation du CMS avec localStorage](./README_LOCALSTORAGE_CMS.md)
-- [Documentation de migration MongoDB vers localStorage](./MIGRATION_MONGODB_LOCALSTORAGE.md)
-
-## Structure du projet
-
+```bash
+npm run dev        # serveur de developpement
+npm run build      # build de production
+npm run start      # serveur de production apres build
+npm run lint       # verification ESLint
+npm run typecheck  # verification TypeScript
 ```
+
+## Docker
+
+Le fichier `docker-compose.yml` lance uniquement MongoDB pour le developpement local. L'application Next.js continue de tourner avec Node.js sur la machine locale.
+
+Variables Docker attendues dans `.env` :
+
+```bash
+MONGODB_PORT=27017
+MONGO_INITDB_ROOT_USERNAME=fps_admin
+MONGO_INITDB_ROOT_PASSWORD=change_me_locally
+MONGO_INITDB_DATABASE=fps_website
+```
+
+L'URL MongoDB correspondante pour `.env.local` est :
+
+```bash
+MONGODB_URI=mongodb://fps_admin:change_me_locally@localhost:27017/fps_website?authSource=admin
+```
+
+## Variables d'environnement
+
+Ne jamais publier `.env`, `.env.local`, ni les secrets de production. Les fichiers suivis par Git sont seulement des exemples :
+
+- `.env.local.example`
+- `.env.docker.example`
+
+Variables principales :
+
+- `MONGODB_URI`
+- `NEXTAUTH_URL`
+- `NEXTAUTH_SECRET`
+- `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`
+- `CLOUDINARY_API_KEY`
+- `CLOUDINARY_API_SECRET`
+
+## Structure
+
+```text
 fps-website/
-├── public/              # Fichiers statiques (images, etc.)
+├── docker-compose.yml
+├── public/
+├── scripts/
 ├── src/
-│   ├── app/             # Routes Next.js App Router
-│   │   ├── admin/       # Interface d'administration
-│   │   ├── api/         # API routes
-│   │   └── [...]/       # Pages du site public
-│   ├── components/      # Composants React réutilisables
-│   ├── lib/             # Utilitaires et services
-│   │   └── cms/         # Services de gestion de contenu avec localStorage
-│   └── styles/          # Styles globaux
-└── package.json         # Dépendances et scripts
+│   ├── app/
+│   ├── components/
+│   └── lib/
+├── package.json
+└── README.md
 ```
 
-## Fonctionnalités du CMS
+## Publication GitHub
 
-- Gestion des pages du site (création, modification, suppression)
-- Édition de composants dynamiques (texte, images, statistiques, etc.)
-- Gestion des utilisateurs administrateurs
-- Configuration du site (nom, logo, informations de contact)
-- Stockage persistant entre les sessions (localStorage)
+Le depot cible est :
 
-## Limitations de localStorage
+[https://github.com/fkazadi2/fps](https://github.com/fkazadi2/fps)
 
-- Stockage limité à 5-10 Mo selon les navigateurs
-- Données stockées localement sur chaque appareil (pas de synchronisation)
-- Pour un usage en production avec beaucoup de données, considérez revenir à MongoDB
+Avant publication :
 
-## Contribution
+```bash
+npm run lint
+npm run typecheck
+npm run build
+```
 
-Les contributions à ce projet sont les bienvenues. N'hésitez pas à soumettre des pull requests.
-
-## Licence
-
-Ce projet est sous licence [insérer le type de licence].
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Puis publier via une branche dediee et une pull request.

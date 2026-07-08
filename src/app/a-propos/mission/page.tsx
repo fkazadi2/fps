@@ -2,7 +2,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import MainLayout from "@/components/layout/MainLayout";
-import { FileText, Users, Building, TrendingUp, CheckCircle, Target, Heart, Handshake } from "lucide-react";
+import {
+  FileText, Users, Building, TrendingUp, CheckCircle, Target, Heart, Handshake,
+  Stethoscope, Leaf, Pill, Users2, HandCoins, Wallet, Wrench, Award, Ambulance,
+  Receipt, Droplets, Construction, ShieldCheck, Landmark, HeartHandshake, Coins, Globe
+} from "lucide-react";
 
 import PageHeader from "@/components/layout/PageHeader";
 import FeaturedImageBox from "@/components/ui/FeaturedImageBox";
@@ -18,16 +22,16 @@ export default function MissionPage() {
           icon={Target}
           variant="teal"
           breadcrumbs={[
-            { name: "Notre raison d'être", href: "/a-propos" },
+            { name: "Qui sommes-nous", href: "/a-propos" },
             { name: "Mission & Vision", href: "/a-propos/mission" }
           ]}
+          backgroundImage="/images/banners/qui-nous-sommes/banner_mission.jpg"
         />
 
         {/* 2. L'Image à la Une */}
         <FeaturedImageBox
-          icon={Target}
-          label="Engagement Stratégique pour la Santé en RDC"
           variant="green"
+          image="/images/featured-images/qui-sommes-nous/featured_misison.jpg"
         />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
@@ -58,238 +62,217 @@ export default function MissionPage() {
           <section className="mb-16">
             <div className="text-center mb-12">
               <div className="inline-block mb-4">
-                <span className="px-4 py-2 bg-[var(--danger)] bg-opacity-10 text-[var(--danger)] rounded-full text-sm font-semibold tracking-wide uppercase">
-                  Notre Mission
+                <span className="px-4 py-2 bg-[var(--danger)] bg-opacity-10 text-white rounded-full text-sm font-semibold tracking-wide uppercase">
+                  Notre Engagement
                 </span>
               </div>
               <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--primary)] mb-6">
                 Mission du FPS
               </h2>
-            </div>
-
-            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
-              <div className="prose prose-lg max-w-none">
-                <p className="text-xl text-gray-800 leading-relaxed mb-6">
-                  Le <strong>Fonds de Promotion de la Santé (FPS)</strong> a pour mission de <strong className="text-[var(--primary)]">mobiliser, gérer et promouvoir efficacement les ressources pour la santé publique</strong>, conformément au <strong className="text-[var(--danger)]">Décret n°22/15 du 09 avril 2022</strong>.
-                </p>
-                <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                  Le FPS constitue un levier stratégique pour l'atteinte de la <strong>Couverture Santé Universelle (CSU)</strong>, priorité nationale inscrite dans la vision du Chef de l'État. Nous travaillons pour garantir que tous les Congolais aient accès à des services de santé de qualité sans subir de difficultés financières.
-                </p>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  En tant qu'établissement public, le FPS opère sous la <strong>tutelle du Ministère de la Santé</strong> et s'inscrit dans le cadre légal défini par le décret précité, garantissant ainsi la transparence, la redevabilité et l'efficacité dans la gestion des ressources sanitaires.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* Cadre légal */}
-          <section className="mb-16">
-            <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-8 md:p-12 border-l-4 border-[var(--primary)]">
-              <div className="flex items-start space-x-4 mb-6">
-                <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-[var(--primary)] flex items-center justify-center shadow-lg">
-                  <FileText className="w-8 h-8 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-[var(--primary)] mb-4">
-                    Cadre légal et juridique
-                  </h2>
-                  <div className="space-y-4">
-                    <div className="bg-white rounded-lg p-6 shadow-md">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">Décret n°22/15 du 09 avril 2022</h3>
-                      <p className="text-gray-700">
-                        Le FPS est créé et régit par le <strong>Décret n°22/15 du 09 avril 2022</strong>, qui définit son statut, ses missions, son organisation et son fonctionnement. Ce décret confère au FPS le statut d'établissement public doté de la personnalité juridique et de l'autonomie financière.
-                      </p>
-                    </div>
-                    <div className="bg-white rounded-lg p-6 shadow-md">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">Tutelle ministérielle</h3>
-                      <p className="text-gray-700">
-                        Le FPS est placé sous la <strong>tutelle du Ministère de la Santé</strong>, qui assure la supervision de ses activités, valide ses orientations stratégiques et garantit la conformité de ses actions avec les politiques nationales de santé.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Axes stratégiques */}
-          <section className="mb-16">
-            <div className="text-center mb-12">
-              <div className="inline-block mb-4">
-                <span className="px-4 py-2 bg-[var(--accent)] bg-opacity-10 text-[var(--accent)] rounded-full text-sm font-semibold tracking-wide uppercase">
-                  Nos Axes Stratégiques
-                </span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--primary)] mb-6">
-                Les quatre piliers de notre action
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Quatre axes stratégiques qui guident toutes nos interventions pour un impact durable sur la santé publique
+              <p className="text-lg text-gray-700 max-w-3xl mx-auto font-medium">
+                Le Fonds de Promotion de la Santé a notamment pour missions de :
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Axe 1 */}
-              <div className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl border-2 border-transparent hover:border-[var(--primary)] transition-all duration-300">
-                <div className="flex items-start space-x-4 mb-4">
-                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-2xl font-bold text-white">1</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+              {[
+                { icon: Stethoscope, text: "Financer les projets d’infrastructures sanitaires, d’équipements médicaux ainsi que promouvoir la production locale des médicaments autre intrants spécifiques ;", color: "blue" },
+                { icon: Leaf, text: "Financer la promotion de la médecine traditionnelle ;", color: "yellow" },
+                { icon: Pill, text: "Financer l’approvisionnement en médicaments essentiels y compris les contraceptifs, les vaccins et autres intrants de santé publique ;", color: "blue" },
+                { icon: Users2, text: "Financer la gouvernance du secteur de la santé, la planification, le développement des ressources humaines du secteur de la santé ;", color: "yellow" },
+                { icon: HandCoins, text: "Subventionner les Etablissements de Services et Soins de Santé et Pharmaceutiques.", color: "blue" }
+              ].map((m, i) => (
+                <div key={i} className={`bg-white border-l-4 ${m.color === 'blue' ? 'border-[var(--primary)]' : 'border-[var(--accent)]'} p-6 rounded-r-xl shadow-md hover:shadow-xl transition-all group`}>
+                  <div className={`w-12 h-12 ${m.color === 'blue' ? 'bg-blue-50 text-[var(--primary)]' : 'bg-yellow-50 text-[var(--accent)]'} rounded-lg flex items-center justify-center mb-4`}>
+                    <m.icon className="w-6 h-6" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-[var(--primary)] mb-3">
-                      Mobilisation des ressources internes et externes
-                    </h3>
-                    <p className="text-gray-700 leading-relaxed">
-                      Le FPS mobilise activement des ressources financières additionnelles provenant de sources internes (contributions locales, taxes sanitaires) et externes (partenaires internationaux, bailleurs de fonds) pour renforcer le financement du secteur de la santé.
-                    </p>
-                  </div>
+                  <p className="text-gray-700 leading-relaxed font-medium">{m.text}</p>
                 </div>
-              </div>
+              ))}
+            </div>
+          </section>
 
-              {/* Axe 2 */}
-              <div className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl border-2 border-transparent hover:border-[var(--danger)] transition-all duration-300">
-                <div className="flex items-start space-x-4 mb-4">
-                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-2xl font-bold text-white">2</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-[var(--primary)] mb-3">
-                      Soutien aux zones de santé pour l'accès aux soins
-                    </h3>
-                    <p className="text-gray-700 leading-relaxed">
-                      Le FPS apporte un soutien direct aux zones de santé pour améliorer l'accès aux soins de qualité. Cela inclut le financement d'infrastructures, la dotation en médicaments et équipements, et le renforcement des capacités du personnel de santé.
-                    </p>
-                  </div>
-                </div>
-              </div>
+          {/* NOS ATTRIBUTIONS DANS LE PROGRAMME DE LA GRATUITE DES ACCOUCHEMENTS */}
+          <section className="mb-20">
+            <div className="bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
+              <div className="relative z-10">
+                <h2 className="text-2xl md:text-3xl font-black mb-8 border-b border-white/20 pb-4">
+                  Nos attributions dans le programme de la gratuité des accouchements
+                </h2>
+                <p className="text-lg text-blue-100 mb-10 leading-relaxed max-w-4xl">
+                  Le Fonds de Promotion de la Santé charriera les financements destinés à améliorer et à promouvoir l’offre des soins et services de santé. À ce titre, dans le cadre du Programme de la prise en charge gratuite de la Femme enceinte, de l’Accouchement et du Nouveau-né, le FPS a la charge de :
+                </p>
 
-              {/* Axe 3 */}
-              <div className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl border-2 border-transparent hover:border-[var(--accent)] transition-all duration-300">
-                <div className="flex items-start space-x-4 mb-4">
-                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-2xl font-bold text-white">3</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-[var(--primary)] mb-3">
-                      Promotion des comportements sains et de la prévention
-                    </h3>
-                    <p className="text-gray-700 leading-relaxed">
-                      Le FPS développe et finance des programmes de prévention et de promotion de la santé pour encourager les comportements sains au sein des communautés. Cela inclut la sensibilisation, l'éducation sanitaire et la mobilisation communautaire.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Axe 4 */}
-              <div className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl border-2 border-transparent hover:border-[var(--secondary)] transition-all duration-300">
-                <div className="flex items-start space-x-4 mb-4">
-                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-2xl font-bold text-white">4</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-[var(--primary)] mb-3">
-                      Partenariat et plaidoyer avec les acteurs du secteur santé
-                    </h3>
-                    <p className="text-gray-700 leading-relaxed">
-                      Le FPS développe des partenariats stratégiques avec les acteurs publics, privés et de la société civile du secteur santé. Nous menons également des actions de plaidoyer pour promouvoir des politiques favorables à la santé publique et à la CSU.
-                    </p>
-                  </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {[
+                    { icon: Wallet, title: "Financement des pré-requis", text: "Payer aux établissements de soins les fonds pour le pré requis pour recevoir dignement les parturientes et leurs bébés." },
+                    { icon: Wrench, title: "Dotation technique", text: "Doter les Etablissements de soins en matériel, équipements et consommables nécessaires." },
+                    { icon: Award, title: "Bonus qualité", text: "Payer le bonus qualité aux établissements de soins méritants après évaluation." },
+                    { icon: Ambulance, title: "Logistique d'urgence", text: "Mettre à disposition une logistique de transfert (30 ambulances dont 10 pédiatriques) avec gestionnaire dédié." },
+                    { icon: Receipt, title: "Gestion des factures", text: "Payer les factures des médicaments requis directement par le FPS." },
+                    { icon: Droplets, title: "Disponibilité de sang", text: "Assurer en permanence la disponibilité de sang de qualité dans les Etablissements sous programme." }
+                  ].map((item, i) => (
+                    <div key={i} className="flex gap-4 p-4 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
+                      <div className="flex-shrink-0 w-12 h-12 bg-[var(--accent)] rounded-lg flex items-center justify-center text-[var(--primary)]">
+                        <item.icon className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-[var(--accent)] mb-1">{item.title}</h4>
+                        <p className="text-sm text-blue-50 leading-relaxed">{item.text}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </section>
 
-          {/* Impact chiffré - OBLIGATOIRE */}
-          <section className="mb-16">
-            <div className="bg-gradient-to-br from-[var(--primary)] via-[var(--secondary)] to-[var(--danger)] rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
-              {/* Éléments décoratifs */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl"></div>
+          {/* Axes d’intervention */}
+          <section id="nos-axes" className="mb-20">
+            <div className="text-center mb-12">
+              <div className="inline-block mb-4">
+                <span className="px-4 py-2 bg-[var(--accent)] bg-opacity-10 text-white rounded-full text-sm font-semibold tracking-wide uppercase">
+                  Stratégie Opérationnelle
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--primary)] mb-6">
+                Axes d’intervention
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                L’amélioration de la qualité de l’offre des services et des soins de santé au travers le FPS passe par :
+              </p>
+            </div>
 
-              <div className="relative z-10">
-                <div className="text-center mb-12">
-                  <div className="inline-block mb-4">
-                    <span className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold tracking-wide uppercase">
-                      Notre Impact
-                    </span>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                { icon: Construction, title: "Infrastructures sanitaires", text: "La construction et la réhabilitation des infrastructures sanitaires", color: "blue", href: "/plateau-technique/infrastructures" },
+                { icon: Wrench, title: "Financement et dotation en équipements", text: "Le financement et la dotation des ESS en matériels médicaux et non médicaux", color: "yellow", href: "/plateau-technique/equipements" },
+                { icon: Pill, title: "Financement en médicaments", text: "Le financement en médicaments éssentiels", color: "blue", href: "/plateau-technique/medicaments" },
+                { icon: Users, title: "Financement du renforcement des capacités des ressources humaines du secteur santé", text: "Le renforcement des capacités des ressources humaines du secteur de la santé", color: "yellow", href: "/gouvernance-sante/capacitation" },
+                { icon: Leaf, title: "Recherche en médecine", text: "La promotion de la médecine traditionnelle", color: "blue", href: "/medecine-traditionnelle" },
+                { icon: ShieldCheck, title: "Système des références", text: "Pilotage opérationnel du système de santé publique.", color: "yellow", href: "/gouvernance-sante" }
+              ].map((axe, i) => (
+                <Link
+                  key={i}
+                  href={axe.href}
+                  className={`group block bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl border-b-4 ${axe.color === 'blue' ? 'border-[var(--primary)]' : 'border-[var(--accent)]'} transition-all duration-300 transform hover:-translate-y-2`}
+                >
+                  <div className={`w-14 h-14 rounded-xl ${axe.color === 'blue' ? 'bg-blue-50 text-[var(--primary)]' : 'bg-yellow-50 text-[var(--accent)]'} flex items-center justify-center mb-6 shadow-inner group-hover:scale-110 transition-transform`}>
+                    <axe.icon className="w-7 h-7" />
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-extrabold mb-6">
-                    Résultats et impact chiffré
-                  </h2>
-                  <p className="text-xl text-white/90 max-w-3xl mx-auto">
-                    Des résultats concrets qui témoignent de notre engagement pour la santé publique en RDC
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{axe.title}</h3>
+                  <p className="text-gray-600 leading-relaxed font-medium">
+                    {axe.text}
                   </p>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* Sources de financement */}
+          <section className="mb-20">
+            <div className="text-center mb-12">
+              <div className="inline-block mb-4">
+                <span className="px-4 py-2 bg-[var(--primary)] bg-opacity-10 text-white rounded-full text-sm font-semibold tracking-wide uppercase">
+                  Pérennité Financière
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--primary)] mb-6">
+                Sources de financement
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto font-medium">
+                L’Etat congolais reconnaît au FPS les sources de financements suivantes :
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Catégorie 1 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-[var(--primary)] hover:shadow-xl transition-shadow">
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-[var(--primary)] shadow-inner">
+                    <Landmark className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Les pouvoirs publics</h3>
                 </div>
+                <ul className="space-y-3">
+                  {[
+                    "La dotation initiale pour son démarrage ;",
+                    "Les subventions."
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start text-gray-700">
+                      <CheckCircle className="w-5 h-5 text-[var(--primary)] mr-2 mt-0.5 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                    <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-white/20 mb-4 mx-auto">
-                      <Users className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="text-center">
-                      <div className="text-4xl font-extrabold mb-2">5M+</div>
-                      <div className="text-white/90">Personnes couvertes</div>
-                    </div>
+              {/* Catégorie 2 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-[var(--accent)] hover:shadow-xl transition-shadow">
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="w-14 h-14 bg-yellow-50 rounded-xl flex items-center justify-center text-[var(--accent)] shadow-inner">
+                    <HeartHandshake className="w-7 h-7" />
                   </div>
-
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                    <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-white/20 mb-4 mx-auto">
-                      <Building className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="text-center">
-                      <div className="text-4xl font-extrabold mb-2">650+</div>
-                      <div className="text-white/90">Centres de santé partenaires</div>
-                    </div>
-                  </div>
-
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                    <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-white/20 mb-4 mx-auto">
-                      <CheckCircle className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="text-center">
-                      <div className="text-4xl font-extrabold mb-2">26</div>
-                      <div className="text-white/90">Provinces couvertes</div>
-                    </div>
-                  </div>
-
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                    <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-white/20 mb-4 mx-auto">
-                      <TrendingUp className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="text-center">
-                      <div className="text-4xl font-extrabold mb-2">85%</div>
-                      <div className="text-white/90">Taux de satisfaction</div>
-                    </div>
-                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Contributions & Solidarité</h3>
                 </div>
+                <ul className="space-y-3">
+                  {[
+                    "Les contributions des communautés, de la solidarité nationale et internationale ;",
+                    "Les libéralités, dons et legs de diverses sources."
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start text-gray-700">
+                      <CheckCircle className="w-5 h-5 text-[var(--accent)] mr-2 mt-0.5 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-                {/* Projets phares */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-                  <h3 className="text-2xl font-bold mb-6 text-center">Projets phares et résultats d'impact</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-white/5 rounded-lg p-6">
-                      <h4 className="font-bold text-lg mb-2">Programme de dotation en médicaments</h4>
-                      <p className="text-white/90 text-sm mb-2">
-                        <strong>Résultat:</strong> Plus de 500 zones de santé équipées en médicaments essentiels en 2023
-                      </p>
-                      <p className="text-white/80 text-xs">
-                        Impact: Réduction de 40% des ruptures de stock dans les zones ciblées
-                      </p>
-                    </div>
-                    <div className="bg-white/5 rounded-lg p-6">
-                      <h4 className="font-bold text-lg mb-2">Renforcement des capacités du personnel</h4>
-                      <p className="text-white/90 text-sm mb-2">
-                        <strong>Résultat:</strong> Formation de 2,500 agents de santé en 2023
-                      </p>
-                      <p className="text-white/80 text-xs">
-                        Impact: Amélioration de la qualité des soins dans 85% des structures partenaires
-                      </p>
-                    </div>
+              {/* Catégorie 3 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-[var(--primary)] hover:shadow-xl transition-shadow md:col-span-2 lg:col-span-1">
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-[var(--primary)] shadow-inner">
+                    <Coins className="w-7 h-7" />
                   </div>
-                  <div className="mt-6 text-center text-white/80 text-sm italic">
-                    * Les données chiffrées sont mises à jour trimestriellement. Dernière mise à jour: Janvier 2024
-                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Les ressources propres</h3>
                 </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+                  {[
+                    "Les financements innovants de la santé ;",
+                    "Une quotité de redevances minières dévolues au pouvoir central ;",
+                    "Une taxe de la promotion de la santé fixée à deux pourcent de la valeur CIF des marchandises à l’importation ;",
+                    "Une quotité des droits d’accises prélevées sur les produits nocifs à la santé.",
+                    "Une quotité de 2% sur les cotisations des régimes d’assurance maladie collectée par le Fonds de Solidarité de la Santé ;",
+                    "Les placements, les produits d’exploitation et les recettes diverses."
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start text-gray-700 list-none">
+                      <CheckCircle className="w-5 h-5 text-[var(--primary)] mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm">{item}</span>
+                    </li>
+                  ))}
+                </div>
+              </div>
+
+              {/* Catégorie 4 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-[var(--accent)] hover:shadow-xl transition-shadow md:col-span-2 lg:col-span-1">
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="w-14 h-14 bg-yellow-50 rounded-xl flex items-center justify-center text-[var(--accent)] shadow-inner">
+                    <Globe className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Partenaires & Emprunts</h3>
+                </div>
+                <ul className="space-y-3">
+                  {[
+                    "Les partenaires agrées : Les financements de la coopération bi-multinationale destinés à l’amélioration de l’offre et de la qualité des services et des soins de santé ;",
+                    "Les emprunts locaux et/ou extérieurs."
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start text-gray-700">
+                      <CheckCircle className="w-5 h-5 text-[var(--accent)] mr-2 mt-0.5 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </section>
@@ -298,7 +281,7 @@ export default function MissionPage() {
           <section className="mb-16">
             <div className="text-center mb-12">
               <div className="inline-block mb-4">
-                <span className="px-4 py-2 bg-gradient-to-r from-[var(--primary)] to-[var(--danger)] bg-opacity-10 text-[var(--primary)] rounded-full text-sm font-semibold tracking-wide uppercase">
+                <span className="px-4 py-2 bg-gradient-to-r from-[var(--primary)] to-[var(--danger)] bg-opacity-10 text-white rounded-full text-sm font-semibold tracking-wide uppercase">
                   Nos Valeurs
                 </span>
               </div>
@@ -362,27 +345,16 @@ export default function MissionPage() {
           <section className="bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] rounded-2xl p-8 md:p-12 text-white text-center">
             <h2 className="text-3xl font-bold mb-4">En savoir plus sur nos actions</h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Découvrez nos programmes, nos publications et nos résultats concrets sur le terrain
+              Découvrez nos publications et nos résultats concrets sur le terrain
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/programmes"
-                className="px-8 py-4 bg-white text-[var(--primary)] rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-              >
-                Nos programmes
-              </Link>
               <Link
                 href="/publications"
                 className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white rounded-xl font-semibold hover:bg-white/20 transition-all duration-300"
               >
-                Télécharger un rapport
+                Télécharger nos rapports d'activités
               </Link>
-              <Link
-                href="/contact"
-                className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white rounded-xl font-semibold hover:bg-white/20 transition-all duration-300"
-              >
-                Contactez-nous
-              </Link>
+
             </div>
           </section>
 

@@ -79,7 +79,7 @@ const defaultArticles: NewsArticle[] = [
     content: `
       <p>La Direction générale du Fonds de Promotion de la Santé ainsi que l'ensemble de son personnel ont soufflé la 3ième bougie d'anniversaire depuis la création de cet établissement public impliqué dans la facilitation de la mise en œuvre de la Couverture Santé Universelle en RDC.</p>
 
-      <p>Occasion pour le DGE du FPS, Monsieur Marius MIKA, de rappeler aux cadres, collaborateurs et experts réunis en l'espace « La Sablière » ce samedi 12 avril 2025, de la responsabilité de rester dans la droite ligne de la mission assignée au FPS, à savoir veiller à l'amélioration de la qualité de l'offre des soins et services de santé en RDC.</p>
+      <p>Occasion pour le Directeur général du FPS, Monsieur Marius MIKA NYEMBO, de rappeler aux cadres, collaborateurs et experts réunis en l'espace « La Sablière » ce samedi 12 avril 2025, de la responsabilité de rester dans la droite ligne de la mission assignée au FPS, à savoir veiller à l'amélioration de la qualité de l'offre des soins et services de santé en RDC.</p>
 
       <p>Une approche de travail orientée vers la performance qui a permis au FPS, de présenter à ce jour depuis sa création, des résultats concrets sur le terrain.</p>
 
@@ -99,7 +99,7 @@ const defaultArticles: NewsArticle[] = [
     content: `
       <p>Le Fonds de Promotion de la Santé (FPS) a officiellement lancé ce mercredi un nouveau programme visant à renforcer les capacités des structures sanitaires en zones rurales.</p>
       <p>Ce programme ambitieux, qui s'étendra sur une période de trois ans, cible particulièrement les centres de santé dans les régions les plus reculées de la République Démocratique du Congo, où l'accès aux soins de qualité demeure un défi majeur.</p>
-      <p>Lors de la cérémonie de lancement, le DGE du FPS a souligné l'importance de cette initiative pour l'avancement de la Couverture Santé Universelle (CSU) : "Nous ne pouvons pas parler de couverture santé universelle si les centres de santé de base ne disposent pas des infrastructures et des équipements nécessaires pour offrir des soins de qualité à tous les citoyens, peu importe où ils vivent."</p>
+      <p>Lors de la cérémonie de lancement, le Directeur général du FPS a souligné l'importance de cette initiative pour l'avancement de la Couverture Santé Universelle (CSU) : "Nous ne pouvons pas parler de couverture santé universelle si les centres de santé de base ne disposent pas des infrastructures et des équipements nécessaires pour offrir des soins de qualité à tous les citoyens, peu importe où ils vivent."</p>
       <p>Le programme comprend plusieurs volets, notamment la réhabilitation des infrastructures existantes, la formation du personnel médical, la fourniture d'équipements médicaux essentiels et la mise en place de systèmes de référence efficaces vers les hôpitaux de district.</p>
       <p>Les premiers bénéficiaires seront 150 centres de santé répartis dans cinq provinces : le Nord-Kivu, le Sud-Kivu, le Kasaï, le Kasaï Central et la Lomami. Le programme s'étendra progressivement à d'autres provinces dans les phases ultérieures.</p>
       <p>Cette initiative, d'un coût total estimé à 15 millions de dollars, est financée par le gouvernement congolais avec l'appui de partenaires internationaux.</p>
@@ -134,7 +134,7 @@ const defaultArticles: NewsArticle[] = [
       <p>Le Fonds de Promotion de la Santé (FPS) et l'UNICEF ont signé ce mardi un accord de partenariat stratégique pour renforcer la prise en charge des soins maternels et infantiles en République Démocratique du Congo.</p>
       <p>Cet accord, d'une durée de cinq ans, vise à réduire la mortalité maternelle et infantile dans le pays, particulièrement dans les zones les plus vulnérables.</p>
       <p>La cérémonie de signature s'est déroulée en présence du Ministre de la Santé Publique, Hygiène et Prévoyance Sociale, et du Représentant de l'UNICEF en RDC.</p>
-      <p>"Ce partenariat marque une étape importante dans notre engagement commun pour la santé des femmes et des enfants congolais", a déclaré le DGE du FPS. "Il permettra de renforcer nos capacités d'intervention et d'améliorer significativement l'accès aux soins de qualité pour les populations les plus vulnérables."</p>
+      <p>"Ce partenariat marque une étape importante dans notre engagement commun pour la santé des femmes et des enfants congolais", a déclaré le Directeur général du FPS. "Il permettra de renforcer nos capacités d'intervention et d'améliorer significativement l'accès aux soins de qualité pour les populations les plus vulnérables."</p>
       <p>Le partenariat se concentrera sur plusieurs axes prioritaires : le renforcement des services de santé maternelle et néonatale, l'amélioration de la couverture vaccinale, la promotion de pratiques nutritionnelles saines, et le développement de mécanismes de financement innovants pour garantir la pérennité des interventions.</p>
       <p>Ce nouveau partenariat s'inscrit dans le cadre plus large de la mise en œuvre de la Couverture Santé Universelle en RDC et témoigne de l'engagement du gouvernement congolais à faire de la santé maternelle et infantile une priorité nationale.</p>
     `,

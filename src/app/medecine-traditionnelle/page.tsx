@@ -11,7 +11,8 @@ export default function MedecineTraditionellePage() {
         {/* 1. La Bannière */}
         <PageHeader
           title="Médecine traditionnelle"
-          description="Soutien à la médecine traditionnelle et promotion de la production locale pharmaceutique"
+          description="Promouvoir  la médecine traditionnelle en RDC"
+          backgroundImage="/images/banners/medecine-traditionnelle/banner-medecine-traditionnelle.jpg"
           icon={Leaf}
           variant="green"
           breadcrumbs={[
@@ -24,6 +25,7 @@ export default function MedecineTraditionellePage() {
           icon={Leaf}
           label="Valorisation du Patrimoine et Pharmacopée Locale"
           variant="green"
+          image="/images/featured-images/medecine-traditionnelle/medecine-traditionnelle.jpg"
         />
 
         {/* Contenu principal */}
@@ -75,32 +77,29 @@ export default function MedecineTraditionellePage() {
           {/* Enjeux et objectifs */}
           <div className="mb-12">
             <h2 className="text-2xl font-bold text-fps-primary mb-6">Enjeux et objectifs</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <h3 className="text-xl font-semibold text-fps-primary mb-4">
-                  <Leaf className="inline h-6 w-6 mr-2" />
-                  Valorisation du patrimoine
-                </h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Préservation des savoirs ancestraux</li>
-                  <li>• Documentation des pratiques traditionnelles</li>
-                  <li>• Recherche sur les plantes médicinales</li>
-                  <li>• Protection de la biodiversité médicinale</li>
-                </ul>
-              </div>
-
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <h3 className="text-xl font-semibold text-fps-primary mb-4">
-                  <TrendingUp className="inline h-6 w-6 mr-2" />
-                  Développement économique
-                </h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Production locale de médicaments</li>
-                  <li>• Création d&apos;emplois dans le secteur</li>
-                  <li>• Réduction de la dépendance aux importations</li>
-                  <li>• Accessibilité financière des traitements</li>
-                </ul>
-              </div>
+            <div className="bg-white border-l-4 border-green-500 shadow-sm rounded-r-lg p-8">
+              <ul className="space-y-6 text-gray-700">
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-4 mt-1 font-bold text-sm">1</span>
+                  <p className="text-lg">Appuyer la mise en œuvre de la politique nationale de la médecine traditionnelle</p>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-4 mt-1 font-bold text-sm">2</span>
+                  <p className="text-lg">Promouvoir la qualité, la sécurité et la traçabilité des produits, de la pharmacopée traditionnelle, fournir les normes de qualité pour les médicaments prioritaires et essentiels afin d'assurer leur sécurité et leur efficacité</p>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-4 mt-1 font-bold text-sm">3</span>
+                  <p className="text-lg">Encourager la recherche scientifique sur la médecine traditionnelle</p>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-4 mt-1 font-bold text-sm">4</span>
+                  <p className="text-lg">Appuyer la mise en place d'un registre national des praticiens connus et la production locale des médicaments à base des plantes</p>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-4 mt-1 font-bold text-sm">5</span>
+                  <p className="text-lg">Financer une stratégie d'assurance qualité des produits et pratiques traditionnels en lien avec les autorités compétentes</p>
+                </li>
+              </ul>
             </div>
           </div>
 

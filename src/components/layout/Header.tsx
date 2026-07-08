@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Facebook, Twitter, Linkedin, Youtube, Phone, Mail } from "lucide-react";
 import { usePathname } from "next/navigation";
 import useSWR from 'swr';
 
@@ -14,63 +14,65 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const navigation = [
   { name: "Accueil", href: "/", submenu: [] },
   {
-    name: "Notre raison d'être",
+    name: "Qui sommes-nous",
     href: "/a-propos",
     submenu: [
-      { name: "Notre histoire", href: "/a-propos/histoire" },
-      { name: "Nos missions", href: "/a-propos/mission" },
-      { name: "Organisation", href: "/a-propos/gouvernance" },
-      { name: "Cadre juridique", href: "/a-propos/juridique" },
+      { name: "Notre histoire", href: "/a-propos/histoire", image: "/images/banners/qui-nous-sommes/banner-notre-histoire.jpg" },
+      { name: "Nos missions", href: "/a-propos/mission", image: "/images/banners/qui-nous-sommes/banner_mission.jpg" },
+      { name: "Organisation", href: "/a-propos/gouvernance", image: "/images/banners/qui-nous-sommes/banner_structure_gouvernance.jpg" },
+      { name: "Cadre juridique", href: "/a-propos/juridique", image: "/images/banners/qui-nous-sommes/cadre_juridique_ham.jpg" },
     ],
   },
   {
     name: "Plateau technique",
     href: "/plateau-technique",
     submenu: [
-      { name: "Infrastructures sanitaires", href: "/plateau-technique/infrastructures" },
-      { name: "Dotation en médicaments", href: "/plateau-technique/medicaments" },
-      { name: "Dotation en équipements", href: "/plateau-technique/equipements" },
-      { name: "Banque de sang", href: "/plateau-technique/banque-de-sang" },
-      { name: "Classification des ESS", href: "/plateau-technique/classification-ess" },
+      { name: "Infrastructures sanitaires", href: "/plateau-technique/infrastructures", image: "/images/banners/plateau-technique/banner-infrastructures-sanitaires.jpg" },
+      { name: "Financement en médicaments", href: "/plateau-technique/medicaments", image: "/images/banners/plateau-technique/banner-medicaments.jpg" },
+      { name: "Financement et dotation en équipements", href: "/plateau-technique/equipements", image: "/images/banners/plateau-technique/banner-equipements.jpg" },
+      { name: "Banque de sang", href: "/plateau-technique/banque-de-sang", image: "/images/banners/plateau-technique/banner-banque-sang.jpg" },
     ],
   },
   {
     name: "Gouvernance Santé",
     href: "/gouvernance-sante",
     submenu: [
-      { name: "Capacitation Du personnel de santé", href: "/gouvernance-sante/capacitation" },
-      { name: "Qualité des soins", href: "/gouvernance-sante/qualite-soins" },
-      { name: "Système des références", href: "/gouvernance-sante/systeme-references" },
-      { name: "Recherche médicale", href: "/gouvernance-sante/recherche-medicale" },
+      { name: "Financement du renforcement des capacités des ressources humaines du secteur santé", href: "/gouvernance-sante/capacitation", image: "/images/banners/gouvernance-sante/banner-capatitation.jpg" },
+      { name: "Système des références", href: "/gouvernance-sante/systeme-references", image: "/images/banners/gouvernance-sante/banner-systeme-reference.jpg" },
+      { name: "Recherche en médecine", href: "/gouvernance-sante/recherche-medicale", image: "/images/banners/gouvernance-sante/banner-recherche.jpg" },
     ],
+  },
+  {
+    name: "Production locale des médicaments",
+    href: "/ce-que-nous-faisons/production-locale",
+    submenu: [],
   },
   {
     name: "Médecine traditionnelle",
     href: "/medecine-traditionnelle",
     submenu: [
-      { name: "Réglementation", href: "/medecine-traditionnelle/reglementation" },
-      { name: "Formation des praticiens", href: "/medecine-traditionnelle/formation-praticiens" },
-      { name: "Promotion des initiatives locales en santé", href: "/medecine-traditionnelle/promotion-initiatives" },
+      { name: "Réglementation", href: "/medecine-traditionnelle/reglementation", image: "/images/featured-images/medecine-traditionnelle/reglementation.jpg" },
+      { name: "Formation des praticiens", href: "/medecine-traditionnelle/formation-praticiens", image: "/images/featured-images/medecine-traditionnelle/formation-praticiens.jpg" },
+      { name: "Promotion des initiatives locales en santé", href: "/medecine-traditionnelle/promotion-initiatives", image: "/images/featured-images/medecine-traditionnelle/promotion.JPG" },
     ],
   },
   {
     name: "Publications",
     href: "/publications",
     submenu: [
-      { name: "Offre d'emploi", href: "/publications/offre-emploi" },
-      { name: "Appel d'offre", href: "/publications/appel-offre" },
-      { name: "Rapports & Documentations", href: "/publications/rapports-documentations" },
-      { name: "Gouvernance & Statuts", href: "/publications/rapports-documentations?type=gouvernance" },
-      { name: "Bulletins d'Information", href: "/publications/rapports-documentations?type=bulletin" },
+      { name: "Offre d'emploi", href: "/publications/offre-emploi", image: "/images/banners/publications/recrutement.jpg" },
+      { name: "Appel d'offre", href: "/publications/appel-offre", image: "/images/banners/publications/appel-d-offre.jpg" },
+      { name: "Rapports & Documentations", href: "/publications/rapports-documentations", image: "/images/banners/publications/rapports.jpg" },
     ],
   },
   {
     name: "Centre de Presse",
     href: "/centre-presse",
     submenu: [
-      { name: "Presse", href: "/centre-presse/presse" },
-      { name: "Galerie Photo", href: "/centre-presse/galerie" },
-      { name: "Événements", href: "/centre-presse/evenements" },
+      { name: "Presse", href: "/centre-presse/presse", image: "/images/banners/centre-presse/presse.jpg" },
+      { name: "Galerie Photo", href: "/centre-presse/galerie", image: "/images/banners/centre-presse/galerie-photo.jpg" },
+      { name: "Événements", href: "/centre-presse/evenements", image: "/images/banners/centre-presse/evenement.jpg" },
+      { name: "Direction de communication", href: "/centre-presse/direction-de-communication", image: "/images/fpd-19197896.jpg" },
     ],
   },
 
@@ -184,7 +186,7 @@ export default function Header() {
               href="/publications/offre-emploi"
               className="animate-marquee hover:underline block cursor-pointer whitespace-nowrap text-sm font-medium"
             >
-              🚀 Consulter nos nouvelles offres d'emploi dans la section Publications et Rejoignez l'équipe du Fonds de Promotion de la Santé (FPS) ! &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 🚀 Consulter nos avis de recrutement et contribuez à l'accès de tous aux soins de santé !
+              🚀 Consultez nos nouvelles offres d'emploi dans la section Publications et Rejoignez l'équipe du Fonds de Promotion de la Santé (FPS) ! &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 🚀 Consultez nos avis de recrutement et contribuez à l'accès de tous aux soins de santé !
             </Link>
           </div>
         </div>
@@ -192,99 +194,118 @@ export default function Header() {
 
       {/* Bande supérieure redessinée */}
       <div className="bg-gradient-to-r from-white via-gray-50 to-white border-b-2 border-[var(--accent)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-0 flex items-center justify-between">
           {/* Logo et nom */}
           <div className="flex items-center group">
             <Link href="/" className="flex items-center">
               <div className="relative mr-4">
                 {/* Halo animé derrière le logo */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[var(--primary)] via-[var(--secondary)] to-[var(--accent)] rounded-full blur-xl opacity-30 animate-pulse"></div>
 
-                <div className="relative w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-2xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-white transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                   <Image
                     src="/images/logo-fps.jpg"
                     alt="Logo FPS"
-                    width={64}
-                    height={64}
+                    width={84}
+                    height={84}
                     className="object-cover"
                   />
                 </div>
               </div>
-              <div>
-                <h1 className="text-xl font-bold text-red-500 group-hover:text-[var(--primary)] transition-colors">
-                  FONDS DE PROMOTION DE LA SANTE
-                </h1>
-                <p className="text-xs text-gray-600">
+              <div className="flex flex-col justify-center leading-tight">
+                <p className="text-[9px] uppercase tracking-wide text-gray-500 font-medium">
                   République Démocratique du Congo
+                </p>
+                <p className="text-[9.3px] text-gray-600 font-semibold mb-0.5">
+                  MINISTÈRE DE LA SANTÉ PUBLIQUE, HYGIÈNE ET PRÉVOYANCE SOCIALE
+                </p>
+                <h1 className="text-lg font-black text-red-600 group-hover:text-red-700 transition-colors leading-none tracking-tighter">
+                  FONDS DE PROMOTION DE LA SANTÉ
+                </h1>
+                <p className="text-[9px] italic text-gray-500 mt-0.5">
+                  Pour l'amélioration de la qualité de l'offre des soins et des services de santé en RDC
                 </p>
               </div>
             </Link>
           </div>
 
-          {/* Contacts avec design moderne */}
-          <div className="hidden lg:flex items-center space-x-6">
+          {/* Contacts et Réseaux Sociaux */}
+          <div className="hidden lg:flex items-center space-x-4">
             {/* Email */}
-            <div className="flex items-center space-x-2 group">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
+            <div className="flex items-center space-x-2 group mr-2">
+              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-md group-hover:rotate-6 transition-all duration-300">
+                <Mail className="w-4 h-4 text-white" />
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Email</p>
-                <a href="mailto:secretariat@fps.cd" className="text-sm font-medium text-gray-900 hover:text-[var(--primary)] transition-colors">
+              <div className="hidden xl:block">
+                <p className="text-[10px] text-gray-400 leading-none">Email</p>
+                <a href="mailto:secretariat@fps.cd" className="text-xs font-semibold text-gray-800 hover:text-red-600 transition-colors">
                   secretariat@fps.cd
                 </a>
               </div>
             </div>
 
-            {/* Téléphone - Bouton jaune */}
-            <div className="flex items-center space-x-2 group">
-              <a
-                href="tel:+243819115812"
-                className="px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 font-medium rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center space-x-2"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                <span>Appeler</span>
-              </a>
-            </div>
+            {/* Téléphone */}
+            <a
+              href="tel:+243819115812"
+              className="px-4 py-2 bg-yellow-300 hover:bg-yellow-400 text-gray-900 text-xs font-bold rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-2"
+            >
+              <Phone className="w-4 h-4" />
+              <span>Appeler</span>
+            </a>
 
-            {/* Bouton Contacts - Lien direct vers /contact */}
+            {/* Contacts */}
             <Link
               href="/contact"
-              className="px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-medium rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center space-x-2"
+              className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center space-x-2"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
+              <Mail className="w-4 h-4" />
               <span>Contacts</span>
             </Link>
+
+            {/* Séparateur */}
+            <div className="h-8 w-px bg-gray-200 mx-2"></div>
+
+            {/* Réseaux Sociaux */}
+            <div className="flex items-center space-x-2">
+              {[
+                { icon: Facebook, href: "https://www.facebook.com/p/Fonds-de-Promotion-de-la-Sant%25C3%25A9-FPS-100092568336168/", color: "hover:bg-blue-600 hover:text-white" },
+                { icon: Twitter, href: "#", color: "hover:bg-sky-500 hover:text-white" },
+                { icon: Linkedin, href: "https://www.linkedin.com/company/fonds-de-promotion-de-la-sant%C3%A9-f-p-s/", color: "hover:bg-blue-700 hover:text-white" },
+                { icon: Youtube, href: "#", color: "hover:bg-red-600 hover:text-white" }
+              ].map((social, i) => (
+                <a
+                  key={i}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-8 h-8 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400 ${social.color} hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}
+                >
+                  <social.icon className="w-4 h-4" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Navigation principale avec gradients */}
-      <nav className="bg-gradient-to-r from-[var(--primary)] via-[var(--secondary)] to-[var(--primary)]" ref={menuRef}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+      <nav className="bg-gradient-to-r from-[var(--primary)] via-[var(--secondary)] to-[var(--primary)] border-b border-white/10" ref={menuRef}>
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex justify-center items-center h-14">
             {/* Navigation desktop */}
-            <div className="hidden lg:flex space-x-1 flex-1">
+            <div className="hidden lg:flex items-stretch h-full gap-1">
               {currentNavigation.map((item: any, index: number) => (
                 <div
                   key={item.name}
-                  className="relative group"
+                  className="relative group flex items-center"
                   onMouseEnter={() => item.submenu.length > 0 && handleMouseEnter(index)}
                   onMouseLeave={handleMenuMouseLeave}
                 >
                   <Link
                     href={item.href}
-                    className={`px-4 py-2 rounded-lg text-white font-medium hover:bg-red-600 hover:shadow-lg transition-all duration-300 flex items-center space-x-1 ${currentPath === item.href ? 'bg-red-700/60 shadow-inner' : ''
+                    className={`px-3 py-2 rounded-lg text-white font-medium hover:bg-red-600 hover:shadow-lg transition-all duration-300 flex items-center space-x-1 whitespace-nowrap ${currentPath === item.href ? 'bg-red-700/60 shadow-inner' : ''
                       }`}
                   >
-                    <span className="transition-all duration-300 group-hover:scale-110 group-hover:translate-x-1 inline-block origin-left">{item.name}</span>
+                    <span className="text-sm transition-all duration-300 group-hover:scale-105 inline-block origin-center">{item.name}</span>
                     {item.submenu.length > 0 && (
                       <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeSubmenu === index ? 'rotate-180' : ''}`} />
                     )}
@@ -293,7 +314,8 @@ export default function Header() {
                   {/* Mega Menu moderne avec placeholders d'images */}
                   {item.submenu.length > 0 && activeSubmenu === index && (
                     <div
-                      className="absolute left-0 top-full mt-2 w-[600px] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden animate-slideDown z-50"
+                      className={`absolute top-full mt-2 w-[600px] max-w-[90vw] md:max-w-[70vw] lg:max-w-[600px] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden animate-slideDown z-50 ${index > 3 ? 'right-0' : 'left-0'
+                        }`}
                       onMouseEnter={handleSubmenuMouseEnter}
                       onMouseLeave={handleMenuMouseLeave}
                     >
@@ -306,18 +328,27 @@ export default function Header() {
                             <Link
                               key={subItem.name}
                               href={subItem.href}
-                              className="group/item flex items-start space-x-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 transition-all duration-300"
+                              className="group/item flex items-start space-x-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 transition-all duration-300"
                               onClick={() => setActiveSubmenu(null)}
                             >
-                              {/* Placeholder d'image avec gradient et icône */}
-                              <div className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-gradient-to-br from-[var(--primary)] to-[var(--danger)] relative group-hover/item:scale-110 transition-transform duration-300">
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                  <svg className="w-10 h-10 text-white opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                  </svg>
-                                </div>
+                              {/* Miniature d'image ou Placeholder */}
+                              <div className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-gradient-to-br from-[var(--primary)] to-[var(--danger)] relative group-hover/item:scale-110 transition-transform duration-300 shadow-md">
+                                {subItem.image ? (
+                                  <Image
+                                    src={subItem.image}
+                                    alt={subItem.name}
+                                    fill
+                                    className="object-cover"
+                                  />
+                                ) : (
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <svg className="w-10 h-10 text-white opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                  </div>
+                                )}
                                 {/* Numéro du sous-item */}
-                                <div className="absolute top-1 right-1 w-6 h-6 bg-white rounded-full flex items-center justify-center text-xs font-bold text-[var(--primary)]">
+                                <div className="absolute top-1 right-1 w-6 h-6 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-xs font-bold text-[var(--primary)] shadow-sm">
                                   {subIndex + 1}
                                 </div>
                               </div>

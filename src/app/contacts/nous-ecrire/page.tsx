@@ -9,7 +9,7 @@ export default function NousEcrirePage() {
     <MainLayout>
       <div className="bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
+        <PageHeader
           title="Nous écrire"
           description="Contactez-nous pour toute question, suggestion ou demande d'information"
           icon={Mail}
@@ -20,12 +20,6 @@ export default function NousEcrirePage() {
           ]}
         />
 
-        {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
-          icon={Mail}
-          label="Communication et Correspondance avec les Services du FPS"
-          variant="blue"
-        />
 
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

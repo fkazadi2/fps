@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Users, Building, CheckCircle, TrendingUp, BarChart3 } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 interface StatValue {
   label: string;
@@ -23,8 +24,16 @@ interface StatsSectionProps {
 export default function StatsSection({ customContent }: StatsSectionProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [counts, setCounts] = useState([0, 0, 0, 0]);
-  const sectionRef = useRef(null);
-  
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Hook pour l'effet parallax
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+
   // Configuration par défaut
   const defaultContent: StatsContent = {
     title: "Notre impact en chiffres",
@@ -32,13 +41,13 @@ export default function StatsSection({ customContent }: StatsSectionProps) {
     values: [
       { label: "Personnes couvertes", value: "5M+", icon: "users", color: "bg-[var(--danger)]" },
       { label: "Centres de santé partenaires", value: "650+", icon: "building", color: "bg-[var(--accent)]" },
-      { label: "Provinces couvertes", value: "26", icon: "check", color: "bg-[var(--danger)]" },
-      { label: "Taux de satisfaction", value: "85%", icon: "trending", color: "bg-[var(--accent)]" }
+      { label: "Provinces couvertes", value: "26", icon: "check", color: "bg-emerald-500" },
+      { label: "Taux de satisfaction", value: "85%", icon: "trending", color: "bg-blue-500" }
     ]
   };
 
   const content = customContent || defaultContent;
-  
+
   // Fonction pour extraire le nombre d'une chaîne
   const extractNumber = (str: string): number => {
     const match = str.match(/[\d.]+/);
@@ -48,10 +57,10 @@ export default function StatsSection({ customContent }: StatsSectionProps) {
     if (str.includes('K')) return num * 1000;
     return num;
   };
-  
+
   // Valeurs cibles pour les compteurs
   const targetValues = content.values.map(v => extractNumber(v.value));
-  
+
   // Formats d'affichage pour les valeurs
   const formatValues = content.values.map(v => {
     if (v.value.includes('M+')) return (val: number) => `${Math.floor(val / 1000000)}M+`;
@@ -59,7 +68,7 @@ export default function StatsSection({ customContent }: StatsSectionProps) {
     if (v.value.includes('%')) return (val: number) => `${val}%`;
     return (val: number) => `${val}`;
   });
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -70,45 +79,45 @@ export default function StatsSection({ customContent }: StatsSectionProps) {
       },
       { threshold: 0.2 }
     );
-    
+
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
-    
+
     return () => observer.disconnect();
   }, []);
-  
+
   // Effet pour animer les compteurs
   useEffect(() => {
     if (!isVisible) return;
-    
+
     // Durée de l'animation en ms
     const animationDuration = 2000;
     const framesPerSecond = 60;
     const totalFrames = animationDuration / 1000 * framesPerSecond;
-    
+
     let frame = 0;
     const counter = setInterval(() => {
       frame++;
       const progress = frame / totalFrames;
-      
+
       // Fonction d'easing pour ralentir vers la fin
       const easeOutQuad = (t: number) => t * (2 - t);
       const easedProgress = easeOutQuad(progress);
-      
+
       // Mettre à jour les compteurs avec les valeurs intermédiaires
       setCounts(targetValues.map(target => Math.floor(target * easedProgress)));
-      
+
       if (frame >= totalFrames) {
         clearInterval(counter);
         // S'assurer que les valeurs finales sont exactes
         setCounts([...targetValues]);
       }
     }, 1000 / framesPerSecond);
-    
+
     return () => clearInterval(counter);
   }, [isVisible]);
-  
+
   // Fonction pour obtenir l'icône
   const getIcon = (iconName: string) => {
     const iconClass = "w-10 h-10";
@@ -120,9 +129,20 @@ export default function StatsSection({ customContent }: StatsSectionProps) {
       default: return <CheckCircle className={iconClass} />;
     }
   };
-  
+
   return (
     <section ref={sectionRef} className="py-20 bg-gradient-to-br from-[var(--primary)] via-[var(--secondary)] to-[var(--primary)] relative overflow-hidden">
+      {/* Image de fond avec opacité et effet Parallax */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <motion.img
+          src="/images/home/result-fps.jpg"
+          alt="Impact Background"
+          className="absolute inset-0 w-full h-[130%] object-cover opacity-40"
+          style={{ y, top: "-15%" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/80 via-[var(--secondary)]/80 to-[var(--primary)]/80"></div>
+      </div>
+
       {/* Motifs de fond animés */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-full h-full">
@@ -154,18 +174,18 @@ export default function StatsSection({ customContent }: StatsSectionProps) {
             {content.subtitle}
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {content.values.map((stat, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={`group relative bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-8 overflow-hidden border border-white/20 transform transition-all duration-500 hover:bg-white/20 hover:scale-105 hover:shadow-3xl
                 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               {/* Gradient animé au survol */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
+
               <div className="relative flex flex-col items-center text-center">
                 {/* Icône avec effet de halo */}
                 <div className="relative mb-6">
@@ -174,19 +194,16 @@ export default function StatsSection({ customContent }: StatsSectionProps) {
                     {getIcon(stat.icon)}
                   </div>
                 </div>
-                
+
                 {/* Compteur animé */}
                 <p className="text-5xl md:text-6xl font-extrabold text-white mb-3 transition-all drop-shadow-lg">
                   {formatValues[index](counts[index])}
                 </p>
-                
+
                 {/* Label */}
                 <p className="text-lg text-white/90 font-medium leading-tight">
                   {stat.label}
                 </p>
-
-                {/* Ligne décorative en bas */}
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 group-hover:w-full group-hover:opacity-100 transition-all duration-500"></div>
               </div>
             </div>
           ))}

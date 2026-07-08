@@ -9,8 +9,8 @@ export default function EquipementsPage() {
     <MainLayout>
       <div className="bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
-          title="Dotation en équipements"
+        <PageHeader
+          title="Financement et dotation en équipements"
           description="Kits d'accouchement, couveuses, lits hospitaliers et matériels de soins pour moderniser nos établissements de santé"
           icon={Microscope}
           variant="amber"
@@ -18,13 +18,15 @@ export default function EquipementsPage() {
             { name: "Plateau technique", href: "/plateau-technique" },
             { name: "Équipements", href: "/plateau-technique/equipements" }
           ]}
+          backgroundImage="/images/banners/plateau-technique/banner-equipements.jpg"
         />
 
         {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
+        <FeaturedImageBox
           icon={Microscope}
           label="Équipements Médicaux de Pointe pour la RDC"
           variant="blue"
+          image="/images/featured-images/plateau-technique/featured-financement-equipements.jpg"
         />
 
         {/* Contenu principal */}

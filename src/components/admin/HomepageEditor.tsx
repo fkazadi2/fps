@@ -32,8 +32,6 @@ const defaultHomepageContent = {
         image: "/images/slides/fps-slide-1.jpg",
         buttonText: "Découvrir le FPS",
         buttonLink: "/a-propos",
-        secondaryButtonText: "Nos programmes",
-        secondaryButtonLink: "/programmes",
       },
       {
         id: 2,

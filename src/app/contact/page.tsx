@@ -17,10 +17,12 @@ import {
   Building,
   Calendar,
   MessageCircle,
-  ExternalLink
+  ExternalLink,
+  Import
 } from "lucide-react";
 import PageHeader from "@/components/layout/PageHeader";
 import FeaturedImageBox from "@/components/ui/FeaturedImageBox";
+import Image from "next/image";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -139,22 +141,18 @@ export default function ContactPage() {
     <MainLayout>
       <div className="bg-gray-50 min-h-screen">
         {/* 1. La Bannière */}
-        <PageHeader 
+        <PageHeader
           title="Contactez-nous"
           description="Nous sommes à votre écoute pour répondre à vos questions, recevoir vos suggestions ou traiter vos réclamations"
           icon={Mail}
           variant="slate"
+          backgroundImage="/images/call-center.jpg"
           breadcrumbs={[
             { name: "Nous Contacter", href: "/contact" }
           ]}
         />
 
-        {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
-          icon={Mail}
-          label="Services de Communication et Support aux Usagers du FPS"
-          variant="blue"
-        />
+
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Informations de contact */}
@@ -168,7 +166,7 @@ export default function ContactPage() {
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Notre adresse</h3>
                 <p className="text-gray-600">
                   16, Av. Lukusa,<br />
-                  Imm Les Palmiers, Apt 2A,<br />
+                  Imm Les Palmiers, Apt 3B,<br />
                   Kinshasa-Gombe, RDC
                 </p>
                 <a
@@ -238,8 +236,8 @@ export default function ContactPage() {
                   <h3 className="text-lg font-bold text-gray-900 mb-2">Horaires d'ouverture</h3>
                   <p className="text-gray-600">
                     <strong>Lundi - Vendredi:</strong> 8h00 - 16h00<br />
-                    <strong>Samedi - Dimanche:</strong> Fermé<br />
-                    <strong>Jours fériés:</strong> Fermé
+                    <strong className="text-red-600">Samedi - Dimanche:</strong> Fermé<br />
+                    <strong className="text-red-600">Jours fériés:</strong> Fermé
                   </p>
                 </div>
               </div>
@@ -270,7 +268,7 @@ export default function ContactPage() {
               </div>
               <div className="p-4 bg-gray-50 text-sm text-gray-600">
                 <p>
-                  <strong>Adresse complète:</strong> 16, Av. Lukusa, Imm Les Palmiers, Apt 2A, Kinshasa-Gombe, RDC
+                  <strong>Adresse complète:</strong> 16, Av. Lukusa, Imm Les Palmiers, Apt 3B, Kinshasa-Gombe, RDC
                 </p>
               </div>
             </div>
@@ -288,8 +286,8 @@ export default function ContactPage() {
 
               {formStatus.type && (
                 <div className={`mb-6 p-4 rounded-lg flex items-start space-x-3 ${formStatus.type === "success"
-                    ? "bg-green-50 border border-green-200"
-                    : "bg-red-50 border border-red-200"
+                  ? "bg-green-50 border border-green-200"
+                  : "bg-red-50 border border-red-200"
                   }`}>
                   {formStatus.type === "success" ? (
                     <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -456,8 +454,8 @@ export default function ContactPage() {
 
               {reclamationStatus.type && (
                 <div className={`mb-6 p-4 rounded-lg ${reclamationStatus.type === "success"
-                    ? "bg-green-50 border border-green-200"
-                    : "bg-red-50 border border-red-200"
+                  ? "bg-green-50 border border-green-200"
+                  : "bg-red-50 border border-red-200"
                   }`}>
                   <div className="flex items-start space-x-3">
                     {reclamationStatus.type === "success" ? (

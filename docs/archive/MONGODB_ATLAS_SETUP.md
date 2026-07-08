@@ -37,7 +37,7 @@ Pendant que le cluster se crée:
 2. Cliquez **"Add New Database User"**
 3. **Username:** `fps_admin`
 4. **Password:** Générez un mot de passe fort (NOTEZ-LE !)
-   - Exemple: `FpsSecure2026!`
+   - Exemple: `CHANGE_ME_ATLAS`
 5. Database User Privileges: **"Read and write to any database"**
 6. Cliquez **"Add User"**
 
@@ -78,16 +78,16 @@ Ouvrez `/Users/mac/fps-website-2025/fps-website-20250707/.env.local`
 MONGODB_URI=mongodb://localhost:27017/fps_website
 
 # APRÈS (Atlas - votre vraie connection string)
-MONGODB_URI=mongodb+srv://fps_admin:FpsSecure2026!@fps-cluster.xxxxx.mongodb.net/fps_website?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fps_admin:CHANGE_ME_ATLAS@fps-cluster.xxxxx.mongodb.net/fps_website?retryWrites=true&w=majority
 ```
 
 ⚠️ **Changez:**
-- `FpsSecure2026!` → Votre vrai mot de passe
+- `CHANGE_ME_ATLAS` → Votre vrai mot de passe
 - `xxxxx` → Votre vrai ID cluster
 
 **Exemple complet:**
 ```bash
-MONGODB_URI=mongodb+srv://fps_admin:MonMotDePasse123@fps-cluster.a1b2c.mongodb.net/fps_website?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fps_admin:CHANGE_ME_ATLAS@fps-cluster.a1b2c.mongodb.net/fps_website?retryWrites=true&w=majority
 ```
 
 ---

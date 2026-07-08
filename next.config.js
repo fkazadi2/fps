@@ -7,11 +7,6 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-  eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true,
-  },
   images: {
     // Formats d'images optimisés
     formats: ['image/avif', 'image/webp'],
@@ -30,8 +25,9 @@ const nextConfig = {
   },
   // Compression des assets
   compress: true,
-  // Optimisation de la production
-  swcMinify: true,
-}
+  turbopack: {
+    root: __dirname,
+  },
+};
 
-module.exports = nextConfig 
+module.exports = nextConfig;

@@ -10,7 +10,7 @@ export default function ContactsPage() {
     <MainLayout>
       <div className="bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
+        <PageHeader
           title="Contacts"
           description="Nous visiter, nous écrire ou participer à nos événements - Toutes les informations pour nous contacter"
           icon={Phone}
@@ -21,7 +21,7 @@ export default function ContactsPage() {
         />
 
         {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
+        <FeaturedImageBox
           icon={Phone}
           label="Siège Social et Réseau National du FPS"
           variant="blue"
@@ -34,7 +34,7 @@ export default function ContactsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold text-fps-primary mb-3">Marius MIKA NYEMBO</h3>
-                <p className="text-gray-700 mb-2">DGE du FPS</p>
+                <p className="text-gray-700 mb-2">Directeur général du FPS</p>
                 <p className="text-gray-600 flex items-center">
                   <Mail className="h-4 w-4 mr-2" />
                   dg@fps.cd
@@ -73,7 +73,7 @@ export default function ContactsPage() {
             <Link href="/contacts/adresses-provinces" className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-center mb-4">
                 <Building className="h-8 w-8 text-fps-primary mr-3" />
-                <h3 className="text-xl font-semibold text-fps-primary">Nos adresses en provinces</h3>
+                <h3 className="text-xl font-semibold text-fps-primary">Commissions provinciales FPS</h3>
               </div>
               <p className="text-gray-600">
                 Représentations et antennes du FPS dans tout le pays.

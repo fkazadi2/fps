@@ -21,22 +21,26 @@ import MediaGallery from "@/components/ui/MediaGallery";
 import EventsSection from "@/components/ui/EventsSection";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 
+function getStrategicAxeHref(axe: any): string {
+  const icon = String(axe?.icon || "").toLowerCase();
+  const title = String(axe?.title || "").toLowerCase();
+
+  if (icon === "building" || title.includes("infrastructure")) return "/plateau-technique/infrastructures";
+  if (icon === "tool" || title.includes("équipement") || title.includes("equipement")) return "/plateau-technique/equipements";
+  if (icon === "pill" || title.includes("médicament") || title.includes("medicament")) return "/plateau-technique/medicaments";
+  if (icon === "users" || title.includes("ressources humaines") || title.includes("ressource humaine")) return "/gouvernance-sante/capacitation";
+  if (icon === "leaf" || title.includes("médecine traditionnelle") || title.includes("medecine traditionnelle")) return "/medecine-traditionnelle";
+  if (icon === "shield" || title.includes("gouvernance")) return "/gouvernance-sante";
+
+  return "/a-propos/mission#nos-axes";
+}
+
 // Configuration par défaut pour les sections éditables
 const defaultHomepageContent = {
   heroSlider: {
     slides: [
       {
         id: 1,
-        title: "Accès aux soins pour les vulnérables",
-        description: "L'accès aux prestations de santé pour les indigents et les vulnérables sur toute l'étendue de la RDC.",
-        image: "/images/slides/new-slides/acces-aux-soins-pour-les-vulnerables.jpg",
-        buttonText: "Découvrir le FPS",
-        buttonLink: "/a-propos",
-        secondaryButtonText: "Nos programmes",
-        secondaryButtonLink: "/programmes",
-      },
-      {
-        id: 2,
         title: "Mise en œuvre de la CSU",
         description: "Nous envisageons la mise en œuvre du système de la CSU comme un processus en tenant compte de la diversité des contextes géographiques, socio-culturels et économiques.",
         image: "/images/slides/new-slides/mise-en-œuvre-de-la-CSU.jpg",
@@ -44,6 +48,14 @@ const defaultHomepageContent = {
         buttonLink: "/programmes",
         secondaryButtonText: "Contactez-nous",
         secondaryButtonLink: "/contact",
+      },
+      {
+        id: 2,
+        title: "Accès aux soins pour les vulnérables",
+        description: "L'accès aux prestations de santé pour les indigents et les vulnérables sur toute l'étendue de la RDC.",
+        image: "/images/slides/new-slides/acces-aux-soins-pour-les-vulnerables.jpg",
+        buttonText: "Découvrir le FPS",
+        buttonLink: "/a-propos",
       },
       {
         id: 3,
@@ -73,31 +85,43 @@ const defaultHomepageContent = {
     title: "Notre mission",
     subtitle: "Mobiliser, gérer et promouvoir efficacement les ressources pour la santé publique, conformément au Décret n°22/15 du 09 avril 2022",
     vision: "Une RDC où la santé est financée de manière durable et équitable pour tous",
-    legalFramework: "Décret n°22/15 du 09 avril 2022 - Tutelle du Ministère de la Santé",
+    legalFramework: "Décret n°22/15 du 09 avril 2022 - Tutelle du Ministre de la Santé",
     strategicAxes: [
       {
-        title: "Mobilisation des ressources internes et externes",
-        description: "Mobiliser activement des ressources financières additionnelles provenant de sources internes et externes pour renforcer le financement du secteur de la santé.",
-        icon: "trending",
-        image: "/images/home/axes/mobilization.png"
-      },
-      {
-        title: "Soutien aux zones de santé pour l'accès aux soins",
-        description: "Apporter un soutien direct aux zones de santé pour améliorer l'accès aux soins de qualité, incluant le financement d'infrastructures et la dotation en médicaments.",
+        title: "Infrastructures sanitaires",
+        description: "La construction et la réhabilitation des infrastructures sanitaires pour assurer un environnement de soin moderne et adapté aux besoins de la population.",
         icon: "building",
-        image: "/images/home/axes/health_support.png"
+        image: "/images/home/axes/axe-infrastructures.png"
       },
       {
-        title: "Promotion des comportements sains et de la prévention",
-        description: "Développer et financer des programmes de prévention et de promotion de la santé pour encourager les comportements sains au sein des communautés.",
-        icon: "check",
-        image: "/images/home/axes/prevention.png"
+        title: "Financement et dotation en équipements",
+        description: "Le financement et la dotation des Établissements de Services et Soins de Santé en matériels médicaux et non médicaux de pointe pour des diagnostics précis.",
+        icon: "tool",
+        image: "/images/home/axes/axe-equipements.png"
       },
       {
-        title: "Partenariat et plaidoyer avec les acteurs du secteur santé",
-        description: "Développer des partenariats stratégiques et mener des actions de plaidoyer pour promouvoir des politiques favorables à la santé publique et à la CSU.",
+        title: "Financement en médicaments",
+        description: "Le financement permanent en médicaments essentiels, vaccins et autres intrants de santé publique sur toute l'étendue du territoire.",
+        icon: "pill",
+        image: "/images/home/axes/axe-medicaments.png"
+      },
+      {
+        title: "Financement du renforcement des capacités des ressources humaines du secteur santé",
+        description: "Le renforcement continu des capacités du personnel de santé et le soutien au développement des compétences pour une prise en charge de qualité.",
         icon: "users",
-        image: "/images/home/axes/partnerships.png"
+        image: "/images/home/axes/axe-rh.png"
+      },
+      {
+        title: "Recherche en médecine",
+        description: "La promotion et l'encadrement de la médecine traditionnelle comme axe complémentaire intégré dans le système de santé national.",
+        icon: "leaf",
+        image: "/images/home/axes/axe-medecine-traditionnelle.png"
+      },
+      {
+        title: "Système des références",
+        description: "Le pilotage stratégique de la santé publique, incluant la planification, le financement de la recherche et le système de références ambulances.",
+        icon: "shield",
+        image: "/images/home/axes/axe-gouvernance.png"
       }
     ]
   },
@@ -127,8 +151,8 @@ const defaultHomepageContent = {
     values: [
       { label: "Personnes couvertes", value: "5M+", icon: "users", color: "bg-[var(--danger)]" },
       { label: "Centres de santé partenaires", value: "650+", icon: "building", color: "bg-[var(--accent)]" },
-      { label: "Provinces couvertes", value: "26", icon: "check", color: "bg-[var(--danger)]" },
-      { label: "Taux de satisfaction", value: "85%", icon: "trending", color: "bg-[var(--accent)]" }
+      { label: "Provinces couvertes", value: "26", icon: "check", color: "bg-emerald-500" },
+      { label: "Taux de satisfaction", value: "85%", icon: "trending", color: "bg-blue-500" }
     ]
   },
   interactiveMap: {
@@ -168,7 +192,7 @@ const defaultHomepageContent = {
     linkUrl: "/evenements"
   },
   partners: {
-    title: "Nos Partenaires",
+    title: "Nos Partenaires EPVG",
     subtitle: "Ensemble pour une meilleure santé publique",
     description: "Le FPS collabore avec de nombreux partenaires locaux et internationaux pour maximiser son impact."
   },
@@ -298,42 +322,45 @@ export default function HomeClient({
             {/* Vision et Cadre légal - Design Glassmorphism Raffiné */}
             <div className="grid md:grid-cols-2 gap-8 mb-20">
               <div className="group relative">
-                <div className="absolute inset-0 bg-blue-600/5 rounded-3xl blur-2xl group-hover:bg-blue-600/10 transition-all duration-500"></div>
-                <div className="relative h-full bg-white/60 backdrop-blur-xl border border-white/40 p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
-                  <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <Target className="w-24 h-24 text-[var(--primary)]" />
+                <div className="absolute inset-0 bg-[var(--primary)] opacity-10 rounded-3xl blur-2xl group-hover:opacity-20 transition-all duration-500"></div>
+                <div className="relative h-full bg-[var(--primary)] border border-white/20 p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                  <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:rotate-12 transition-all duration-500">
+                    <Target className="w-24 h-24 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-[var(--primary)] mb-6 flex items-center gap-3">
-                    <span className="w-1.5 h-6 bg-[var(--danger)] rounded-full"></span>
+                  <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                    <span className="w-1.5 h-6 bg-[var(--accent)] rounded-full"></span>
                     Notre Vision
                   </h3>
-                  <p className="text-3xl font-bold text-gray-800 leading-snug tracking-tight">
+                  <p className="text-3xl font-bold text-white leading-snug tracking-tight">
                     « {homepageContent.mission.vision} »
                   </p>
                 </div>
               </div>
 
               <div className="group relative">
-                <div className="absolute inset-0 bg-red-600/5 rounded-3xl blur-2xl group-hover:bg-red-600/10 transition-all duration-500"></div>
-                <div className="relative h-full bg-white/60 backdrop-blur-xl border border-white/40 p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
-                  <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <svg className="w-24 h-24 text-[var(--danger)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="absolute inset-0 bg-[var(--accent)] opacity-10 rounded-3xl blur-2xl group-hover:opacity-20 transition-all duration-500"></div>
+                <div className="relative h-full bg-[var(--accent)] border border-white/40 p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                  <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:rotate-12 transition-all duration-500">
+                    <svg className="w-24 h-24 text-[var(--primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold text-[var(--primary)] mb-6 flex items-center gap-3">
-                    <span className="w-1.5 h-6 bg-[var(--primary)] rounded-full"></span>
+                    <span className="w-1.5 h-6 bg-[var(--danger)] rounded-full"></span>
                     Cadre légal
                   </h3>
-                  <p className="text-lg text-gray-700 leading-relaxed font-medium">
+                  <p className="text-lg text-[var(--primary)] leading-relaxed font-bold">
                     {homepageContent.mission.legalFramework}
                   </p>
-                  <p className="mt-4 text-sm text-gray-500">
-                    Sous la tutelle administrative et technique du Ministère de la Santé Publique, Hygiène et Prévoyance Sociale.
+                  <p className="mt-4 text-sm text-[var(--secondary)] opacity-80">
+                    Sous la tutelle administrative et technique du Ministre de la Santé Publique, Hygiène et Prévoyance Sociale.
                   </p>
                 </div>
               </div>
             </div>
+
+            {/* Séparateur discret amélioré */}
+            <div className="max-w-4xl mx-auto border-t border-gray-100 my-20"></div>
 
             {/* Axes stratégiques - Cards avec Images */}
             <div className="mb-16">
@@ -342,50 +369,66 @@ export default function HomeClient({
                 <div className="w-24 h-1.5 bg-[var(--danger)] mx-auto rounded-full"></div>
               </div>
 
-              <div className="grid gap-8 md:grid-cols-2">
-                {homepageContent.mission.strategicAxes.map((axe, index) => (
-                  <div
-                    key={index}
-                    className={`group relative bg-white rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] transform transition-all duration-700 ease-out border border-gray-100 ${animate ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-                      }`}
-                    style={{ transitionDelay: `${(index + 1) * 150}ms` }}
-                  >
-                    <div className="flex flex-col h-full">
-                      {/* Partie Image */}
-                      <div className="relative h-64 overflow-hidden">
-                        <img
-                          src={axe.image || `/images/placeholder-axe-${index + 1}.jpg`}
-                          alt={axe.title}
-                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                        <div className="absolute bottom-6 left-6 right-6">
-                          <div className="flex items-center gap-4">
-                            <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center font-black text-2xl">
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {homepageContent.mission.strategicAxes.map((axe, index) => {
+                  const axesColors = [
+                    "from-blue-500 to-blue-700",       // 1. Infrastructures
+                    "from-amber-500 to-orange-600",    // 2. Equipements
+                    "from-cyan-500 to-blue-600",       // 3. Medicaments
+                    "from-violet-500 to-purple-600",   // 4. RH
+                    "from-emerald-500 to-green-600",   // 5. Medecine Trad
+                    "from-rose-500 to-red-600"         // 6. Gouvernance
+                  ];
+                  const currentGradient = axesColors[index % axesColors.length];
+
+                  return (
+                    <Link
+                      key={index}
+                      href={getStrategicAxeHref(axe)}
+                      className={`group relative bg-white rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] transform transition-all duration-700 ease-out border border-gray-100 ${animate ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                        }`}
+                      style={{ transitionDelay: `${(index + 1) * 150}ms` }}
+                    >
+                      <div className="flex flex-col h-full">
+                        {/* Partie Image */}
+                        <div className="relative h-64 overflow-hidden">
+                          <img
+                            src={axe.image || `/images/home/axes/strategic_axe_mobilization_1775667777913${index + 1}.png`}
+                            alt={axe.title}
+                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                          />
+                          {/* Overlay au survol */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-[var(--primary)]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                            <span className="text-white font-bold flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                              En savoir plus <ArrowRight className="w-5 h-5" />
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Partie Contenu */}
+                        <div className="relative p-8 flex-1 flex flex-col">
+                          <div className="flex items-center gap-4 mb-6">
+                            <div className={`flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${currentGradient} text-white flex items-center justify-center font-black text-xl shadow-lg`}>
                               {index + 1}
                             </div>
-                            <h4 className="text-xl font-bold text-white leading-tight">
+                            <h4 className="text-xl font-bold text-[var(--primary)] leading-tight">
                               {axe.title}
                             </h4>
                           </div>
+
+                          <p className="text-gray-600 leading-relaxed text-sm pb-6">
+                            {axe.description}
+                          </p>
+
+                          <div className="mt-auto">
+                            {/* Ligne décorative en bas forcée */}
+                            <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${currentGradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500`}></div>
+                          </div>
                         </div>
                       </div>
-
-                      {/* Partie Contenu */}
-                      <div className="relative p-8 flex-1 flex flex-col justify-between">
-                        <p className="text-gray-600 leading-relaxed text-lg mb-6">
-                          {axe.description}
-                        </p>
-                        <div className="flex items-center text-[var(--danger)] font-bold group-hover:translate-x-2 transition-transform cursor-pointer">
-                          En savoir plus <ArrowRight className="ml-2 w-5 h-5" />
-                        </div>
-
-                        {/* Ligne décorative en bas forcée */}
-                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--danger)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
 

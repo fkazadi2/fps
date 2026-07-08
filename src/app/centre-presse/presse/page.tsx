@@ -15,9 +15,10 @@ export default async function Communiques() {
     <MainLayout>
       <div className="bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
+        <PageHeader
           title="Presse & Communiqués"
-          description="Consulter les dernières annonces et déclarations officielles du Fonds de Promotion de la Santé"
+          description="Consultez les dernières annonces et déclarations officielles du Fonds de Promotion de la Santé"
+          backgroundImage="/images/banners/centre-presse/presse.jpg"
           icon={Newspaper}
           variant="blue"
           breadcrumbs={[
@@ -26,12 +27,7 @@ export default async function Communiques() {
           ]}
         />
 
-        {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
-          icon={Newspaper}
-          label="Communiqués Officiels et Actualités Médias"
-          variant="blue"
-        />
+
 
         {/* Liste des communiqués */}
         <section className="py-12">

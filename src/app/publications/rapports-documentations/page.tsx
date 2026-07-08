@@ -27,6 +27,72 @@ const DOCUMENTS_DATA = [
     fileSize: "1.8 MB",
     format: "PDF",
     downloads: 890,
+  },
+  {
+    id: "doc-loi-csu-2023",
+    title: "Loi relative à la CSU - N°23/006",
+    category: "Texte Légal",
+    date: "03 Mars 2023",
+    description: "Loi portant modification et complétant certaines dispositions relatives à la Couverture Santé Universelle (CSU).",
+    fileUrl: "/uploads/documents/loi_csu_23_006_du_03_mars_2023.pdf",
+    fileSize: "1.2 MB",
+    format: "PDF",
+    downloads: 450,
+  },
+  {
+    id: "doc-decret-fps-tps1",
+    title: "Décret N°25/028 du 17 JUIL 2025",
+    category: "Décret",
+    date: "Mars 2024",
+    description: "Décret fixant les modalités de fonctionnement et d'organisation technique du Fonds de Promotion de la Santé.",
+    fileUrl: "/uploads/documents/Décret FPS TPS-1.pdf",
+    fileSize: "0.8 MB",
+    format: "PDF",
+    downloads: 320,
+  },
+  {
+    id: "doc-decrets-journal",
+    title: "Journal des Décrets FPS",
+    category: "Bulletin Officiel",
+    date: "Avril 2024",
+    description: "Recueil officiel regroupant l'ensemble des décrets et ordonnances relatifs au fonctionnement du Fonds de Promotion de la Santé.",
+    fileUrl: "/uploads/documents/Decrets Journal FPS.pdf",
+    fileSize: "3.1 MB",
+    format: "PDF",
+    downloads: 150,
+  },
+  {
+    id: "doc-constitution-rdc",
+    title: "Constitution de la RDC",
+    category: "Texte Légal",
+    date: "Révision 2011",
+    description: "Constitution de la République Démocratique du Congo (révision de certains articles par la loi n°11/002 du 20 janvier 2011).",
+    fileUrl: "/uploads/documents/Constitution%20de%20la%20RDC.pdf",
+    fileSize: "—",
+    format: "PDF",
+    downloads: 0,
+  },
+  {
+    id: "doc-loi-18-035-2018",
+    title: "Loi n° 18/035 du 13 décembre 2018",
+    category: "Texte Légal",
+    date: "13 Décembre 2018",
+    description: "Loi fixant les principes fondamentaux relatifs à l’organisation de la santé publique en République Démocratique du Congo.",
+    fileUrl: "/uploads/documents/Loi%2018%3A035.pdf",
+    fileSize: "—",
+    format: "PDF",
+    downloads: 0,
+  },
+  {
+    id: "doc-ordonnance-cncsu-21-032-2021",
+    title: "Ordonnance n° 21/032 du 1er juin 2021 (CNCSU)",
+    category: "Texte Légal",
+    date: "1er Juin 2021",
+    description: "Ordonnance portant création, organisation et fonctionnement du Conseil National de la Couverture Santé Universelle (CNCSU).",
+    fileUrl: "/uploads/documents/830.06.21-Ordonnance-du-1er-juin-2021_CNCSU.pdf",
+    fileSize: "—",
+    format: "PDF",
+    downloads: 0,
   }
 ];
 
@@ -46,12 +112,12 @@ export default function RapportsDocumentationsPage() {
   }));
 
   const totalDownloads = documents.reduce((acc: number, doc: any) => acc + (doc.downloads || 0), 0);
-  
+
   return (
     <MainLayout>
       <div className="bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
+        <PageHeader
           title="Rapports & Documentations"
           description="Accéder aux ressources officielles, rapports d'activité et documents techniques du Fonds de Promotion de la Santé"
           icon={FileText}
@@ -60,14 +126,10 @@ export default function RapportsDocumentationsPage() {
             { name: "Publications", href: "/publications" },
             { name: "Rapports & Doc", href: "/publications/rapports-documentations" }
           ]}
+          backgroundImage="/images/banners/publications/banner-document.jpg"
         />
 
-        {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
-          icon={FileText}
-          label="Documentation Officielle et Rapports Institutionnels"
-          variant="green"
-        />
+
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
@@ -149,7 +211,7 @@ export default function RapportsDocumentationsPage() {
             ))}
           </div>
         </div>
-        
+
         {/* Section archives simple */}
         <div className="bg-red-50 py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

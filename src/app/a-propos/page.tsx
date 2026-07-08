@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import MainLayout from '@/components/layout/MainLayout';
-import { Building } from "lucide-react";
+import { Building, Stethoscope, Leaf, Pill, Users2, HandCoins } from "lucide-react";
 import PageHeader from "@/components/layout/PageHeader";
 import FeaturedImageBox from "@/components/ui/FeaturedImageBox";
 
@@ -13,35 +13,99 @@ export default function AboutPage() {
     <MainLayout>
       <div className="w-full bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
+        <PageHeader
           title="À propos du FPS"
-          description="Découvrez notre mission et notre vision pour l'amélioration de la santé publique en RDC"
+          description="Découvrez notre mission et notre vision pour l'amélioration de  qualité de santé de l'offre des soins et des services de santé en RDC"
           icon={Building}
           variant="teal"
           breadcrumbs={[
-            { name: "Notre raison d'être", href: "/a-propos" }
+            { name: "Qui sommes-nous", href: "/a-propos" }
           ]}
+          backgroundImage="/images/banners/qui-nous-sommes/banner_qui_sommes_nous.jpg"
         />
 
         {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
-          icon={Building}
-          label="Institution de Référence pour le Financement de la Santé en RDC"
+        <FeaturedImageBox
           variant="blue"
+          image="/images/522929587_663562896739316_7745634594645377162_n.jpg"
         />
 
         {/* Contenu principal */}
-        <div className="max-w-5xl mx-auto px-4 py-12">
-          <div className="prose max-w-none">
-            <p>Le Fonds de Promotion de la Santé (FPS) est un établissement public à caractère administratif, doté de la personnalité juridique, créé par Décret n°19/13 du 25 novembre 2019.</p>
-            <p>Le FPS a pour mission de mobiliser des ressources additionnelles pour le financement des interventions prioritaires de santé.</p>
-            
-            <h2 className="text-2xl font-bold mt-8 mb-4 text-fps-primary">Notre histoire</h2>
-            <p>Le Fonds de Promotion de la Santé (FPS) a été créé en 2015 par décret présidentiel pour répondre aux défis persistants du financement de la santé en République Démocratique du Congo.</p>
-            <p>Né de la volonté de renforcer le système de santé congolais et d'améliorer l'accès aux soins pour tous, le FPS représente une innovation majeure dans le paysage sanitaire du pays. Depuis sa création, il a mobilisé des ressources significatives et mis en œuvre des programmes qui ont contribué à l'amélioration des indicateurs de santé dans plusieurs provinces.</p>
-            
-            <h2 className="text-2xl font-bold mt-8 mb-4 text-fps-primary">Notre mission</h2>
-            <p>Mobiliser et gérer efficacement des ressources financières pour soutenir les interventions prioritaires de santé publique, renforcer le système de santé et améliorer l'accès à des soins de qualité pour tous les Congolais, en particulier les populations les plus vulnérables.</p>
+        <div className="max-w-5xl mx-auto px-4">
+          <div>
+
+            <div className="mt-12 mb-16">
+              <h2 className="text-3xl font-extrabold text-[var(--primary)] mb-8 border-b-2 border-[var(--accent)] pb-2 inline-block">
+                Notre histoire
+              </h2>
+              <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                Le Fonds de Promotion de la Santé (FPS) a été créé en 2018 par la Loi n°18/035 du 13 décembre 2018 pour répondre aux défis persistants du financement de la santé en République Démocratique du Congo.
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Né de la volonté de renforcer le système de santé congolais et d'améliorer l'accès aux soins pour tous, le FPS représente une innovation majeure dans le paysage sanitaire du pays. Depuis sa création, il a mobilisé des ressources significatives et mis en œuvre des programmes qui ont contribué à l'amélioration des indicateurs de santé dans plusieurs provinces.
+              </p>
+            </div>
+
+            <div className="mt-12 mb-16">
+              <h2 className="text-3xl font-extrabold text-[var(--primary)] mb-8 border-b-2 border-[var(--accent)] pb-2 inline-block">
+                Notre mission
+              </h2>
+              <p className="text-lg text-gray-700 mb-8 font-medium">
+                Le Fonds de Promotion de la Santé a notamment pour missions de :
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Mission 1 */}
+                <div className="bg-white border-l-4 border-[var(--primary)] p-6 rounded-r-xl shadow-md hover:shadow-xl transition-shadow group">
+                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-[var(--primary)] mb-4 group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
+                    <Stethoscope className="w-6 h-6" />
+                  </div>
+                  <p className="text-gray-700 leading-relaxed font-medium">
+                    Financer les projets d’infrastructures sanitaires, d’équipements médicaux ainsi que promouvoir la production locale des médicaments autre intrants spécifiques ;
+                  </p>
+                </div>
+
+                {/* Mission 2 */}
+                <div className="bg-white border-l-4 border-[var(--accent)] p-6 rounded-r-xl shadow-md hover:shadow-xl transition-shadow group">
+                  <div className="w-12 h-12 bg-yellow-50 rounded-lg flex items-center justify-center text-[var(--accent)] mb-4 group-hover:bg-[var(--accent)] group-hover:text-white transition-colors">
+                    <Leaf className="w-6 h-6" />
+                  </div>
+                  <p className="text-gray-700 leading-relaxed font-medium">
+                    Financer la promotion de la médecine traditionnelle ;
+                  </p>
+                </div>
+
+                {/* Mission 3 */}
+                <div className="bg-white border-l-4 border-[var(--primary)] p-6 rounded-r-xl shadow-md hover:shadow-xl transition-shadow group">
+                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-[var(--primary)] mb-4 group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
+                    <Pill className="w-6 h-6" />
+                  </div>
+                  <p className="text-gray-700 leading-relaxed font-medium">
+                    Financer l’approvisionnement en médicaments essentiels y compris les contraceptifs, les vaccins et autres intrants de santé publique ;
+                  </p>
+                </div>
+
+                {/* Mission 4 */}
+                <div className="bg-white border-l-4 border-[var(--accent)] p-6 rounded-r-xl shadow-md hover:shadow-xl transition-shadow group">
+                  <div className="w-12 h-12 bg-yellow-50 rounded-lg flex items-center justify-center text-[var(--accent)] mb-4 group-hover:bg-[var(--accent)] group-hover:text-white transition-colors">
+                    <Users2 className="w-6 h-6" />
+                  </div>
+                  <p className="text-gray-700 leading-relaxed font-medium">
+                    Financer la gouvernance du secteur de la santé, la planification, le développement des ressources humaines du secteur de la santé ;
+                  </p>
+                </div>
+
+                {/* Mission 5 */}
+                <div className="bg-white border-l-4 border-[var(--primary)] p-6 rounded-r-xl shadow-md hover:shadow-xl transition-shadow group">
+                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-[var(--primary)] mb-4 group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
+                    <HandCoins className="w-6 h-6" />
+                  </div>
+                  <p className="text-gray-700 leading-relaxed font-medium">
+                    Subventionner les Etablissements de Services et Soins de Santé et Pharmaceutiques.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Navigation vers les sous-pages */}

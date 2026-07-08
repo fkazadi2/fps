@@ -12,6 +12,7 @@ export default function FormationPraticiensPage() {
         <PageHeader 
           title="Formation des praticiens"
           description="Programmes de formation et certification pour les praticiens de médecine traditionnelle"
+          backgroundImage="/images/banners/medecine-traditionnelle/formation-praticien.jpg"
           icon={GraduationCap}
           variant="green"
           breadcrumbs={[
@@ -25,6 +26,7 @@ export default function FormationPraticiensPage() {
           icon={GraduationCap}
           label="Professionnalisation et Renforcement des Compétences des Praticiens"
           variant="green"
+          image="/images/featured-images/medecine-traditionnelle/formation-praticiens.jpg"
         />
 
         <div className="max-w-7xl mx-auto px-4 py-12">

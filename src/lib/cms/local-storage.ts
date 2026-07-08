@@ -35,7 +35,7 @@ export function initLocalStorage(): void {
       logoUrl: '/images/logo-fps.jpg',
       contactEmail: 'secretariat@fps.cd',
       contactPhone: '+243 819 115 812',
-      contactAddress: '16, Av. Lukusa, Imm Les Palmiers, Apt 2A, Kinshasa-Gombe, RDC',
+      contactAddress: '16, Av. Lukusa, Imm Les Palmiers, Apt 3B, Kinshasa-Gombe, RDC',
       socialLinks: {}
     });
   }
@@ -213,7 +213,7 @@ export async function getSiteConfig<T = unknown>(): Promise<T> {
       logoUrl: '/images/logo-fps.jpg',
       contactEmail: 'secretariat@fps.cd',
       contactPhone: '+243 819 115 812',
-      contactAddress: '16, Av. Lukusa, Imm Les Palmiers, Apt 2A, Kinshasa-Gombe, RDC',
+      contactAddress: '16, Av. Lukusa, Imm Les Palmiers, Apt 3B, Kinshasa-Gombe, RDC',
       socialLinks: {}
     };
     setItem('site_config', 'default', defaultConfig);
@@ -236,8 +236,8 @@ export async function updateSiteConfig<T = unknown>(data: T): Promise<T> {
       if (key === 'socialLinks' && typeof (data as Record<string, unknown>)[key] === 'object') {
         // Gestion spéciale pour les liens sociaux
         (config as Record<string, unknown>).socialLinks = {
-          ...(config as Record<string, unknown>).socialLinks,
-          ...(data as Record<string, unknown>)[key]
+          ...((config as Record<string, unknown>).socialLinks as object),
+          ...((data as Record<string, unknown>)[key] as object)
         };
       } else {
         (config as Record<string, unknown>)[key] = (data as Record<string, unknown>)[key];

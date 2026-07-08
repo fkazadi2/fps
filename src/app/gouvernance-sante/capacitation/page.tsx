@@ -9,53 +9,44 @@ export default function CapacitationPage() {
     <MainLayout>
       <div className="bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
-          title="Capacitation du personnel"
-          description="Formation continue, développement des compétences et certification du personnel de santé pour une meilleure qualité des soins"
+        <PageHeader
+          title="Financement du renforcement des capacités des ressources humaines du secteur santé"
+          description=""
           icon={GraduationCap}
-          variant="purple"
+          variant="teal"
           breadcrumbs={[
             { name: "Gouvernance Santé", href: "/gouvernance-sante" },
             { name: "Capacitation", href: "/gouvernance-sante/capacitation" }
           ]}
+          backgroundImage="/images/banners/gouvernance-sante/banner-capatitation.jpg"
         />
 
         {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
-          icon={GraduationCap}
-          label="Formation et Perfectionnement du Personnel de Santé"
-          variant="purple"
+        <FeaturedImageBox
+          image="/images/featured-images/gouvernance-sante/featured-financement-capacitation.jpg"
+          variant="teal"
         />
 
         <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center mb-4">
-                <GraduationCap className="h-8 w-8 text-fps-primary mr-3" />
-                <h3 className="text-xl font-semibold text-fps-primary">Programmes de formation</h3>
-              </div>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Formation en soins obstétricaux d&apos;urgence</li>
-                <li>• Gestion des médicaments essentiels</li>
-                <li>• Bonnes pratiques transfusionnelles</li>
-                <li>• Système d&apos;information sanitaire</li>
-                <li>• Gestion administrative des ESS</li>
-              </ul>
-            </div>
-
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center mb-4">
-                <Award className="h-8 w-8 text-fps-primary mr-3" />
-                <h3 className="text-xl font-semibold text-fps-primary">Certifications</h3>
-              </div>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Certification en transfusion sanguine</li>
-                <li>• Accréditation CSU</li>
-                <li>• Formation continue obligatoire</li>
-                <li>• Évaluation des compétences</li>
-                <li>• Mise à jour des protocoles</li>
-              </ul>
-            </div>
+          <div className="bg-white border-l-4 border-teal-500 shadow-sm rounded-r-lg p-8 mb-12">
+            <h3 className="text-2xl font-bold text-fps-primary mb-6 flex items-center">
+              <GraduationCap className="h-8 w-8 mr-3" />
+              Missions de capacitation des ressources humaines
+            </h3>
+            <ul className="space-y-6 text-gray-700">
+              <li className="flex items-start">
+                <span className="flex-shrink-0 w-6 h-6 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center mr-4 mt-1 font-bold text-sm">1</span>
+                <p className="text-lg">Identifier, analyser et prioriser les besoins nationaux en renforcement des capacités des RH.</p>
+              </li>
+              <li className="flex items-start">
+                <span className="flex-shrink-0 w-6 h-6 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center mr-4 mt-1 font-bold text-sm">2</span>
+                <p className="text-lg">Elaborer et appuyer la mise en oeuvre des stratégies de financement du développement des RH en santé</p>
+              </li>
+              <li className="flex items-start">
+                <span className="flex-shrink-0 w-6 h-6 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center mr-4 mt-1 font-bold text-sm">3</span>
+                <p className="text-lg">Participer au suivi du financement de la formation continue, de la spécialisation; le renforcement des capacités du personnel de santé</p>
+              </li>
+            </ul>
           </div>
 
           <div className="bg-green-50 border border-green-200 rounded-lg p-8">

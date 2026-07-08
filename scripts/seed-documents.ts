@@ -32,6 +32,30 @@ const documentsToSeed = [
     date: '10 Mars 2024',
     description: 'Analyse de l\'impact du programme de gratuité des accouchements sur la santé maternelle et néonatale en RDC.',
     featured: true
+  },
+  {
+    fileName: 'loi_csu_23_006_du_03_mars_2023.pdf',
+    title: 'Loi relative à la CSU - N°23/006',
+    category: 'Texte Légal',
+    date: '03 Mars 2023',
+    description: 'Loi portant modification et complétant certaines dispositions relatives à la Couverture Santé Universelle (CSU).',
+    featured: true
+  },
+  {
+    fileName: 'Décret FPS TPS-1.pdf',
+    title: 'Décret FPS TPS-1',
+    category: 'Décret',
+    date: '2024',
+    description: 'Décret fixant les modalités de fonctionnement et d\'organisation technique du Fonds de Promotion de la Santé.',
+    featured: true
+  },
+  {
+    fileName: 'Decrets Journal FPS.pdf',
+    title: 'Journal des Décrets FPS',
+    category: 'Bulletin Officiel',
+    date: 'Avril 2024',
+    description: 'Recueil officiel regroupant l\'ensemble des décrets et ordonnances relatifs au fonctionnement du Fonds de Promotion de la Santé.',
+    featured: true
   }
 ];
 

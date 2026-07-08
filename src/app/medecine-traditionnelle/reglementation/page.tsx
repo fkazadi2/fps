@@ -12,6 +12,7 @@ export default function ReglementationPage() {
         <PageHeader 
           title="Réglementation"
           description="Cadre juridique et normes pour encadrer la pratique de la médecine traditionnelle en RDC"
+          backgroundImage="/images/banners/medecine-traditionnelle/banner-reglementation.jpg"
           icon={Scale}
           variant="green"
           breadcrumbs={[
@@ -25,6 +26,7 @@ export default function ReglementationPage() {
           icon={Scale}
           label="Encadrement Juridique et Normatif de la Médecine Traditionnelle"
           variant="green"
+          image="/images/featured-images/medecine-traditionnelle/reglementation.jpg"
         />
 
         <div className="max-w-7xl mx-auto px-4 py-12">

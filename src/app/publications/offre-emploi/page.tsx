@@ -42,13 +42,14 @@ export default function OffreEmploiPage() {
             { name: "Publications", href: "/publications" },
             { name: "Offre d'emploi", href: "/publications/offre-emploi" }
           ]}
+          backgroundImage="/images/banners/publications/banner-emplo.jpg"
         />
-
         {/* 2. L'Image à la Une (En deuxième position) */}
         <FeaturedImageBox
           variant="blue"
-          image="/images/articles/celebration/1.jpg"
+          image="/images/featured-images/publications/featured-emploi.jpg"
         />
+
 
 
         {/* 3. Section Retour (Optionnel, mais utile) */}
@@ -201,7 +202,15 @@ export default function OffreEmploiPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Pourquoi rejoindre le FPS ?</h2>
-              <p className="text-gray-600">Les avantages de travailler avec nous</p>
+              <div className="flex justify-center">
+                <Link 
+                  href="/a-propos/mission" 
+                  className="px-6 py-2 border-2 border-[var(--primary)] text-[var(--primary)] font-bold rounded-xl hover:bg-[var(--primary)] hover:text-white transition-all duration-300 shadow-sm hover:shadow-md flex items-center gap-2 group"
+                >
+                  Les avantages de travailler avec nous
+                  <ArrowLeft className="w-4 h-4 rotate-180 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

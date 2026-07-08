@@ -46,7 +46,7 @@ const defaultMediaItems: MediaItem[] = [
     src: '/images/albums/album3/1.jpg',
     thumbnail: '/images/albums/album3/1.jpg',
     title: 'Briefing hebdomadaire de la Direction générale du FPS',
-    description: 'Briefing hebdomadaire de la Direction générale du FPS présidé par le DGE Marius MIKA ce 17.03.2025.',
+    description: 'Briefing hebdomadaire de la Direction générale du FPS présidé par le DGE Marius MIKA NYEMBO ce 17.03.2025.',
     date: '17 mars 2025',
     link: '/actualites/galerie/briefing-dg-marius-mika'
   },
@@ -56,7 +56,7 @@ const defaultMediaItems: MediaItem[] = [
     src: '/images/albums/album4/01.jpg',
     thumbnail: '/images/albums/album4/01.jpg',
     title: 'Réunion hebdomadaire de la Direction générale du FPS',
-    description: 'Réunion hebdomadaire de la Direction générale du Fonds de Promotion de la Santé dirigée par le DGE Marius Mika. 27.01.2025',
+    description: 'Réunion hebdomadaire de la Direction générale du Fonds de Promotion de la Santé dirigée par le DGE Marius MIKA NYEMBO. 27.01.2025',
     date: '27 janvier 2025',
     link: '/actualites/galerie/reunion-dg-marius-mika-janvier'
   },

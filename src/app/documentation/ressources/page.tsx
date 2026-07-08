@@ -11,9 +11,9 @@ export default function DocumentationRessources() {
     <MainLayout>
       <div className="bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
+        <PageHeader
           title="Ressources éducatives"
-          description="Consulter nos guides, brochures, affiches et autres matériels éducatifs pour la promotion de la santé et la sensibilisation à la CSU."
+          description="Consultez nos guides, brochures, affiches et autres matériels éducatifs pour la promotion de la santé et la sensibilisation à la CSU."
           icon={BookOpen}
           variant="teal"
           breadcrumbs={[
@@ -23,7 +23,7 @@ export default function DocumentationRessources() {
         />
 
         {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
+        <FeaturedImageBox
           icon={BookOpen}
           label="Éducation et Sensibilisation : Outils pour une Santé Communautaire Durable"
           variant="blue"

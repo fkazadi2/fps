@@ -37,7 +37,7 @@
 - ✅ **Mission** : Texte exact avec référence au Décret n°22/15 du 09 avril 2022
 - ✅ **Cadre légal** : 
   - Décret n°22/15 du 09 avril 2022 mentionné
-  - Tutelle du Ministère de la Santé explicitée
+  - Tutelle du Ministre de la Santé explicitée
 - ✅ **4 axes stratégiques** : Tous nommés explicitement
   1. Mobilisation des ressources internes et externes
   2. Soutien aux zones de santé pour l'accès aux soins

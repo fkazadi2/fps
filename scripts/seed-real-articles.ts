@@ -89,7 +89,7 @@ const realArticles = [
         content: `
       <p>La Direction générale du Fonds de Promotion de la Santé ainsi que l'ensemble de son personnel ont soufflé la 3ième bougie d'anniversaire depuis la création de cet établissement public impliqué dans la facilitation de la mise en œuvre de la Couverture Santé Universelle en RDC.</p>
 
-      <p>Occasion pour le DGE du FPS, Monsieur Marius MIKA, de rappeler aux cadres, collaborateurs et experts réunis en l'espace « La Sablière » ce samedi 12 avril 2025, de la responsabilité de rester dans la droite ligne de la mission assignée au FPS, à savoir veiller à l'amélioration de la qualité de l'offre des soins et services de santé en RDC.</p>
+      <p>Occasion pour le Directeur général du FPS, Monsieur Marius MIKA NYEMBO, de rappeler aux cadres, collaborateurs et experts réunis en l'espace « La Sablière » ce samedi 12 avril 2025, de la responsabilité de rester dans la droite ligne de la mission assignée au FPS, à savoir veiller à l'amélioration de la qualité de l'offre des soins et services de santé en RDC.</p>
 
       <p>Une approche de travail orientée vers la performance qui a permis au FPS, de présenter à ce jour depuis sa création, des résultats concrets sur le terrain.</p>
 
@@ -101,7 +101,7 @@ const realArticles = [
         image: '/images/articles/celebration/1.jpg',
         images: [
             { src: '/images/articles/celebration/1.jpg', alt: 'Célébration du 3ème anniversaire du FPS à l\'espace La Sablière' },
-            { src: '/images/articles/celebration/2.jpg', alt: 'Discours du DGE du FPS, Monsieur Marius MIKA' },
+            { src: '/images/articles/celebration/2.jpg', alt: 'Discours du Directeur général du FPS, Monsieur Marius MIKA NYEMBO' },
             { src: '/images/articles/celebration/3.jpg', alt: 'Réunion des cadres, collaborateurs et experts lors de l\'anniversaire' },
         ],
         published: true,

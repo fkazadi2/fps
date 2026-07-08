@@ -11,9 +11,9 @@ export default function DocumentationTextesLegaux() {
     <MainLayout>
       <div className="bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
+        <PageHeader
           title="Textes légaux"
-          description="Consulter les lois, décrets, arrêtés et autres textes juridiques régissant le Fonds de Promotion de la Santé et la Couverture Santé Universelle en RDC."
+          description="Consultez les lois, décrets, arrêtés et autres textes juridiques régissant le Fonds de Promotion de la Santé et la Couverture Santé Universelle en RDC."
           icon={Scale}
           variant="slate"
           breadcrumbs={[
@@ -23,7 +23,7 @@ export default function DocumentationTextesLegaux() {
         />
 
         {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
+        <FeaturedImageBox
           icon={Scale}
           label="Cadre Juridique et Réglementaire de la Santé en RDC"
           variant="blue"
@@ -69,10 +69,43 @@ export default function DocumentationTextesLegaux() {
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-              <Scale className="w-6 h-6 mr-2 text-[var(--primary)]" /> 
+              <Scale className="w-6 h-6 mr-2 text-[var(--primary)]" />
               Lois
             </h2>
             <div className="space-y-6">
+              {/* Nouvelle Loi 2023 */}
+              <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
+                <div className="p-6">
+                  <div className="flex flex-col md:flex-row justify-between md:items-center space-y-4 md:space-y-0">
+                    <div>
+                      <div className="flex items-center mb-2">
+                        <div className="w-10 h-10 rounded-full bg-fps-primary-light flex items-center justify-center text-[var(--primary)] mr-3">
+                          <BookOpen className="w-5 h-5" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-gray-900">Loi relative à la CSU</h3>
+                      </div>
+                      <p className="text-sm text-gray-500 mb-2">Loi N°23/006 du 03 mars 2023</p>
+                      <p className="text-gray-600 mb-4">
+                        Loi portant modification et complétant certaines dispositions relatives à la Couverture Santé Universelle (CSU).
+                      </p>
+                    </div>
+                    <div className="md:flex md:items-center">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-fps-primary-light text-[var(--primary)] mr-2">
+                        <Calendar className="w-3 h-3 mr-1" />
+                        Mar 2023
+                      </span>
+                      <a
+                        href="/uploads/documents/loi_csu_23_006_du_03_mars_2023.pdf"
+                        target="_blank"
+                        className="inline-flex items-center px-4 py-2 border border-transparent text-white bg-[var(--danger)] rounded-md hover:bg-fps-danger-dark transition-colors"
+                      >
+                        <Download className="w-4 h-4 mr-2" />
+                        Télécharger (PDF)
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
                 <div className="p-6">
                   <div className="flex flex-col md:flex-row justify-between md:items-center space-y-4 md:space-y-0">
@@ -101,7 +134,7 @@ export default function DocumentationTextesLegaux() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
                 <div className="p-6">
                   <div className="flex flex-col md:flex-row justify-between md:items-center space-y-4 md:space-y-0">
@@ -130,7 +163,7 @@ export default function DocumentationTextesLegaux() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
                 <div className="p-6">
                   <div className="flex flex-col md:flex-row justify-between md:items-center space-y-4 md:space-y-0">
@@ -167,10 +200,69 @@ export default function DocumentationTextesLegaux() {
         <section className="py-12 bg-fps-primary-light">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-              <Filter className="w-6 h-6 mr-2 text-[var(--primary)]" /> 
+              <Filter className="w-6 h-6 mr-2 text-[var(--primary)]" />
               Décrets
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
+              {/* Nouveau Décret Journal FPS */}
+              <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100 h-full">
+                <div className="p-6">
+                  <div className="flex items-center mb-2">
+                    <div className="w-10 h-10 rounded-full bg-fps-primary-light flex items-center justify-center text-[var(--primary)] mr-3">
+                      <Filter className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900">Journal des Décrets FPS</h3>
+                  </div>
+                  <p className="text-sm text-gray-500 mb-1">Recueil Officiel</p>
+                  <p className="text-gray-600 mb-4">
+                    Journal officiel regroupant l'ensemble des décrets et ordonnances relatifs au fonctionnement du Fonds de Promotion de la Santé.
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-fps-primary-light text-[var(--primary)]">
+                      <Calendar className="w-3 h-3 mr-1" />
+                      2024
+                    </span>
+                    <a
+                      href="/uploads/documents/Decrets Journal FPS.pdf"
+                      target="_blank"
+                      className="inline-flex items-center px-4 py-2 border border-transparent text-white bg-[var(--danger)] rounded-md hover:bg-fps-danger-dark transition-colors"
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Télécharger
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Nouveau Décret FPS TPS-1 */}
+              <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100 h-full">
+                <div className="p-6">
+                  <div className="flex items-center mb-2">
+                    <div className="w-10 h-10 rounded-full bg-fps-primary-light flex items-center justify-center text-[var(--primary)] mr-3">
+                      <Filter className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900">Décret N°25/028 du 17 JUIL 2025</h3>
+                  </div>
+                  <p className="text-sm text-gray-500 mb-1">Document de référence</p>
+                  <p className="text-gray-600 mb-4">
+                    Décret fixant les modalités de fonctionnement et d'organisation technique du Fonds de Promotion de la Santé.
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-fps-primary-light text-[var(--primary)]">
+                      <Calendar className="w-3 h-3 mr-1" />
+                      2024
+                    </span>
+                    <a
+                      href="/uploads/documents/Décret FPS TPS-1.pdf"
+                      target="_blank"
+                      className="inline-flex items-center px-4 py-2 border border-transparent text-white bg-[var(--danger)] rounded-md hover:bg-fps-danger-dark transition-colors"
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Télécharger
+                    </a>
+                  </div>
+                </div>
+              </div>
               <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100 h-full">
                 <div className="p-6">
                   <div className="flex items-center mb-2">
@@ -195,7 +287,7 @@ export default function DocumentationTextesLegaux() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100 h-full">
                 <div className="p-6">
                   <div className="flex items-center mb-2">
@@ -220,7 +312,7 @@ export default function DocumentationTextesLegaux() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100 h-full">
                 <div className="p-6">
                   <div className="flex items-center mb-2">
@@ -245,7 +337,7 @@ export default function DocumentationTextesLegaux() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100 h-full">
                 <div className="p-6">
                   <div className="flex items-center mb-2">
@@ -278,7 +370,7 @@ export default function DocumentationTextesLegaux() {
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-              <Filter className="w-6 h-6 mr-2 text-fps-primary" /> 
+              <Filter className="w-6 h-6 mr-2 text-fps-primary" />
               Arrêtés ministériels
             </h2>
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
@@ -364,7 +456,7 @@ export default function DocumentationTextesLegaux() {
         <section className="py-12 bg-fps-primary-light">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-              <BookOpen className="w-6 h-6 mr-2 text-fps-primary" /> 
+              <BookOpen className="w-6 h-6 mr-2 text-fps-primary" />
               Documents administratifs
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
@@ -383,7 +475,7 @@ export default function DocumentationTextesLegaux() {
                   Télécharger
                 </button>
               </div>
-              
+
               <div className="bg-white p-6 rounded-lg shadow-lg">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 rounded-full bg-fps-secondary flex items-center justify-center text-white mr-3">
@@ -399,7 +491,7 @@ export default function DocumentationTextesLegaux() {
                   Télécharger
                 </button>
               </div>
-              
+
               <div className="bg-white p-6 rounded-lg shadow-lg">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 rounded-full bg-fps-accent bg-opacity-20 flex items-center justify-center text-[var(--secondary)] mr-3">

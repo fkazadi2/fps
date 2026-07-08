@@ -106,7 +106,7 @@ const defaultAlbums: PhotoAlbum[] = [
   {
     id: 'briefing-dg-marius-mika',
     title: 'Briefing hebdomadaire de la Direction générale du FPS',
-    description: 'Briefing hebdomadaire de la Direction générale du FPS présidé par le DGE Marius MIKA ce 17.03.2025.',
+    description: 'Briefing hebdomadaire de la Direction générale du FPS présidé par le DGE Marius MIKA NYEMBO ce 17.03.2025.',
     date: '17/03/2025',
     category: 'reunions',
     coverImage: '/images/albums/album3/1.jpg',
@@ -115,7 +115,7 @@ const defaultAlbums: PhotoAlbum[] = [
         id: 'briefing-dg-marius-mika-1',
         src: '/images/albums/album3/1.jpg',
         alt: 'Briefing hebdomadaire présidé par le DG',
-        caption: 'Le DGE Marius MIKA présidant la réunion de briefing'
+        caption: 'Le DGE Marius MIKA NYEMBO présidant la réunion de briefing'
       },
       {
         id: 'briefing-dg-marius-mika-2',
@@ -146,7 +146,7 @@ const defaultAlbums: PhotoAlbum[] = [
   {
     id: 'reunion-dg-marius-mika-janvier',
     title: 'Réunion hebdomadaire de la Direction générale du FPS',
-    description: 'Réunion hebdomadaire de la Direction générale du Fonds de Promotion de la Santé dirigée par le DGE Marius Mika. 27.01.2025',
+    description: 'Réunion hebdomadaire de la Direction générale du Fonds de Promotion de la Santé dirigée par le DGE Marius MIKA NYEMBO. 27.01.2025',
     date: '27/01/2025',
     category: 'reunions',
     coverImage: '/images/albums/album4/01.jpg',
@@ -155,7 +155,7 @@ const defaultAlbums: PhotoAlbum[] = [
         id: 'reunion-dg-marius-mika-janvier-1',
         src: '/images/albums/album4/01.jpg',
         alt: 'Réunion hebdomadaire dirigée par le DG',
-        caption: 'Le DGE Marius Mika présidant la réunion de janvier'
+        caption: 'Le DGE Marius MIKA NYEMBO présidant la réunion de janvier'
       },
       {
         id: 'reunion-dg-marius-mika-janvier-2',

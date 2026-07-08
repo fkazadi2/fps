@@ -48,7 +48,7 @@ services:
       - ./backup:/backup
     environment:
       MONGO_INITDB_ROOT_USERNAME: fps_admin
-      MONGO_INITDB_ROOT_PASSWORD: fps_secure_2026
+      MONGO_INITDB_ROOT_PASSWORD: CHANGE_ME_LOCALLY
       MONGO_INITDB_DATABASE: fps_website
 
 volumes:
@@ -92,11 +92,11 @@ abc123...      mongo:7.0   Up 10 seconds  0.0.0.0:27017->27017/tcp   fps_mongodb
 
 ```bash
 # MongoDB Local via Docker
-MONGODB_URI=mongodb://fps_admin:fps_secure_2026@localhost:27017/fps_website?authSource=admin
+MONGODB_URI=mongodb://fps_admin:CHANGE_ME_LOCALLY@localhost:27017/fps_website?authSource=admin
 
 # NextAuth
 NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=tFB0Ecoj0olnIaKML/xUll2+CH/JlDovE/o4cwMVtG4=
+NEXTAUTH_SECRET=GENERATE_WITH_OPENSSL
 
 # Cloudinary
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
@@ -156,10 +156,10 @@ docker-compose down
 docker logs fps_mongodb_dev
 
 # Accéder au shell MongoDB
-docker exec -it fps_mongodb_dev mongosh -u fps_admin -p fps_secure_2026
+docker exec -it fps_mongodb_dev mongosh -u fps_admin -p CHANGE_ME_LOCALLY
 
 # Backup manuel
-docker exec fps_mongodb_dev mongodump --uri="mongodb://fps_admin:fps_secure_2026@localhost:27017/fps_website?authSource=admin" --out=/backup
+docker exec fps_mongodb_dev mongodump --uri="mongodb://fps_admin:CHANGE_ME_LOCALLY@localhost:27017/fps_website?authSource=admin" --out=/backup
 
 # Voir les données (volumes)
 docker volume ls
@@ -175,7 +175,7 @@ docker volume ls
 2. `docker-compose up -d`
 3. Changer `.env.production`:
    ```bash
-   MONGODB_URI=mongodb://fps_admin:fps_secure_2026@localhost:27017/fps_website?authSource=admin
+   MONGODB_URI=mongodb://fps_admin:CHANGE_ME_LOCALLY@localhost:27017/fps_website?authSource=admin
    ```
 
 **Zéro différence !** 🎯

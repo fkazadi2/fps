@@ -13,8 +13,8 @@ interface Slide {
   image: string;
   buttonText: string;
   buttonLink: string;
-  secondaryButtonText: string;
-  secondaryButtonLink: string;
+  secondaryButtonText?: string;
+  secondaryButtonLink?: string;
 }
 
 interface HeroSliderProps {
@@ -31,8 +31,6 @@ const defaultSlides: Slide[] = [
     image: "/images/slides/new-slides/acces-aux-soins-pour-les-vulnerables.jpg",
     buttonText: "Découvrir le FPS",
     buttonLink: "/a-propos",
-    secondaryButtonText: "Nos programmes",
-    secondaryButtonLink: "/programmes",
   },
   {
     id: 2,
@@ -455,13 +453,15 @@ export default function HeroSlider({ customSlides, autoplay = true, duration = 7
                             {slide.buttonText}
                             <ArrowRight className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
                           </Link>
-                          <Link
-                            href={slide.secondaryButtonLink}
-                            className="group px-8 py-4 rounded-xl text-white bg-white/10 backdrop-blur-md border-2 border-white/50 hover:bg-white hover:text-[var(--primary)] font-semibold shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
-                          >
-                            {slide.secondaryButtonText}
-                            <ArrowRight className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
-                          </Link>
+                          {slide.secondaryButtonText && slide.secondaryButtonLink && (
+                            <Link
+                              href={slide.secondaryButtonLink}
+                              className="group px-8 py-4 rounded-xl text-white bg-white/10 backdrop-blur-md border-2 border-white/50 hover:bg-white hover:text-[var(--primary)] font-semibold shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
+                            >
+                              {slide.secondaryButtonText}
+                              <ArrowRight className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                          )}
                         </div>
                       </div>
 

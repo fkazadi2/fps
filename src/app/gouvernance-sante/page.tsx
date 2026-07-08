@@ -1,6 +1,6 @@
 import MainLayout from "@/components/layout/MainLayout";
 import Link from "next/link";
-import { Users, Award, ArrowRightLeft, Microscope, Scale } from "lucide-react";
+import { Users, Award, ArrowRightLeft, Microscope, HeartPulse } from "lucide-react";
 import PageHeader from "@/components/layout/PageHeader";
 import FeaturedImageBox from "@/components/ui/FeaturedImageBox";
 
@@ -9,20 +9,20 @@ export default function GouvernanceSantePage() {
     <MainLayout>
       <div className="bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
+        <PageHeader
           title="Gouvernance Santé"
-          description="Appui à la gouvernance du système de santé, développement des ressources humaines et amélioration de la qualité des soins"
-          icon={Scale}
+          description="Renforcement du système de Santé"
+          icon={HeartPulse}
           variant="slate"
           breadcrumbs={[
             { name: "Gouvernance de la Santé", href: "/gouvernance-sante" }
           ]}
+          backgroundImage="/images/banners/gouvernance-sante/banner-gouvernance.jpg"
         />
 
         {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
-          icon={Scale}
-          label="Pilotage Stratégique et Amélioration de la Qualité des Services de Santé"
+        <FeaturedImageBox
+          image="/images/featured-images/gouvernance-sante/featured-gouvernance.jpg"
           variant="blue"
         />
 
@@ -33,22 +33,13 @@ export default function GouvernanceSantePage() {
             <Link href="/gouvernance-sante/capacitation" className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-center mb-4">
                 <Users className="h-8 w-8 text-fps-primary mr-3" />
-                <h3 className="text-xl font-semibold text-fps-primary">Capacitation du personnel</h3>
+                <h3 className="text-xl font-semibold text-fps-primary">Financement du renforcement des capacités des ressources humaines du secteur santé</h3>
               </div>
               <p className="text-gray-600">
-                Formation continue, développement des compétences et certification du personnel de santé.
+                Identification des besoins nationaux, stratégies de financement et suivi du développement des ressources humaines en santé.
               </p>
             </Link>
 
-            <Link href="/gouvernance-sante/qualite-soins" className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-              <div className="flex items-center mb-4">
-                <Award className="h-8 w-8 text-fps-primary mr-3" />
-                <h3 className="text-xl font-semibold text-fps-primary">Qualité des soins</h3>
-              </div>
-              <p className="text-gray-600">
-                Mise en place de standards de qualité et protocoles de soins.
-              </p>
-            </Link>
 
             <Link href="/gouvernance-sante/systeme-references" className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-center mb-4">
@@ -56,17 +47,17 @@ export default function GouvernanceSantePage() {
                 <h3 className="text-xl font-semibold text-fps-primary">Système des références</h3>
               </div>
               <p className="text-gray-600">
-                Organisation des transferts de patients et coordination entre niveaux de soins.
+                Analyse des performances (ambulances, délais), évaluation des références et identification des contraintes opérationnelles.
               </p>
             </Link>
 
             <Link href="/gouvernance-sante/recherche-medicale" className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-center mb-4">
                 <Microscope className="h-8 w-8 text-fps-primary mr-3" />
-                <h3 className="text-xl font-semibold text-fps-primary">Recherche médicale</h3>
+                <h3 className="text-xl font-semibold text-fps-primary">Recherche en médecine</h3>
               </div>
               <p className="text-gray-600">
-                Promotion de la recherche en santé et développement de solutions adaptées.
+                Validation des recherches, intégration aux politiques de santé publique et partenariats universitaires.
               </p>
             </Link>
           </div>

@@ -18,6 +18,7 @@ export default function BanqueDeSangPage() {
             { name: "Plateau technique", href: "/plateau-technique" },
             { name: "Banque de sang", href: "/plateau-technique/banque-de-sang" }
           ]}
+          backgroundImage="/images/banners/plateau-technique/banner-banque-sang.jpg"
         />
 
         {/* 2. L'Image à la Une */}
@@ -25,6 +26,7 @@ export default function BanqueDeSangPage() {
           icon={Droplets}
           label="Collecte et Sécurisation des Dons de Sang"
           variant="red"
+          image="/images/featured-images/plateau-technique/featured-banque-sang.jpg"
         />
 
         {/* Contenu principal */}

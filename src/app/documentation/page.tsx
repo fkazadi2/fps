@@ -9,9 +9,9 @@ export default function Documentation() {
     <MainLayout>
       <div className="bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
+        <PageHeader
           title="Documentation"
-          description="Consulter nos publications, textes légaux et ressources éducatives liés à la promotion de la santé et la Couverture Santé Universelle en RDC."
+          description="Consultez nos publications, textes légaux et ressources éducatives liés à la promotion de la santé et la Couverture Santé Universelle en RDC."
           icon={BookOpen}
           variant="blue"
           breadcrumbs={[
@@ -20,7 +20,7 @@ export default function Documentation() {
         />
 
         {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
+        <FeaturedImageBox
           icon={BookOpen}
           label="Centre de Ressources et Documentation du FPS"
           variant="blue"

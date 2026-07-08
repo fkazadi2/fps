@@ -45,7 +45,7 @@
 - "Les **zones de santé** bénéficient des dotations du **FPS**."
 
 ### ❌ INCORRECT:
-- "Le dge du fps préside le ca." (tout en minuscules)
+- "Le Directeur général du FPS préside le ca." (tout en minuscules)
 - "Le Directeur Général préside le Conseil d'Administration." (majuscules inutiles)
 - "Le Fps œuvre pour la Csu en Rdc." (majuscules partielles)
 

@@ -36,11 +36,11 @@ export interface PageData {
  */
 export function initializeDefaultPages(): void {
   const pages = getAllItems<PageData>('pages');
-  
+
   // Si le localStorage est vide, ajoutons des pages par défaut
   if (pages.length === 0) {
     const defaultPages = getDefaultPages();
-    
+
     // Ajouter chaque page par défaut
     Object.values(defaultPages).forEach(page => {
       setItem('pages', page.id, page);
@@ -68,7 +68,7 @@ export function getPageById(id: string): PageData | null {
 export function getPageBySlug(slug: string): PageData | null {
   // Transformer le slug en format normalisé
   const normalizedSlug = slug.replace(/^\//, '').replace(/\/$/, '');
-  
+
   const pages = getAllItems<PageData>('pages');
   return pages.find(page => {
     const pageSlug = page.slug.replace(/^\//, '').replace(/\/$/, '');
@@ -82,14 +82,14 @@ export function getPageBySlug(slug: string): PageData | null {
 export function createPage(pageData: Omit<PageData, 'id'>): PageData {
   const id = uuidv4();
   const date = new Date().toISOString();
-  
+
   const newPage: PageData = {
     ...pageData,
     id,
     lastUpdated: date,
     author: 'Admin'
   };
-  
+
   setItem('pages', id, newPage);
   return newPage;
 }
@@ -99,17 +99,17 @@ export function createPage(pageData: Omit<PageData, 'id'>): PageData {
  */
 export function updatePage(id: string, pageData: Partial<PageData>): PageData | null {
   const existingPage = getItem<PageData>('pages', id);
-  
+
   if (!existingPage) {
     return null;
   }
-  
+
   const updatedPage: PageData = {
     ...existingPage,
     ...pageData,
     lastUpdated: new Date().toISOString()
   };
-  
+
   setItem('pages', id, updatedPage);
   return updatedPage;
 }
@@ -119,11 +119,11 @@ export function updatePage(id: string, pageData: Partial<PageData>): PageData | 
  */
 export function deletePage(id: string): boolean {
   const existingPage = getItem<PageData>('pages', id);
-  
+
   if (!existingPage) {
     return false;
   }
-  
+
   removeItem('pages', id);
   return true;
 }

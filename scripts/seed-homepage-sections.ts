@@ -87,7 +87,7 @@ const initialSections = [
             title: "Notre mission",
             subtitle: "Mobiliser, gérer et promouvoir efficacement les ressources pour la santé publique, conformément au Décret n°22/15 du 09 avril 2022",
             vision: "Une RDC où la santé est financée de manière durable et équitable pour tous",
-            legalFramework: "Décret n°22/15 du 09 avril 2022 - Tutelle du Ministère de la Santé",
+            legalFramework: "Décret n°22/15 du 09 avril 2022 - Tutelle du Ministre de la Santé",
             strategicAxes: [
                 {
                     title: "Mobilisation des ressources internes et externes",
@@ -96,7 +96,7 @@ const initialSections = [
                 },
                 {
                     title: "Soutien aux zones de santé pour l'accès aux soins",
-                    description: "Apporter un soutien direct aux zones de santé pour améliorer l'accès aux soins de qualité, incluant le financement d'infrastructures et la dotation en médicaments.",
+                    description: "Apporter un soutien direct aux zones de santé pour améliorer l'accès aux soins de qualité, incluant le financement d'infrastructures et la Financement en médicaments.",
                     icon: "building"
                 },
                 {

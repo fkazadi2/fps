@@ -86,14 +86,7 @@ export default function PublicationsPage() {
       description: "Statuts, règlements, plan stratégique",
       link: "/publications/rapports-documentations?type=gouvernance"
     },
-    {
-      id: "bulletins",
-      name: "Bulletins / Infolettres",
-      icon: Calendar,
-      color: "green",
-      description: "Bulletins d'information et infolettres régulières",
-      link: "/publications/rapports-documentations?type=bulletin"
-    }
+
   ];
 
   // Voix du terrain - Témoignages et reportages
@@ -102,7 +95,7 @@ export default function PublicationsPage() {
       id: 1,
       type: "témoignage",
       title: "Témoignage d'un bénéficiaire - Zone de santé de Mbuji-Mayi",
-      description: "Marie, mère de 3 enfants, témoigne de l'impact du programme de dotation en médicaments sur sa communauté.",
+      description: "Marie, mère de 3 enfants, témoigne de l'impact du programme de Financement en médicaments sur sa communauté.",
       image: "/images/articles/celebration/1.jpg", // Placeholder - à remplacer par photo réelle
       date: "15 Janvier 2024",
       link: "/centre-presse/presse#temoignage-marie"
@@ -131,7 +124,7 @@ export default function PublicationsPage() {
   const resultatsTangibles = [
     {
       id: 1,
-      title: "Dotation en médicaments essentiels",
+      title: "Financement en médicaments essentiels",
       value: "500+",
       unit: "zones de santé équipées",
       description: "Plus de 500 zones de santé ont été équipées en médicaments essentiels en 2023",
@@ -173,13 +166,10 @@ export default function PublicationsPage() {
           breadcrumbs={[
             { name: "Publications", href: "/publications" }
           ]}
+          backgroundImage="/images/banners/publications/banner-document.jpg"
         />
 
-        {/* 2. L'Image à la Une */}
-        <FeaturedImageBox
-          variant="blue"
-          image="/images/articles/celebration/1.jpg"
-        />
+
 
         {/* Section: 3 Dernières publications mises en avant */}
         <section className="py-12 bg-white border-b-4 border-[var(--primary)]">
@@ -260,7 +250,7 @@ export default function PublicationsPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Catégories de publications</h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
-                Consulter nos publications organisées par type pour faciliter votre recherche
+                Consultez nos publications organisées par type pour faciliter votre recherche
               </p>
             </div>
 
@@ -306,7 +296,7 @@ export default function PublicationsPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <div className="inline-block mb-4">
-                <span className="px-4 py-2 bg-[var(--accent)] bg-opacity-10 text-[var(--accent)] text-white rounded-full text-sm font-semibold tracking-wide uppercase">
+                <span className="px-4 py-2 bg-[var(--accent)] bg-opacity-10 text-white rounded-full text-sm font-semibold tracking-wide uppercase">
                   Voix du Terrain
                 </span>
               </div>
@@ -371,7 +361,7 @@ export default function PublicationsPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <div className="inline-block mb-4">
-                <span className="px-4 py-2 bg-[var(--danger)] bg-opacity-10 text-[var(--danger)] text-white rounded-full text-sm font-semibold tracking-wide uppercase">
+                <span className="px-4 py-2 bg-[var(--danger)] bg-opacity-10 text-white rounded-full text-sm font-semibold tracking-wide uppercase">
                   Résultats Tangibles
                 </span>
               </div>

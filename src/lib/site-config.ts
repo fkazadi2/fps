@@ -30,7 +30,7 @@ export async function getSiteConfig(): Promise<SiteConfig> {
     logoUrl: '/images/logo-fps.jpg',
     contactEmail: '',
     contactPhone: '+243 819 115 812',
-    contactAddress: '16, Av. Lukusa, Imm Les Palmiers, Apt 2A, Kinshasa-Gombe, RDC',
+    contactAddress: '16, Av. Lukusa, Imm Les Palmiers, Apt 3B, Kinshasa-Gombe, RDC',
     socialLinks: {}
   };
 

@@ -72,7 +72,7 @@ Ce rapport présente l'état d'avancement de l'implémentation des recommandatio
    - Section dédiée "Résultats et impact chiffré"
    - Statistiques : 5M+ personnes couvertes, 650+ centres de santé, 26 provinces, 85% satisfaction
    - Projets phares avec résultats chiffrés :
-     - Programme de dotation en médicaments (500+ zones de santé)
+     - Programme de Financement en médicaments (500+ zones de santé)
      - Renforcement des capacités (2,500 agents formés)
 
 3. **Harmonisation majuscules/minuscules** ✅ **COMPLET**
@@ -229,7 +229,7 @@ Ce rapport présente l'état d'avancement de l'implémentation des recommandatio
 
 ### ✅ Cadre légal
 - **Décret n°22/15 du 09 avril 2022** : Mentionné et détaillé (lignes 95-98)
-- **Tutelle ministérielle** : "Tutelle du Ministère de la Santé" explicitée (lignes 100-104)
+- **Tutelle ministérielle** : "Tutelle du Ministre de la Santé" explicitée (lignes 100-104)
 
 ### ✅ 4 axes stratégiques (tous nommés explicitement)
 1. ✅ **Mobilisation des ressources internes et externes** (ligne 137)

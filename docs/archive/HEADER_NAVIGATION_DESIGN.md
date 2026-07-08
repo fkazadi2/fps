@@ -165,7 +165,7 @@ Un **header moderne et professionnel** avec **mega menus** incluant des placehol
 ┌────────────────────────────────┐
 │ [📍] Nous visiter              │
 │ [✉️] Nous écrire              │
-│ [🗺️] Nos adresses en provinces│
+│ [🗺️] Commissions provinciales FPS│
 └────────────────────────────────┘
 ```
 

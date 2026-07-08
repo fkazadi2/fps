@@ -56,23 +56,19 @@ export default function AppelOffrePage() {
     <MainLayout>
       <div className="bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
+        <PageHeader
           title="Appel d'offres"
-          description="Consulter tous les appels d'offres en cours et passés du FPS pour participer à nos projets de développement sanitaire"
+          description="Consultez tous les appels d'offres en cours et passés du FPS pour participer à nos projets de développement sanitaire"
           icon={FileText}
           variant="rose"
           breadcrumbs={[
             { name: "Publications", href: "/publications" },
             { name: "Appels d'offres", href: "/publications/appel-offre" }
           ]}
+          backgroundImage="/images/banners/publications/banner-document.jpg"
         />
 
-        {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
-          icon={FileText}
-          label="Passation de Marchés et Collaboration Institutionnelle"
-          variant="purple"
-        />
+
 
         {/* Filtres et statistiques */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -127,8 +123,8 @@ export default function AppelOffrePage() {
                       <div className="flex items-center mb-2">
                         <h3 className="text-xl font-bold text-gray-900 mr-3">{ao.titre}</h3>
                         <span className={`px-3 py-1 rounded-full text-sm font-medium ${ao.statut === "Ouvert"
-                            ? "bg-green-100 text-green-800"
-                            : "bg-gray-100 text-gray-800"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-gray-100 text-gray-800"
                           }`}>
                           {ao.statut}
                         </span>

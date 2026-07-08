@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { LucideIcon } from "lucide-react";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
@@ -7,6 +8,7 @@ interface PageHeaderProps {
   icon: LucideIcon;
   variant?: 'green' | 'blue' | 'red' | 'purple' | 'orange' | 'indigo' | 'teal' | 'emerald' | 'slate' | 'amber' | 'rose' | 'violet' | 'red-dark';
   breadcrumbs: { name: string; href: string }[];
+  backgroundImage?: string;
 }
 
 export default function PageHeader({
@@ -14,7 +16,8 @@ export default function PageHeader({
   description,
   icon: Icon,
   variant = 'blue',
-  breadcrumbs
+  breadcrumbs,
+  backgroundImage
 }: PageHeaderProps) {
   const gradients = {
     green: 'from-green-800 to-green-600',
@@ -50,6 +53,19 @@ export default function PageHeader({
 
   return (
     <div className={`bg-gradient-to-r ${gradients[variant]} text-white py-10 shadow-inner relative overflow-hidden`}>
+      {/* Background Image with 30% opacity */}
+      {backgroundImage && (
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src={backgroundImage} 
+            alt="" 
+            fill 
+            className="object-cover opacity-30" 
+            priority
+          />
+        </div>
+      )}
+
       {/* Decorative circles as seen in screenshot */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/5 rounded-full -ml-20 -mb-20 blur-2xl"></div>

@@ -33,7 +33,7 @@ Toutes les améliorations que vous avez demandées pour le site web du FPS ont �
 - ✅ Votre vision est affichée exactement comme vous l'avez demandée
 - ✅ Votre mission est affichée exactement comme vous l'avez demandée
 - ✅ Le décret n°22/15 du 09 avril 2022 est mentionné et expliqué
-- ✅ La tutelle du Ministère de la Santé est mentionnée
+- ✅ La tutelle du Ministre de la Santé est mentionnée
 - ✅ Les 4 axes stratégiques sont tous présents et détaillés :
   1. Mobilisation des ressources internes et externes
   2. Soutien aux zones de santé pour l'accès aux soins
@@ -120,7 +120,7 @@ Toutes les améliorations que vous avez demandées pour le site web du FPS ont �
 
 **Exemple de correction :**
 - Avant : "Directeur Général du FPS"
-- Maintenant : "DGE du FPS"
+- Maintenant : "Directeur général du FPS"
 
 ---
 

@@ -12,9 +12,9 @@ export default function DocumentationPublications() {
     <MainLayout>
       <div className="bg-white">
         {/* 1. La Bannière */}
-        <PageHeader 
+        <PageHeader
           title="Publications du FPS"
-          description="Consulter nos rapports, études, bulletins et autres publications sur la santé publique et la Couverture Santé Universelle en RDC."
+          description="Consultez nos rapports, études, bulletins et autres publications sur la santé publique et la Couverture Santé Universelle en RDC."
           icon={FileText}
           variant="orange"
           breadcrumbs={[
@@ -24,7 +24,7 @@ export default function DocumentationPublications() {
         />
 
         {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
+        <FeaturedImageBox
           icon={FileText}
           label="Savoir et Transparence : Nos Rapports et Études de Terrain"
           variant="blue"
@@ -69,7 +69,7 @@ export default function DocumentationPublications() {
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-              <Book className="w-6 h-6 mr-2 text-[var(--primary)]" /> 
+              <Book className="w-6 h-6 mr-2 text-[var(--primary)]" />
               Rapports Annuels
             </h2>
             <div className="space-y-8">
@@ -110,7 +110,7 @@ export default function DocumentationPublications() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
                 <div className="md:flex">
                   <div className="md:flex-shrink-0 bg-fps-secondary flex items-center justify-center md:w-48 h-48 text-white">
@@ -153,7 +153,7 @@ export default function DocumentationPublications() {
         <section className="py-12 bg-fps-primary-light">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-              <BarChart className="w-6 h-6 mr-2 text-[var(--primary)]" /> 
+              <BarChart className="w-6 h-6 mr-2 text-[var(--primary)]" />
               Études et Recherches
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
@@ -188,7 +188,7 @@ export default function DocumentationPublications() {
                   </button>
                 </div>
               </div>
-              
+
               <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
                 <div className="p-6 border-b border-gray-100">
                   <div className="flex justify-between items-start">
@@ -223,7 +223,7 @@ export default function DocumentationPublications() {
                   </button>
                 </div>
               </div>
-              
+
               <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
                 <div className="p-6 border-b border-gray-100">
                   <div className="flex justify-between items-start">
@@ -255,7 +255,7 @@ export default function DocumentationPublications() {
                   </button>
                 </div>
               </div>
-              
+
               <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
                 <div className="p-6 border-b border-gray-100">
                   <div className="flex justify-between items-start">
@@ -295,7 +295,7 @@ export default function DocumentationPublications() {
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-              <FileText className="w-6 h-6 mr-2 text-[var(--primary)]" /> 
+              <FileText className="w-6 h-6 mr-2 text-[var(--primary)]" />
               Bulletins trimestriels
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
@@ -317,7 +317,7 @@ export default function DocumentationPublications() {
                   </button>
                 </div>
               </div>
-              
+
               <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
                 <div className="h-32 bg-fps-primary flex items-center justify-center text-white">
                   <div className="text-center">
@@ -336,7 +336,7 @@ export default function DocumentationPublications() {
                   </button>
                 </div>
               </div>
-              
+
               <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
                 <div className="h-32 bg-fps-accent flex items-center justify-center text-[var(--secondary)]">
                   <div className="text-center">
@@ -356,7 +356,7 @@ export default function DocumentationPublications() {
                 </div>
               </div>
             </div>
-            
+
             <div className="mt-8 text-center">
               <button className="inline-flex items-center px-5 py-2 border border-transparent text-white bg-fps-primary rounded-md hover:bg-fps-primary shadow-sm transition-colors">
                 Voir tous les bulletins

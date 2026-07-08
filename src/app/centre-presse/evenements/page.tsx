@@ -18,6 +18,7 @@ export default async function Evenements() {
         <PageHeader 
           title="Événements & Agenda"
           description="Suivez l'agenda des activités et des événements du Fonds de Promotion de la Santé"
+          backgroundImage="/images/banners/centre-presse/evenement.jpg"
           icon={Calendar}
           variant="indigo"
           breadcrumbs={[
@@ -26,12 +27,7 @@ export default async function Evenements() {
           ]}
         />
 
-        {/* 2. L'Image à la Une */}
-        <FeaturedImageBox 
-          icon={Calendar}
-          label="Agenda Institutionnel et Manifestations du FPS"
-          variant="blue"
-        />
+
 
         {/* Section: Événements */}
         <section className="py-12">

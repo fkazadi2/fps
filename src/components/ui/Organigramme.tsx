@@ -15,11 +15,11 @@ interface OrgNodeProps {
   border?: string;
 }
 
-const OrgNode: React.FC<OrgNodeProps> = ({ 
-  title, 
-  subtitle, 
-  color, 
-  textColor = "text-white", 
+const OrgNode: React.FC<OrgNodeProps> = ({
+  title,
+  subtitle,
+  color,
+  textColor = "text-white",
   children,
   expanded = true,
   width = "max-w-xs",
@@ -29,32 +29,32 @@ const OrgNode: React.FC<OrgNodeProps> = ({
 }) => {
   const [isExpanded, setIsExpanded] = useState(expanded);
   const [isActive, setIsActive] = useState(false);
-  
+
   const nodeId = id || `node-${title.toLowerCase().replace(/\s+/g, '-')}`;
   const contentId = `content-${nodeId}`;
-  
+
   // Déterminer la bordure en fonction de la couleur de fond
   const determineBorder = () => {
     if (border) return border;
     if (color === "bg-white") return "border border-gray-300";
     return "";
   };
-  
+
   const handleClick = () => {
     if (children) {
       setIsExpanded(!isExpanded);
       setIsActive(!isActive);
-      
+
       // Effet visuel temporaire
       setTimeout(() => {
         setIsActive(false);
       }, 2000);
     }
   };
-  
+
   return (
     <div className="flex flex-col items-center w-full">
-      <div 
+      <div
         className={`p-3 rounded-lg ${color} ${textColor} text-center w-full ${width} shadow-md ${determineBorder()}
                    ${children ? "cursor-pointer hover:opacity-90 hover:shadow-lg transition-all duration-300" : ""}
                    ${isActive ? "ring-4 ring-blue-300 ring-opacity-70" : ""}`}
@@ -74,8 +74,8 @@ const OrgNode: React.FC<OrgNodeProps> = ({
         <h3 className="font-bold">{title}</h3>
         {subtitle && <p className="text-sm mt-1">{subtitle}</p>}
         {children && (
-          <div 
-            className="mt-1 text-xs transition-transform duration-300" 
+          <div
+            className="mt-1 text-xs transition-transform duration-300"
             style={{ transform: isExpanded ? 'rotate(0deg)' : 'rotate(-90deg)' }}
             aria-hidden="true"
           >
@@ -83,12 +83,12 @@ const OrgNode: React.FC<OrgNodeProps> = ({
           </div>
         )}
       </div>
-      
+
       {children && (
-        <div 
+        <div
           id={contentId}
           className={`mt-4 w-full overflow-hidden transition-all duration-500 ease-in-out`}
-          style={{ 
+          style={{
             maxHeight: isExpanded ? '2000px' : '0',
             opacity: isExpanded ? 1 : 0,
             marginTop: isExpanded ? '1rem' : '0'
@@ -108,19 +108,19 @@ interface ConnectorProps {
   width?: string;
 }
 
-const Connector: React.FC<ConnectorProps> = ({ 
+const Connector: React.FC<ConnectorProps> = ({
   type = 'vertical',
   length = 'medium',
   width = 'w-16'
 }) => {
   const getHeightClass = () => {
-    switch(length) {
+    switch (length) {
       case 'short': return 'h-4';
       case 'long': return 'h-12';
       default: return 'h-8';
     }
   };
-  
+
   if (type === 'horizontal') {
     return <div className={`border-t-2 border-gray-400 ${width} mx-auto my-2`}></div>;
   } else if (type === 'vertical-down') {
@@ -141,54 +141,54 @@ const Organigramme = () => {
       <div className="min-w-[1024px] w-full p-4">
         <div className="flex flex-col items-center w-full">
           {/* Niveau 1: CA */}
-          <OrgNode 
-            title="CA (Conseil d'administration)" 
+          <OrgNode
+            title="Le Conseil d'Administration (CA)"
             color="bg-slate-600"
             width="w-64"
           />
-          
+
           <Connector />
-          
+
           {/* Niveau 2: Collège des Commissaires aux Comptes et Cabinet & Secrétariat du CA */}
           <div className="flex flex-col items-center w-full">
             <div className="flex items-center justify-center w-full space-x-32 mb-2">
               <div className="flex-1 flex justify-end">
-                <OrgNode 
-                  title="Cabinet & Secrétariat du CA" 
+                <OrgNode
+                  title="Cabinet & Secrétariat du CA"
                   color="bg-blue-600"
                   width="w-64"
                 />
               </div>
               <div className="flex-1">
-                <OrgNode 
-                  title="Collège des Commissaires aux Comptes" 
+                <OrgNode
+                  title="Collège des Commissaires aux Comptes"
                   color="bg-rose-800"
                   width="w-64"
                 />
               </div>
             </div>
-            
+
             {/* Ligne horizontale connectant les deux boîtes */}
             <Connector type="horizontal" width="w-96" />
           </div>
-          
+
           <Connector />
-          
+
           {/* Niveau 3: Direction générale */}
-          <OrgNode 
-            title="Direction générale" 
+          <OrgNode
+            title="Direction générale"
             subtitle="DG & DGA"
             color="bg-blue-900"
             width="w-64"
           />
-          
+
           <Connector />
-          
+
           {/* Niveau 4: Cellules et Cabinets sous DG */}
           <div className="grid grid-cols-3 gap-4 w-full">
             <div className="flex flex-col items-center">
-              <OrgNode 
-                title="Cellule de Passation des Marchés Publics" 
+              <OrgNode
+                title="Cellule de Passation des Marchés Publics"
                 color="bg-red-300"
                 textColor="text-gray-800"
                 width="w-64"
@@ -196,67 +196,67 @@ const Organigramme = () => {
             </div>
             <div className="flex flex-col items-center">
               <div className="flex flex-col gap-4 w-full">
-                <OrgNode 
-                  title="Cabinet & Secrétariat du DG" 
+                <OrgNode
+                  title="Cabinet & Secrétariat du DG"
                   color="bg-blue-600"
                   width="w-64"
                 />
-                <OrgNode 
-                  title="Cabinet & Secrétariat du DGA" 
+                <OrgNode
+                  title="Cabinet & Secrétariat du DGA"
                   color="bg-blue-600"
                   width="w-64"
                 />
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <OrgNode 
-                title="Cellule d'Audit Interne" 
+              <OrgNode
+                title="Cellule d'Audit Interne"
                 color="bg-yellow-300"
                 textColor="text-gray-800"
                 width="w-64"
               />
             </div>
           </div>
-          
+
           <Connector />
-          
+
           {/* Niveau 5: Directions */}
           <div className="grid grid-cols-4 gap-4 w-full">
             <div className="flex flex-col items-center">
-              <OrgNode 
-                title="DF" 
+              <OrgNode
+                title="DF"
                 subtitle="(Direction des Finances)"
                 color="bg-blue-300"
                 textColor="text-gray-800"
                 width="w-full max-w-[250px]"
               >
                 <div className="space-y-2">
-                  <OrgNode 
-                    title="Division Comptabilité" 
+                  <OrgNode
+                    title="Division Comptabilité"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
                   />
-                  <OrgNode 
-                    title="Division de la Trésorerie" 
+                  <OrgNode
+                    title="Division de la Trésorerie"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
                   />
-                  <OrgNode 
-                    title="Division Suivi et Évaluation" 
+                  <OrgNode
+                    title="Division Suivi et Évaluation"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
                   />
-                  <OrgNode 
-                    title="Division Ressources" 
+                  <OrgNode
+                    title="Division Ressources"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
                   />
-                  <OrgNode 
-                    title="Division Recouvrement" 
+                  <OrgNode
+                    title="Division Recouvrement"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
@@ -271,18 +271,18 @@ const Organigramme = () => {
                 </div>
               </OrgNode>
             </div>
-            
+
             <div className="flex flex-col items-center">
-              <OrgNode 
-                title="DRHGC" 
+              <OrgNode
+                title="DRHGC"
                 subtitle="(Direction Ressources Humaines et Gestion de Carrières)"
                 color="bg-purple-400"
                 textColor="text-white"
                 width="w-full max-w-[250px]"
               >
                 <div className="space-y-2">
-                  <OrgNode 
-                    title="Division Ressources Humaines" 
+                  <OrgNode
+                    title="Division Ressources Humaines"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
@@ -294,8 +294,8 @@ const Organigramme = () => {
                       </ul>
                     </div>
                   </OrgNode>
-                  <OrgNode 
-                    title="Division Développement du Capital Humain" 
+                  <OrgNode
+                    title="Division Développement du Capital Humain"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
@@ -321,18 +321,18 @@ const Organigramme = () => {
                 </div>
               </OrgNode>
             </div>
-            
+
             <div className="flex flex-col items-center">
-              <OrgNode 
-                title="DT" 
+              <OrgNode
+                title="DT"
                 subtitle="(Direction Technique)"
                 color="bg-blue-400"
                 textColor="text-white"
                 width="w-full max-w-[250px]"
               >
                 <div className="space-y-2">
-                  <OrgNode 
-                    title="Division Infrastructures Sanitaires" 
+                  <OrgNode
+                    title="Division Infrastructures Sanitaires"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
@@ -344,8 +344,8 @@ const Organigramme = () => {
                       </ul>
                     </div>
                   </OrgNode>
-                  <OrgNode 
-                    title="Division Equipements" 
+                  <OrgNode
+                    title="Division Equipements"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
@@ -357,8 +357,8 @@ const Organigramme = () => {
                       </ul>
                     </div>
                   </OrgNode>
-                  <OrgNode 
-                    title="Division Médicaments et Intrants" 
+                  <OrgNode
+                    title="Division Médicaments et Intrants"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
@@ -370,8 +370,8 @@ const Organigramme = () => {
                       </ul>
                     </div>
                   </OrgNode>
-                  <OrgNode 
-                    title="Division Etude et Planification" 
+                  <OrgNode
+                    title="Division Etude et Planification"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
@@ -386,30 +386,30 @@ const Organigramme = () => {
                 </div>
               </OrgNode>
             </div>
-            
+
             <div className="flex flex-col items-center">
-              <OrgNode 
-                title="DGS" 
+              <OrgNode
+                title="DGS"
                 subtitle="(Direction Gouvernance en Santé)"
                 color="bg-orange-400"
                 textColor="text-white"
                 width="w-full max-w-[250px]"
               >
                 <div className="space-y-2">
-                  <OrgNode 
-                    title="Division Renforcement du Système de Santé" 
+                  <OrgNode
+                    title="Division Renforcement du Système de Santé"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
                   />
-                  <OrgNode 
-                    title="Division Promotion de la Médecine Traditionnelle" 
+                  <OrgNode
+                    title="Division Promotion de la Médecine Traditionnelle"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
                   />
-                  <OrgNode 
-                    title="Division Recherche sur le Système de Santé" 
+                  <OrgNode
+                    title="Division Recherche sur le Système de Santé"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
@@ -425,28 +425,28 @@ const Organigramme = () => {
               </OrgNode>
             </div>
           </div>
-          
+
           <Connector length="long" />
-          
+
           {/* Niveau 6: Directions (suite) */}
           <div className="grid grid-cols-4 gap-4 w-full">
             <div className="flex flex-col items-center">
-              <OrgNode 
-                title="DA" 
+              <OrgNode
+                title="DA"
                 subtitle="(Direction Administrative)"
                 color="bg-yellow-300"
                 textColor="text-gray-800"
                 width="w-full max-w-[250px]"
               >
                 <div className="space-y-2">
-                  <OrgNode 
-                    title="Division Administrative" 
+                  <OrgNode
+                    title="Division Administrative"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
                   />
-                  <OrgNode 
-                    title="Division Logistiques et Intendance" 
+                  <OrgNode
+                    title="Division Logistiques et Intendance"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
@@ -468,24 +468,24 @@ const Organigramme = () => {
                 </div>
               </OrgNode>
             </div>
-            
+
             <div className="flex flex-col items-center">
-              <OrgNode 
-                title="DJ" 
+              <OrgNode
+                title="DJ"
                 subtitle="(Direction Juridique)"
                 color="bg-teal-500"
                 textColor="text-white"
                 width="w-full max-w-[250px]"
               >
                 <div className="space-y-2">
-                  <OrgNode 
-                    title="Division de Contractualisation" 
+                  <OrgNode
+                    title="Division de Contractualisation"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
                   />
-                  <OrgNode 
-                    title="Division des Contentieux" 
+                  <OrgNode
+                    title="Division des Contentieux"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
@@ -500,24 +500,24 @@ const Organigramme = () => {
                 </div>
               </OrgNode>
             </div>
-            
+
             <div className="flex flex-col items-center">
-              <OrgNode 
-                title="DCS" 
+              <OrgNode
+                title="DCS"
                 subtitle="(Direction Crédit et Subventionnement)"
                 color="bg-sky-500"
                 textColor="text-white"
                 width="w-full max-w-[250px]"
               >
                 <div className="space-y-2">
-                  <OrgNode 
-                    title="Division Risques et Crédits" 
+                  <OrgNode
+                    title="Division Risques et Crédits"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
                   />
-                  <OrgNode 
-                    title="Division Subventionnement" 
+                  <OrgNode
+                    title="Division Subventionnement"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
@@ -532,24 +532,24 @@ const Organigramme = () => {
                 </div>
               </OrgNode>
             </div>
-            
+
             <div className="flex flex-col items-center">
-              <OrgNode 
-                title="DSI" 
+              <OrgNode
+                title="DSI"
                 subtitle="(Direction Système d'Information)"
                 color="bg-indigo-400"
                 textColor="text-white"
                 width="w-full max-w-[250px]"
               >
                 <div className="space-y-2">
-                  <OrgNode 
-                    title="Division Informatique" 
+                  <OrgNode
+                    title="Division Informatique"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
                   />
-                  <OrgNode 
-                    title="Division Communication" 
+                  <OrgNode
+                    title="Division Communication"
                     color="bg-white"
                     textColor="text-gray-800"
                     border="border border-gray-300"
@@ -565,53 +565,53 @@ const Organigramme = () => {
               </OrgNode>
             </div>
           </div>
-          
+
           <Connector length="long" />
-          
+
           {/* Niveau 7: Directions Régionales */}
-          <OrgNode 
-            title="DR" 
+          <OrgNode
+            title="DR"
             subtitle="(Directions Régionales)"
             color="bg-green-500"
             textColor="text-white"
             width="w-64"
           >
             <div className="grid grid-cols-3 gap-4 max-w-3xl mx-auto">
-              <OrgNode 
-                title="DR - Equateur" 
+              <OrgNode
+                title="DR - Equateur"
                 color="bg-green-100"
                 textColor="text-gray-800"
-                
+
               />
-              <OrgNode 
-                title="DR - Oriental" 
+              <OrgNode
+                title="DR - Oriental"
                 color="bg-green-100"
                 textColor="text-gray-800"
-                
+
               />
-              <OrgNode 
-                title="DR - Kivu" 
+              <OrgNode
+                title="DR - Kivu"
                 color="bg-green-100"
                 textColor="text-gray-800"
-                
+
               />
-              <OrgNode 
-                title="DR - Kasai" 
+              <OrgNode
+                title="DR - Kasai"
                 color="bg-green-100"
                 textColor="text-gray-800"
-                
+
               />
-              <OrgNode 
-                title="DR - Katanga" 
+              <OrgNode
+                title="DR - Katanga"
                 color="bg-green-100"
                 textColor="text-gray-800"
-                
+
               />
-              <OrgNode 
-                title="DR - Ouest" 
+              <OrgNode
+                title="DR - Ouest"
                 color="bg-green-100"
                 textColor="text-gray-800"
-                
+
               />
             </div>
           </OrgNode>

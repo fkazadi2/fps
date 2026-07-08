@@ -24,8 +24,8 @@ const navigation = [
     href: "/plateau-technique",
     submenu: [
       { name: "Infrastructures sanitaires", href: "/plateau-technique/infrastructures" },
-      { name: "Dotation en médicaments", href: "/plateau-technique/medicaments" },
-      { name: "Dotation en équipements", href: "/plateau-technique/equipements" },
+      { name: "Financement en médicaments", href: "/plateau-technique/medicaments" },
+      { name: "Financement et dotation en équipements", href: "/plateau-technique/equipements" },
       { name: "Banque de sang", href: "/plateau-technique/banque-de-sang" },
       { name: "Classification des ESS", href: "/plateau-technique/classification-ess" },
     ],
@@ -34,10 +34,10 @@ const navigation = [
     name: "Gouvernance Santé",
     href: "/gouvernance-sante",
     submenu: [
-      { name: "Capacitation Du personnel de santé", href: "/gouvernance-sante/capacitation" },
+      { name: "Financement du renforcement des capacités des ressources humaines du secteur santé", href: "/gouvernance-sante/capacitation" },
       { name: "Qualité des soins", href: "/gouvernance-sante/qualite-soins" },
       { name: "Système des références", href: "/gouvernance-sante/systeme-references" },
-      { name: "Recherche médicale", href: "/gouvernance-sante/recherche-medicale" },
+      { name: "Recherche en médecine", href: "/gouvernance-sante/recherche-medicale" },
     ],
   },
   {
@@ -275,7 +275,7 @@ export default function Header() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                         </svg>
                       </div>
-                      <span className="font-semibold">Nos adresses en provinces</span>
+                      <span className="font-semibold">Commissions provinciales FPS</span>
                     </Link>
                   </div>
                 </div>
@@ -512,7 +512,7 @@ export default function Header() {
                       <svg className="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                       </svg>
-                      <span className="font-semibold text-gray-700">Nos adresses en provinces</span>
+                      <span className="font-semibold text-gray-700">Commissions provinciales FPS</span>
                     </Link>
                   </div>
                 )}

@@ -26,12 +26,12 @@ export default function InteractiveMapFPS({ height = '400px', className = '' }: 
     if (!mapContainerRef.current || mapRef.current) return;
 
     // Coordonnées de 16, Av. Lukusa, Imm Les Palmiers, Gombe, Kinshasa
-    const fpsLocation: [number, number] = [-4.3033, 15.3051]; 
+    const fpsLocation: [number, number] = [-4.3033, 15.3051];
 
     // Initialiser la carte sans le contrôle d'attribution (supprime le texte et le logo Leaflet)
-    const map = L.map(mapContainerRef.current, { 
-      attributionControl: false 
-    }).setView(fpsLocation, 16); 
+    const map = L.map(mapContainerRef.current, {
+      attributionControl: false
+    }).setView(fpsLocation, 16);
 
     // Ajouter les tuiles OpenStreetMap sans attribution
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -49,7 +49,7 @@ export default function InteractiveMapFPS({ height = '400px', className = '' }: 
         <p class="text-sm mb-1"><strong>Adresse :</strong></p>
         <p class="text-sm mb-2">
           16, Av. Lukusa,<br/>
-          Imm Les Palmiers, Apt 2A,<br/>
+          Imm Les Palmiers, Apt 3B,<br/>
           Kinshasa-Gombe, RDC
         </p>
         <p class="text-sm mb-1"><strong>Téléphones :</strong></p>

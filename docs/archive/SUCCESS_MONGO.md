@@ -79,10 +79,10 @@ docker-compose down
 docker logs fps_mongodb_dev -f
 
 # Accéder au shell MongoDB
-docker exec -it fps_mongodb_dev mongosh -u fps_admin -p fps_secure_2026 --authenticationDatabase admin
+docker exec -it fps_mongodb_dev mongosh -u fps_admin -p CHANGE_ME_LOCALLY --authenticationDatabase admin
 
 # Voir les utilisateurs créés
-docker exec -it fps_mongodb_dev mongosh -u fps_admin -p fps_secure_2026 --authenticationDatabase admin fps_website --eval "db.users.find().pretty()"
+docker exec -it fps_mongodb_dev mongosh -u fps_admin -p CHANGE_ME_LOCALLY --authenticationDatabase admin fps_website --eval "db.users.find().pretty()"
 
 # Recreate admin (si besoin)
 npm run create-admin

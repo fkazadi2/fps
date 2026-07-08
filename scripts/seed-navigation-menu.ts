@@ -37,7 +37,7 @@ const mainHeaderNavigation = {
             submenu: []
         },
         {
-            name: "Notre raison d'être",
+            name: "Qui sommes-nous",
             href: "/a-propos",
             order: 2,
             submenu: [
@@ -53,10 +53,9 @@ const mainHeaderNavigation = {
             order: 3,
             submenu: [
                 { name: "Infrastructures sanitaires", href: "/plateau-technique/infrastructures", order: 1 },
-                { name: "Dotation en médicaments", href: "/plateau-technique/medicaments", order: 2 },
-                { name: "Dotation en équipements", href: "/plateau-technique/equipements", order: 3 },
-                { name: "Banque de sang", href: "/plateau-technique/banque-de-sang", order: 4 },
-                { name: "Classification des ESS", href: "/plateau-technique/classification-ess", order: 5 }
+                { name: "Financement en médicaments", href: "/plateau-technique/medicaments", order: 2 },
+                { name: "Financement et dotation en équipements", href: "/plateau-technique/equipements", order: 3 },
+                { name: "Banque de sang", href: "/plateau-technique/banque-de-sang", order: 4 }
             ]
         },
         {
@@ -64,10 +63,9 @@ const mainHeaderNavigation = {
             href: "/gouvernance-sante",
             order: 4,
             submenu: [
-                { name: "Capacitation Du personnel de santé", href: "/gouvernance-sante/capacitation", order: 1 },
-                { name: "Qualité des soins", href: "/gouvernance-sante/qualite-soins", order: 2 },
-                { name: "Système des références", href: "/gouvernance-sante/systeme-references", order: 3 },
-                { name: "Recherche médicale", href: "/gouvernance-sante/recherche-medicale", order: 4 }
+                { name: "Financement du renforcement des capacités des ressources humaines du secteur santé", href: "/gouvernance-sante/capacitation", order: 1 },
+                { name: "Système des références", href: "/gouvernance-sante/systeme-references", order: 2 },
+                { name: "Recherche en médecine", href: "/gouvernance-sante/recherche-medicale", order: 3 }
             ]
         },
         {
@@ -126,7 +124,7 @@ const footerColumnsNavigation = {
     location: 'footer' as const,
     items: [
         {
-            name: "Notre raison d'être",
+            name: "Qui sommes-nous",
             href: "#",
             order: 1,
             submenu: [
@@ -142,10 +140,9 @@ const footerColumnsNavigation = {
             order: 2,
             submenu: [
                 { name: "Infrastructures sanitaires", href: "/plateau-technique/infrastructures", order: 1 },
-                { name: "Dotation en médicaments", href: "/plateau-technique/medicaments", order: 2 },
-                { name: "Dotation en équipements", href: "/plateau-technique/equipements", order: 3 },
-                { name: "Banque de sang", href: "/plateau-technique/banque-de-sang", order: 4 },
-                { name: "Classification des ESS", href: "/plateau-technique/classification-ess", order: 5 }
+                { name: "Financement en médicaments", href: "/plateau-technique/medicaments", order: 2 },
+                { name: "Financement et dotation en équipements", href: "/plateau-technique/equipements", order: 3 },
+                { name: "Banque de sang", href: "/plateau-technique/banque-de-sang", order: 4 }
             ]
         },
         {
@@ -153,10 +150,9 @@ const footerColumnsNavigation = {
             href: "#",
             order: 3,
             submenu: [
-                { name: "Capacitation Du personnel de santé", href: "/gouvernance-sante/capacitation", order: 1 },
-                { name: "Qualité des soins", href: "/gouvernance-sante/qualite-soins", order: 2 },
-                { name: "Système des références", href: "/gouvernance-sante/systeme-references", order: 3 },
-                { name: "Recherche médicale", href: "/gouvernance-sante/recherche-medicale", order: 4 }
+                { name: "Financement du renforcement des capacités des ressources humaines du secteur santé", href: "/gouvernance-sante/capacitation", order: 1 },
+                { name: "Système des références", href: "/gouvernance-sante/systeme-references", order: 2 },
+                { name: "Recherche en médecine", href: "/gouvernance-sante/recherche-medicale", order: 3 }
             ]
         },
         {
@@ -196,7 +192,7 @@ const footerColumnsNavigation = {
             submenu: [
                 { name: "Nous visiter", href: "/contacts/nous-visiter", order: 1 },
                 { name: "Nous écrire", href: "/contacts/nous-ecrire", order: 2 },
-                { name: "Nos adresses en provinces", href: "/contacts/adresses-provinces", order: 3 }
+                { name: "Commissions provinciales FPS", href: "/contacts/adresses-provinces", order: 3 }
             ]
         }
     ],
