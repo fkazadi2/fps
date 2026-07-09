@@ -81,8 +81,23 @@ export default function ContactPage() {
       return;
     }
 
-    // Simulation d'envoi (à remplacer par un vrai appel API)
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          formType: "contact",
+          ...formData,
+        }),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Erreur lors de l'envoi du message.");
+      }
+
       setFormStatus({
         type: "success",
         message: "Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais."
@@ -95,8 +110,14 @@ export default function ContactPage() {
         subject: "",
         message: ""
       });
+    } catch (error) {
+      setFormStatus({
+        type: "error",
+        message: error instanceof Error ? error.message : "Erreur lors de l'envoi du message."
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   const handleReclamationSubmit = async (e: React.FormEvent) => {
@@ -117,8 +138,24 @@ export default function ContactPage() {
     // Génération du numéro de suivi
     const trackingNumber = generateTrackingNumber();
 
-    // Simulation d'envoi (à remplacer par un vrai appel API)
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          formType: "reclamation",
+          ...reclamationData,
+          trackingNumber,
+        }),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Erreur lors de l'envoi de la réclamation.");
+      }
+
       setReclamationStatus({
         type: "success",
         message: `Votre réclamation a été enregistrée avec succès. Numéro de suivi: ${trackingNumber}`,
@@ -133,8 +170,15 @@ export default function ContactPage() {
         date: "",
         location: ""
       });
+    } catch (error) {
+      setReclamationStatus({
+        type: "error",
+        message: error instanceof Error ? error.message : "Erreur lors de l'envoi de la réclamation.",
+        trackingNumber: ""
+      });
+    } finally {
       setIsSubmittingReclamation(false);
-    }, 1500);
+    }
   };
 
   return (

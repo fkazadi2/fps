@@ -92,6 +92,25 @@ Variables principales :
 - `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`
 - `CLOUDINARY_API_KEY`
 - `CLOUDINARY_API_SECRET`
+- `CONTACT_RECIPIENT_EMAIL`
+- `CONTACT_FROM_EMAIL`
+- `SENDMAIL_PATH`
+
+## Formulaires de contact
+
+Les formulaires publics envoient leurs messages via `POST /api/contact`.
+
+Par defaut, les demandes sont adressees a :
+
+```bash
+CONTACT_RECIPIENT_EMAIL=reclamation@fps.gouv.cd
+```
+
+Sur le VPS, l'envoi utilise `sendmail`/Postfix. Verifiez que le chemin suivant existe ou ajustez `SENDMAIL_PATH` :
+
+```bash
+SENDMAIL_PATH=/usr/sbin/sendmail
+```
 
 ## Structure
 
