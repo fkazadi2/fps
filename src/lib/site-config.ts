@@ -31,7 +31,9 @@ export async function getSiteConfig(): Promise<SiteConfig> {
     contactEmail: '',
     contactPhone: '+243 819 115 812',
     contactAddress: '16, Av. Lukusa, Imm Les Palmiers, Apt 3B, Kinshasa-Gombe, RDC',
-    socialLinks: {}
+    socialLinks: {
+      twitter: 'https://x.com/FPS_RDC'
+    }
   };
 
   // Si côté client, essayer de récupérer depuis localStorage
