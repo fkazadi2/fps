@@ -36,7 +36,9 @@ export function initLocalStorage(): void {
       contactEmail: 'secretariat@fps.cd',
       contactPhone: '+243 819 115 812',
       contactAddress: '16, Av. Lukusa, Imm Les Palmiers, Apt 3B, Kinshasa-Gombe, RDC',
-      socialLinks: {}
+      socialLinks: {
+        twitter: 'https://x.com/FPS_RDC'
+      }
     });
   }
 }
@@ -214,7 +216,9 @@ export async function getSiteConfig<T = unknown>(): Promise<T> {
       contactEmail: 'secretariat@fps.cd',
       contactPhone: '+243 819 115 812',
       contactAddress: '16, Av. Lukusa, Imm Les Palmiers, Apt 3B, Kinshasa-Gombe, RDC',
-      socialLinks: {}
+      socialLinks: {
+        twitter: 'https://x.com/FPS_RDC'
+      }
     };
     setItem('site_config', 'default', defaultConfig);
     return defaultConfig as T;

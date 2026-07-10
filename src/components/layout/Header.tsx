@@ -268,7 +268,7 @@ export default function Header() {
             <div className="flex items-center space-x-2">
               {[
                 { icon: Facebook, href: "https://www.facebook.com/p/Fonds-de-Promotion-de-la-Sant%25C3%25A9-FPS-100092568336168/", color: "hover:bg-blue-600 hover:text-white" },
-                { icon: Twitter, href: "#", color: "hover:bg-sky-500 hover:text-white" },
+                { icon: Twitter, href: "https://x.com/FPS_RDC", color: "hover:bg-sky-500 hover:text-white" },
                 { icon: Linkedin, href: "https://www.linkedin.com/company/fonds-de-promotion-de-la-sant%C3%A9-f-p-s/", color: "hover:bg-blue-700 hover:text-white" },
                 { icon: Youtube, href: "#", color: "hover:bg-red-600 hover:text-white" }
               ].map((social, i) => (
