@@ -92,13 +92,13 @@ Variables principales :
 - `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`
 - `CLOUDINARY_API_KEY`
 - `CLOUDINARY_API_SECRET`
+- `RESEND_API_KEY`
 - `CONTACT_RECIPIENT_EMAIL`
 - `CONTACT_FROM_EMAIL`
-- `SENDMAIL_PATH`
 
 ## Formulaires de contact
 
-Les formulaires publics envoient leurs messages via `POST /api/contact`.
+Les formulaires publics envoient leurs messages via `POST /api/contact` et l'API Resend.
 
 Par defaut, les demandes sont adressees a :
 
@@ -106,10 +106,22 @@ Par defaut, les demandes sont adressees a :
 CONTACT_RECIPIENT_EMAIL=reclamation@fps.gouv.cd
 ```
 
-Sur le VPS, l'envoi utilise `sendmail`/Postfix. Verifiez que le chemin suivant existe ou ajustez `SENDMAIL_PATH` :
+Configurez une cle API Resend cote serveur :
 
 ```bash
-SENDMAIL_PATH=/usr/sbin/sendmail
+RESEND_API_KEY=re_xxxxxxxxx
+```
+
+Pour tester avant la verification du domaine dans Resend :
+
+```bash
+CONTACT_FROM_EMAIL="FPS Website <onboarding@resend.dev>"
+```
+
+Apres verification de `fps.gouv.cd` ou `fps.cd` dans Resend, utilisez une adresse du domaine verifie :
+
+```bash
+CONTACT_FROM_EMAIL="FPS Website <no-reply@fps.gouv.cd>"
 ```
 
 ## Structure

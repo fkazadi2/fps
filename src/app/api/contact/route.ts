@@ -1,12 +1,14 @@
-import { spawn } from "child_process";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 export const runtime = "nodejs";
 
+const RESEND_API_URL = "https://api.resend.com/emails";
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const RECIPIENT_EMAIL = process.env.CONTACT_RECIPIENT_EMAIL || "reclamation@fps.gouv.cd";
-const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || "no-reply@fps.cd";
-const SENDMAIL_PATH = process.env.SENDMAIL_PATH || "/usr/sbin/sendmail";
+const FROM_EMAIL = stripHeaderValue(
+  process.env.CONTACT_FROM_EMAIL || "FPS Website <onboarding@resend.dev>"
+);
 
 const contactSchema = z.object({
   formType: z.enum(["contact", "reclamation", "nous-ecrire"]),
@@ -28,8 +30,13 @@ function stripHeaderValue(value: string): string {
   return value.replace(/[\r\n]+/g, " ").trim();
 }
 
-function encodeHeader(value: string): string {
-  return `=?UTF-8?B?${Buffer.from(stripHeaderValue(value), "utf8").toString("base64")}?=`;
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 function formTypeLabel(formType: ContactPayload["formType"]): string {
@@ -38,7 +45,7 @@ function formTypeLabel(formType: ContactPayload["formType"]): string {
   return "Contact";
 }
 
-function buildEmail(payload: ContactPayload): { subject: string; body: string } {
+function buildEmail(payload: ContactPayload): { subject: string; text: string; html: string } {
   const message = payload.message || payload.description;
   const subject =
     payload.subject ||
@@ -66,49 +73,50 @@ function buildEmail(payload: ContactPayload): { subject: string; body: string } 
 
   return {
     subject: `[FPS] ${formTypeLabel(payload.formType)} - ${subject}`,
-    body: lines.join("\n"),
+    text: lines.join("\n"),
+    html: `<pre style="font-family: Arial, sans-serif; white-space: pre-wrap; line-height: 1.5;">${escapeHtml(
+      lines.join("\n")
+    )}</pre>`,
   };
 }
 
-function sendMail(payload: ContactPayload): Promise<void> {
-  const { subject, body } = buildEmail(payload);
+async function sendMail(payload: ContactPayload): Promise<string | null> {
+  if (!RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY is not configured.");
+  }
+
+  const { subject, text, html } = buildEmail(payload);
   const replyTo = stripHeaderValue(payload.email);
-  const senderName = stripHeaderValue(payload.name);
 
-  const message = [
-    `To: ${RECIPIENT_EMAIL}`,
-    `From: FPS Website <${FROM_EMAIL}>`,
-    `Reply-To: ${senderName} <${replyTo}>`,
-    `Subject: ${encodeHeader(subject)}`,
-    "MIME-Version: 1.0",
-    "Content-Type: text/plain; charset=UTF-8",
-    "Content-Transfer-Encoding: 8bit",
-    "",
-    body,
-  ].join("\n");
-
-  return new Promise((resolve, reject) => {
-    const child = spawn(SENDMAIL_PATH, ["-t", "-oi"]);
-    let stderr = "";
-
-    child.stderr.on("data", (chunk) => {
-      stderr += chunk.toString();
-    });
-
-    child.on("error", (error) => {
-      reject(error);
-    });
-
-    child.on("close", (code) => {
-      if (code === 0) {
-        resolve();
-      } else {
-        reject(new Error(stderr || `sendmail exited with code ${code}`));
-      }
-    });
-
-    child.stdin.end(message);
+  const response = await fetch(RESEND_API_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+      "User-Agent": "fps-website/1.0",
+    },
+    body: JSON.stringify({
+      from: FROM_EMAIL,
+      to: [RECIPIENT_EMAIL],
+      subject,
+      text,
+      html,
+      reply_to: replyTo,
+    }),
   });
+
+  const result = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    const message =
+      result?.error?.message ||
+      result?.message ||
+      (typeof result?.error === "string" ? result.error : null) ||
+      `Resend API error (${response.status})`;
+    throw new Error(message);
+  }
+
+  return result?.id || result?.data?.id || null;
 }
 
 export async function POST(request: NextRequest) {
@@ -132,11 +140,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    await sendMail(payload);
+    const emailId = await sendMail(payload);
 
     return NextResponse.json({
       ok: true,
       recipient: RECIPIENT_EMAIL,
+      emailId,
       trackingNumber: payload.trackingNumber || null,
     });
   } catch (error) {
