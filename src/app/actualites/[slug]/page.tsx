@@ -1,18 +1,18 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
-import { Calendar, User, ArrowLeft, Share2, Newspaper } from "lucide-react";
+import { Calendar, User, Newspaper } from "lucide-react";
 import MainLayout from "@/components/layout/MainLayout";
 import PageHeader from "@/components/layout/PageHeader";
 import FeaturedImageBox from "@/components/ui/FeaturedImageBox";
+import SocialShareButtons from "@/components/ui/SocialShareButtons";
 import { getArticleBySlug } from "@/lib/data/articles";
 
 export const revalidate = 3600; // ISR: Revalider chaque heure
 
 interface ArticlePageProps {
-    params: {
+    params: Promise<{
         slug: string;
-    };
+    }>;
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
@@ -25,6 +25,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
     // Utilisation de la date pré-calculée (Optimisation Phase 4)
     const formattedDate = article.formattedDate || article.publishedAt || "";
+    const articleImages = Array.isArray(article.images) && article.images.length > 0
+        ? article.images
+        : article.image
+            ? [{ src: article.image, alt: article.title }]
+            : [];
 
     return (
         <MainLayout>
@@ -32,7 +37,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 {/* 1. La Bannière */}
                 <PageHeader
                     title={article.title}
-                    description={article.excerpt}
                     icon={Newspaper}
                     variant={article.category === 'evenement' ? 'purple' : 'blue'}
                     breadcrumbs={[
@@ -43,7 +47,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
                 {/* 2. L'Image à la Une */}
                 <FeaturedImageBox
-                    image={article.image}
+                    image={articleImages[0]?.src || article.image}
                     variant={article.category === 'evenement' ? 'purple' : 'blue'}
                 />
 
@@ -74,21 +78,40 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 {/* Main Content */}
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div
-                        className="prose prose-lg prose-blue mx-auto max-w-none"
+                        className="prose prose-lg prose-blue mx-auto max-w-none [&_p]:mb-6 [&_p]:leading-8 [&_p:last-child]:mb-0"
                         // Injection sécurisée du HTML (attention aux XSS si contenu utilisateur non-admin)
                         // Le contenu vient de l'admin (confiance), on peut l'injecter.
                         dangerouslySetInnerHTML={{ __html: article.content }}
                     />
 
+                    {articleImages.length > 1 && (
+                        <section className="mt-12">
+                            <h2 className="text-2xl font-bold text-gray-900 mb-6">Galerie photos</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {articleImages.map((image: { src: string; alt?: string }, index: number) => (
+                                    <div
+                                        key={`${image.src}-${index}`}
+                                        className="relative h-56 rounded-xl overflow-hidden shadow-md bg-gray-100"
+                                    >
+                                        <Image
+                                            src={image.src}
+                                            alt={image.alt || article.title}
+                                            fill
+                                            className="object-cover hover:scale-105 transition-transform duration-500"
+                                            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
                     {/* Tags / Footer Article */}
-                    <div className="mt-12 pt-8 border-t border-gray-100 flex justify-between items-center">
+                    <div className="mt-12 pt-8 border-t border-gray-100 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                         <div className="text-gray-500 text-sm">
                             Fonds de Promotion de la Santé (FPS)
                         </div>
-                        <button className="flex items-center text-gray-500 hover:text-[#005bb0] transition-colors">
-                            <Share2 className="w-5 h-5 mr-2" />
-                            Partager cet article
-                        </button>
+                        <SocialShareButtons title={article.title} path={`/actualites/${slug}`} />
                     </div>
                 </div>
             </article>

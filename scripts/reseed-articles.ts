@@ -16,16 +16,21 @@ async function seedArticles() {
         const articles = [
             // ACTUALITÉS (category: 'communique')
             {
-                title: "Célébration de la 23ème Journée Africaine de la Médecine Traditionnelle",
+                title: "3ᵉ anniversaire du Fonds de Promotion de la Santé (FPS)",
                 slug: "celebration-23e-journee-africaine-medecine-traditionnelle",
-                excerpt: "Le FPS a pris part activement aux festivités marquant la journée dédiée à la valorisation de la médecine traditionnelle en Afrique.",
-                content: "<p>Le Fonds de Promotion de la Santé (FPS) a participé avec enthousiasme à la 23ème Journée Africaine de la Médecine Traditionnelle. Cet événement a été l'occasion de réaffirmer l'importance de l'intégration de la médecine traditionnelle dans le système de santé national.</p><p>Lors de cette journée, plusieurs ateliers et conférences ont mis en lumière les avancées réalisées dans la recherche et la standardisation des produits issus de la pharmacopée traditionnelle. Le FPS s'engage à soutenir les initiatives visant à promouvoir une médecine traditionnelle sûre, efficace et accessible à tous.</p>",
+                excerpt: "À l’occasion de la célébration de son 3ᵉ anniversaire, le Fonds de Promotion de la Santé (FPS) réaffirme son engagement en faveur de l’amélioration de la qualité de l’offre des soins et des services de santé en République démocratique du Congo. Depuis sa mise en place, le FPS s’emploie à accompagner la mise en œuvre de la Couverture Santé Universelle (CSU), à soutenir la gratuité de la maternité et à renforcer les capacités des structures de santé à travers la dotation en équipements, l’appui aux établissements de soins et la modernisation des outils de gestion, notamment par la digitalisation de certaines procédures.",
+                content: "<p>À l’occasion de la célébration de son 3ᵉ anniversaire, le Fonds de Promotion de la Santé (FPS) réaffirme son engagement en faveur de l’amélioration de la qualité de l’offre des soins et des services de santé en République démocratique du Congo.</p><p>Depuis sa mise en place, le FPS s’emploie à accompagner la mise en œuvre de la Couverture Santé Universelle (CSU), à soutenir la gratuité de la maternité et à renforcer les capacités des structures de santé.</p><p>Ces actions se traduisent notamment par la dotation en équipements, l’appui aux établissements de soins et la modernisation des outils de gestion, notamment par la digitalisation de certaines procédures.</p><p>Cette célébration marque une étape importante dans la consolidation des actions menées par l’établissement public pour accompagner les priorités nationales de santé et améliorer l’accès aux soins pour les populations.</p>",
                 category: "communique",
                 image: "/images/articles/celebration/1.jpg",
+                images: [
+                    { src: "/images/articles/celebration/1.jpg", alt: "Célébration du 3ᵉ anniversaire du FPS" },
+                    { src: "/images/articles/celebration/2.jpg", alt: "Activités de célébration du Fonds de Promotion de la Santé" },
+                    { src: "/images/articles/celebration/3.jpg", alt: "Participants à la célébration du 3ᵉ anniversaire du FPS" }
+                ],
                 published: true,
                 publishedAt: new Date("2025-08-31T10:00:00Z"),
                 author: "Comms FPS",
-                tags: ["santé", "médecine traditionnelle", "célébration"]
+                tags: ["anniversaire", "FPS", "CSU"]
             },
             {
                 title: "Lancement de la campagne de sensibilisation sur la Couverture Santé Universelle",
@@ -33,7 +38,7 @@ async function seedArticles() {
                 excerpt: "Une nouvelle étape franchie vers l'accès aux soins pour tous avec le lancement officiel de la campagne nationale.",
                 content: "<p>Le Ministre de la Santé Publique, Hygiène et Prévention a procédé ce jour au lancement officiel de la grande campagne de sensibilisation sur la Couverture Santé Universelle (CSU). Le FPS, en tant qu'acteur clé du financement de la santé, soutient pleinement cette initiative.</p><p>L'objectif est d'informer la population sur les mécanismes de prise en charge, notamment la gratuité de la maternité et des soins néonatals. Des agents de santé communautaires seront déployés dans toutes les provinces pour relayer le message.</p>",
                 category: "communique",
-                image: "/images/articles/celebration/2.jpg",
+                image: "/images/articles/rdc-csu-mise-en-oeuvre/3.jpg",
                 published: true,
                 publishedAt: new Date("2025-09-15T09:30:00Z"),
                 author: "Comms FPS",
@@ -45,7 +50,7 @@ async function seedArticles() {
                 excerpt: "Signature d'un protocole d'accord stratégique avec plusieurs bailleurs de fonds pour le renforcement du système de santé.",
                 content: "<p>Dans le cadre de sa mission de mobilisation des ressources, le FPS a signé ce matin un protocole d'accord avec un consortium de partenaires internationaux. Ce financement additionnel permettra d'accélérer la réhabilitation des infrastructures sanitaires dans les zones reculées.</p><p>La Directrice Générale du FPS a salué cet engagement qui témoigne de la confiance des partenaires envers les réformes engagées par le gouvernement congolais dans le secteur de la santé.</p>",
                 category: "communique",
-                image: "/images/articles/celebration/3.jpg",
+                image: "/images/articles/celebration-de-la-23e-journee/3.jpg",
                 published: true,
                 publishedAt: new Date("2025-10-01T14:00:00Z"),
                 author: "Direction Générale",

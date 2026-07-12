@@ -44,12 +44,17 @@ export const MOCK_ARTICLES = [
   },
   {
     _id: "mock-medecine-trad",
-    title: "Célébration de la 23ème Journée Africaine de la Médecine Traditionnelle",
+    title: "3ᵉ anniversaire du Fonds de Promotion de la Santé (FPS)",
     slug: "celebration-23e-journee-africaine-medecine-traditionnelle",
-    excerpt: "Le FPS a pris part activement aux festivités marquant la journée dédiée à la valorisation de la médecine traditionnelle.",
-    content: "Promotion de la médecine traditionnelle en Afrique...",
+    excerpt: "À l’occasion de la célébration de son 3ᵉ anniversaire, le Fonds de Promotion de la Santé (FPS) réaffirme son engagement en faveur de l’amélioration de la qualité de l’offre des soins et des services de santé en République démocratique du Congo. Depuis sa mise en place, le FPS s’emploie à accompagner la mise en œuvre de la Couverture Santé Universelle (CSU), à soutenir la gratuité de la maternité et à renforcer les capacités des structures de santé à travers la dotation en équipements, l’appui aux établissements de soins et la modernisation des outils de gestion, notamment par la digitalisation de certaines procédures.",
+    content: "<p>À l’occasion de la célébration de son 3ᵉ anniversaire, le Fonds de Promotion de la Santé (FPS) réaffirme son engagement en faveur de l’amélioration de la qualité de l’offre des soins et des services de santé en République démocratique du Congo.</p><p>Depuis sa mise en place, le FPS s’emploie à accompagner la mise en œuvre de la Couverture Santé Universelle (CSU), à soutenir la gratuité de la maternité et à renforcer les capacités des structures de santé.</p><p>Ces actions se traduisent notamment par la dotation en équipements, l’appui aux établissements de soins et la modernisation des outils de gestion, notamment par la digitalisation de certaines procédures.</p><p>Cette célébration marque une étape importante dans la consolidation des actions menées par l’établissement public pour accompagner les priorités nationales de santé et améliorer l’accès aux soins pour les populations.</p>",
     category: "communique",
     image: "/images/articles/celebration/1.jpg",
+    images: [
+      { src: "/images/articles/celebration/1.jpg", alt: "Célébration du 3ᵉ anniversaire du FPS" },
+      { src: "/images/articles/celebration/2.jpg", alt: "Activités de célébration du Fonds de Promotion de la Santé" },
+      { src: "/images/articles/celebration/3.jpg", alt: "Participants à la célébration du 3ᵉ anniversaire du FPS" }
+    ],
     published: true,
     publishedAt: "2025-08-31T10:00:00Z",
     createdAt: "2025-08-31T10:00:00Z"
@@ -61,7 +66,7 @@ export const MOCK_ARTICLES = [
     excerpt: "Une nouvelle étape franchie vers l'accès aux soins pour tous avec le lancement officiel de la campagne nationale.",
     content: "Lancement de la campagne nationale CSU...",
     category: "communique",
-    image: "/images/articles/celebration/2.jpg",
+    image: "/images/articles/rdc-csu-mise-en-oeuvre/3.jpg",
     published: true,
     publishedAt: "2025-09-15T09:30:00Z",
     createdAt: "2025-09-15T09:30:00Z"
@@ -73,7 +78,7 @@ export const MOCK_ARTICLES = [
     excerpt: "Signature d'un protocole d'accord stratégique avec plusieurs bailleurs de fonds.",
     content: "Renforcement des partenariats stratégiques internationaux...",
     category: "communique",
-    image: "/images/articles/celebration/3.jpg",
+    image: "/images/articles/celebration-de-la-23e-journee/3.jpg",
     published: true,
     publishedAt: "2025-10-01T14:00:00Z",
     createdAt: "2025-10-01T14:00:00Z"

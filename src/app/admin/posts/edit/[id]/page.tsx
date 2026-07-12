@@ -21,7 +21,7 @@ import AdvancedRichEditor from "@/components/admin/AdvancedRichEditor";
 const articleSchema = z.object({
     title: z.string().min(5, "Le titre doit contenir au moins 5 caractères"),
     slug: z.string().optional(),
-    excerpt: z.string().min(20, "L'extrait doit contenir au moins 20 caractères").max(300, "Max 300 caractères"),
+    excerpt: z.string().min(20, "L'extrait doit contenir au moins 20 caractères").max(800, "Max 800 caractères"),
     content: z.string().min(50, "Le contenu est trop court"),
     category: z.enum(["communique", "evenement", "autre"], {
         errorMap: () => ({ message: "Veuillez sélectionner une catégorie valide" })

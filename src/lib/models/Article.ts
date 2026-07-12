@@ -53,7 +53,7 @@ const ArticleSchema = new Schema<IArticle, ArticleModel>(
             type: String,
             required: [true, "L'extrait est requis"],
             trim: true,
-            maxlength: [300, "L'extrait ne doit pas dépasser 300 caractères"]
+            maxlength: [800, "L'extrait ne doit pas dépasser 800 caractères"]
         },
         content: {
             type: String,

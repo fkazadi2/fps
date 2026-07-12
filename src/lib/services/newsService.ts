@@ -281,4 +281,4 @@ export const deleteNewsArticle = (articleId: string) => {
     }
   }
   return false;
-}; 
+};
