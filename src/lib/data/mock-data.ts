@@ -11,15 +11,15 @@ export const MOCK_ARTICLES = [
     excerpt: "En marge de la mission de sensibilisation sur la Taxe de Promotion de la Santé (TPS), le Directeur Général du Fonds de Promotion de la Santé (FPS), M. Mika Marius Nyembo, à la tête d’une délégation de l’établissement, a été reçu ce jeudi 23 juillet 2026 par Son Excellence M. Grâce NKUANGA MASUANGI BILOLO, Gouverneur de la province du Kongo-Central, en présence du Ministre provincial de la Santé, Dr Jean Kimboko Ndombasi.",
     content: "<p>En marge de la mission de sensibilisation sur la Taxe de Promotion de la Santé (TPS), le Directeur Général du Fonds de Promotion de la Santé (FPS), M. Mika Marius Nyembo, à la tête d’une délégation de l’établissement, a été reçu ce jeudi 23 juillet 2026 par Son Excellence M. Grâce NKUANGA MASUANGI BILOLO, Gouverneur de la province du Kongo-Central, en présence du Ministre provincial de la Santé, Dr Jean Kimboko Ndombasi.</p><p>Cette visite de courtoisie a été l’occasion de présenter les objectifs de la mission du FPS dans la province et de réaffirmer la volonté de l’établissement d’accompagner les autorités provinciales dans les efforts de renforcement du système de santé.</p><p>À cette occasion, le Directeur Général du FPS a annoncé la remise prochaine d’un important lot d’équipements et de matériels médicaux à l’Hôpital Provincial de Référence Secondaire de Kinkanda. Ce don s’inscrit dans le cadre du soutien à la mise en œuvre du programme de gratuité de la prise en charge de la femme enceinte, de l’accouchée et du nouveau-né, pilier essentiel de la Couverture Santé Universelle.</p><p><strong>Cellule de communication / FPS</strong></p>",
     category: "communique",
-    image: "/images/articles/fps-matadi-csu/image-a-la-une.jpeg",
+    image: "/images/articles/fps-matadi-csu/image-a-la-une.jpg",
     images: [
-      { src: "/images/articles/fps-matadi-csu/image-a-la-une.jpeg", alt: "Le Directeur Général du FPS reçu par le Gouverneur du Kongo-Central à Matadi" },
-      { src: "/images/articles/fps-matadi-csu/fps-matadi-011.jpeg", alt: "Accueil de la délégation du FPS à Matadi" },
-      { src: "/images/articles/fps-matadi-csu/fps-matadi-012.jpeg", alt: "Poignée de main lors de la visite du FPS au Gouvernorat du Kongo-Central" },
-      { src: "/images/articles/fps-matadi-csu/fps-matadi-014.jpeg", alt: "Rencontre de la délégation du FPS avec les autorités provinciales" },
-      { src: "/images/articles/fps-matadi-csu/fps-matadi-015.jpeg", alt: "Échanges entre les responsables du FPS et du Kongo-Central" },
-      { src: "/images/articles/fps-matadi-csu/fps-matadi-021.jpeg", alt: "Entretien entre le Directeur Général du FPS et le Gouverneur du Kongo-Central" },
-      { src: "/images/articles/fps-matadi-csu/fps-matadi-019.jpeg", alt: "Autorité provinciale lors de la rencontre avec le FPS à Matadi" }
+      { src: "/images/articles/fps-matadi-csu/image-a-la-une.jpg", alt: "Le Directeur Général du FPS reçu par le Gouverneur du Kongo-Central à Matadi" },
+      { src: "/images/articles/fps-matadi-csu/fps-matadi-011.jpg", alt: "Accueil de la délégation du FPS à Matadi" },
+      { src: "/images/articles/fps-matadi-csu/fps-matadi-012.jpg", alt: "Poignée de main lors de la visite du FPS au Gouvernorat du Kongo-Central" },
+      { src: "/images/articles/fps-matadi-csu/fps-matadi-014.jpg", alt: "Rencontre de la délégation du FPS avec les autorités provinciales" },
+      { src: "/images/articles/fps-matadi-csu/fps-matadi-015.jpg", alt: "Échanges entre les responsables du FPS et du Kongo-Central" },
+      { src: "/images/articles/fps-matadi-csu/fps-matadi-021.jpg", alt: "Entretien entre le Directeur Général du FPS et le Gouverneur du Kongo-Central" },
+      { src: "/images/articles/fps-matadi-csu/fps-matadi-019.jpg", alt: "Autorité provinciale lors de la rencontre avec le FPS à Matadi" }
     ],
     author: "Cellule de communication / FPS",
     tags: ["Matadi", "Kongo-Central", "Couverture Santé Universelle", "TPS"],
