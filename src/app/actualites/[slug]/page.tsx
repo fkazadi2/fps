@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { Calendar, User, Newspaper } from "lucide-react";
 import MainLayout from "@/components/layout/MainLayout";
@@ -8,11 +9,73 @@ import SocialShareButtons from "@/components/ui/SocialShareButtons";
 import { getArticleBySlug } from "@/lib/data/articles";
 
 export const revalidate = 3600; // ISR: Revalider chaque heure
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fps.cd";
+
+const toAbsoluteUrl = (path: string) => {
+    if (!path) return siteUrl;
+    if (/^https?:\/\//i.test(path)) return path;
+    return new URL(path.startsWith("/") ? path : `/${path}`, siteUrl).toString();
+};
+
+const stripHtml = (html: string) => html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+
+const getArticleDescription = (article: any) => {
+    const description = article.excerpt || stripHtml(article.content || "");
+    return description.length > 220 ? `${description.slice(0, 217).trim()}...` : description;
+};
 
 interface ArticlePageProps {
     params: Promise<{
         slug: string;
     }>;
+}
+
+export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const article = await getArticleBySlug(slug);
+
+    if (!article) {
+        return {
+            title: "Article introuvable | FPS",
+        };
+    }
+
+    const articleUrl = toAbsoluteUrl(`/actualites/${slug}`);
+    const imageUrl = toAbsoluteUrl(article.image || "/images/logo-fps.jpg");
+    const description = getArticleDescription(article);
+
+    return {
+        metadataBase: new URL(siteUrl),
+        title: `${article.title} | FPS`,
+        description,
+        alternates: {
+            canonical: articleUrl,
+        },
+        openGraph: {
+            title: article.title,
+            description,
+            url: articleUrl,
+            siteName: "Fonds de Promotion de la Santé (FPS)",
+            locale: "fr_CD",
+            type: "article",
+            publishedTime: article.publishedAt,
+            authors: [article.author || "Fonds de Promotion de la Santé (FPS)"],
+            images: [
+                {
+                    url: imageUrl,
+                    width: 1200,
+                    height: 630,
+                    alt: article.title,
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: article.title,
+            description,
+            images: [imageUrl],
+        },
+    };
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
