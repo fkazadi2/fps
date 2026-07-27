@@ -5,12 +5,24 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { MOCK_ARTICLES } from "./mock-data";
 
+const normalizeMatadiImagePath = (src: string) =>
+    src.replace(/^\/images\/articles\/fps-matadi-csu\/(.+)\.jpeg$/, "/images/articles/fps-matadi-csu/$1.jpg");
+
 // Fonction utilitaire pour formater les articles
 function formatArticle(article: any) {
     const dateObj = new Date(article.publishedAt || article.createdAt);
+    const images = Array.isArray(article.images)
+        ? article.images.map((image: any) => ({
+            ...image,
+            src: typeof image.src === "string" ? normalizeMatadiImagePath(image.src) : image.src
+        }))
+        : article.images;
+
     return {
         ...article,
         _id: article._id.toString(),
+        image: typeof article.image === "string" ? normalizeMatadiImagePath(article.image) : article.image,
+        images,
         createdAt: article.createdAt?.toISOString ? article.createdAt.toISOString() : article.createdAt,
         updatedAt: article.updatedAt?.toISOString ? article.updatedAt.toISOString() : article.updatedAt,
         publishedAt: article.publishedAt?.toISOString ? article.publishedAt.toISOString() : article.publishedAt,
