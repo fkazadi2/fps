@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { nanoid } from 'nanoid';
 import { BlockData } from '@/components/admin/BlockEditor';
+import { requireAdmin } from '@/lib/auth/require-admin';
 
 interface BannerData {
   enabled: boolean;
@@ -25,6 +26,9 @@ interface PreviewData {
 
 export async function POST(request: NextRequest) {
   try {
+    const denied = await requireAdmin();
+    if (denied) return denied;
+
     const { pageData } = await request.json();
     
     if (!pageData) {

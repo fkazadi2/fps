@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import NavigationMenu from '@/lib/models/NavigationMenu';
+import { requireAdmin } from '@/lib/auth/require-admin';
 
 /**
  * GET /api/navigation?location=header
@@ -69,6 +70,9 @@ export async function GET(request: Request) {
  */
 export async function PUT(request: Request) {
     try {
+        const denied = await requireAdmin();
+        if (denied) return denied;
+
         await connectDB();
 
         const body = await request.json();

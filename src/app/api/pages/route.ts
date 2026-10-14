@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Page from '@/lib/models/Page';
+import { requireAdmin } from '@/lib/auth/require-admin';
 
 // GET: Récupérer toutes les pages
 export async function GET(request: NextRequest) {
@@ -47,6 +48,9 @@ export async function GET(request: NextRequest) {
 // POST: Créer une nouvelle page
 export async function POST(request: NextRequest) {
     try {
+        const denied = await requireAdmin();
+        if (denied) return denied;
+
         await connectDB();
 
         const body = await request.json();
