@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Page from '@/lib/models/Page';
+import { requireAdmin } from '@/lib/auth/require-admin';
 
 // GET: Récupérer une page par slug ou ID
 export async function GET(
@@ -52,6 +53,9 @@ export async function PUT(
     { params }: { params: Promise<{ slug: string }> }
 ) {
     try {
+        const denied = await requireAdmin();
+        if (denied) return denied;
+
         await connectDB();
         const { slug } = await params;
 
@@ -125,6 +129,9 @@ export async function DELETE(
     { params }: { params: Promise<{ slug: string }> }
 ) {
     try {
+        const denied = await requireAdmin();
+        if (denied) return denied;
+
         await connectDB();
         const { slug } = await params;
 

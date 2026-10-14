@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth/auth-options";
+import { requireAdmin } from "@/lib/auth/require-admin";
 import { uploadImage, deleteImage } from "@/lib/storage";
 import { getSiteConfig, updateSiteConfig } from "@/lib/cms/local-storage";
 
@@ -21,7 +20,9 @@ export async function GET() {
 // PUT - Mettre à jour la configuration du site
 export async function PUT(request: NextRequest) {
   try {
-    // Vérification d'authentification désactivée pour simplifier
+    const denied = await requireAdmin();
+    if (denied) return denied;
+
     const data = await request.json();
     
     // Mettre à jour la configuration
@@ -40,7 +41,9 @@ export async function PUT(request: NextRequest) {
 // POST - Pour télécharger le favicon ou le logo
 export async function POST(request: NextRequest) {
   try {
-    // Vérification d'authentification désactivée pour simplifier
+    const denied = await requireAdmin();
+    if (denied) return denied;
+
     const formData = await request.formData();
     const imageType = formData.get('type') as string; // 'favicon' ou 'logo'
     const file = formData.get('file') as File;

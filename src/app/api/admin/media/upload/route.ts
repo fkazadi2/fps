@@ -2,9 +2,22 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import { existsSync } from 'fs';
+import { requireAdmin } from '@/lib/auth/require-admin';
+
+// Extension imposée d'après le type d'image : on ne garde jamais celle de l'envoyeur
+// (sinon un fichier "page.html" déclaré "image/png" serait servi comme HTML)
+const extensions: Record<string, string> = {
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
+  'image/gif': 'gif',
+  'image/webp': 'webp',
+};
 
 export async function POST(request: NextRequest) {
   try {
+    const denied = await requireAdmin();
+    if (denied) return denied;
+
     const formData = await request.formData();
     const file = formData.get('file') as File;
     
@@ -16,8 +29,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Vérifier le type de fichier
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-    if (!allowedTypes.includes(file.type)) {
+    if (!extensions[file.type]) {
       return NextResponse.json(
         { error: 'Type de fichier non autorisé. Utilisez JPEG, PNG, GIF ou WebP.' },
         { status: 400 }
@@ -35,8 +47,8 @@ export async function POST(request: NextRequest) {
 
     // Créer un nom de fichier unique
     const timestamp = Date.now();
-    const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-    const fileName = `${timestamp}_${originalName}`;
+    const baseName = path.parse(file.name).name.replace(/[^a-zA-Z0-9-]/g, '_');
+    const fileName = `${timestamp}_${baseName}.${extensions[file.type]}`;
     
     // Créer le dossier uploads s'il n'existe pas
     const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
