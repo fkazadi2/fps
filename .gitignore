@@ -16,6 +16,8 @@
 # next.js
 /.next/
 /out/
+# copies du build (.next.bak, .next-old...) : Tailwind analyse tout dossier non ignoré
+/.next*/
 
 # production
 /build
@@ -23,6 +25,11 @@
 # misc
 .DS_Store
 *.pem
+
+# identifiants et rapports locaux (jamais dans le dépôt public)
+user-*.txt
+*recovery-codes*.txt
+goaccess-*.html
 
 # debug
 npm-debug.log*
