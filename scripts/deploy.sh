@@ -40,14 +40,20 @@ done
 git fetch -q origin main || fail "impossible de joindre GitHub"
 git merge-base --is-ancestor HEAD origin/main || fail "la branche locale a divergé de origin/main"
 
+# Dépendances : on compare le package-lock.json visé avec celui qui a servi à installer node_modules
+# (empreinte écrite à la fin de chaque installation). Indépendant de l'ordre git pull / deploy.sh.
+STAMP=node_modules/.deploy-lock-sha
+WANT=$(git show origin/main:package-lock.json | sha256sum | cut -d' ' -f1)
+HAVE=$(cat "$STAMP" 2>/dev/null || echo aucune)
+
 if [ "${1:-}" = "--check" ]; then
   echo "Vérifications OK. Version en ligne : $(git log --oneline -1 HEAD)"
   echo "À déployer : $(git log --oneline HEAD..origin/main | wc -l) commit(s)"
+  if [ "$WANT" = "$HAVE" ]; then echo "Dépendances : à jour"; else echo "Dépendances : à réinstaller (npm ci) — Next installé : $(node -p "require('./node_modules/next/package.json').version")"; fi
   exit 0
 fi
 
 # 2. Mise à jour du code
-OLD=$(git rev-parse HEAD)
 # Un npm install lancé à la main sur le serveur modifie package-lock.json : le dépôt fait foi
 git checkout -q -- package-lock.json 2>/dev/null || true
 git merge -q --ff-only origin/main || fail "mise à jour du code impossible"
@@ -58,11 +64,12 @@ rm -rf "$BACKUP_DIR" "$NM_BACKUP"
 cp -a .next "$BACKUP_DIR" || fail "sauvegarde impossible"
 echo "Sauvegarde : $BACKUP_DIR (build $(cat "$BACKUP_DIR/BUILD_ID"))"
 
-# 3b. Dépendances : réinstallées seulement si package.json ou package-lock.json ont changé
-if ! git diff --quiet "$OLD" HEAD -- package.json package-lock.json; then
-  echo "Dépendances modifiées : installation exacte (npm ci)..."
+# 3b. Dépendances : réinstallées si le lockfile visé n'est pas celui qui a servi à installer node_modules
+if [ "$WANT" != "$HAVE" ]; then
+  echo "Dépendances à réinstaller : installation exacte (npm ci)..."
   cp -al node_modules "$NM_BACKUP" || fail "sauvegarde des modules impossible"
   npm ci --no-audit --no-fund > "$LOG.deps" 2>&1 || { tail -20 "$LOG.deps"; restore "installation des dépendances échouée (journal : $LOG.deps)"; }
+  echo "$WANT" > "$STAMP"
 fi
 
 # 4. Compilation
