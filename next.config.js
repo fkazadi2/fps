@@ -20,8 +20,9 @@ const nextConfig = {
     // Tailles d'images pour responsive
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Qualité par défaut
-    minimumCacheTTL: 60,
+    // Durée de conservation des images optimisées (serveur et navigateur) : 7 jours.
+    // Les fichiers téléversés dans WordPress ont chacun un nom unique.
+    minimumCacheTTL: 604800,
   },
   // Photos publiées dans WordPress : servies sous la même adresse que le site
   async rewrites() {
