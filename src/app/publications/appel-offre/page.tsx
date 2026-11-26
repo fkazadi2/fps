@@ -3,54 +3,14 @@ import MainLayout from "@/components/layout/MainLayout";
 import PageHeader from "@/components/layout/PageHeader";
 import FeaturedImageBox from "@/components/ui/FeaturedImageBox";
 import Link from "next/link";
+import { getAppels } from "@/lib/data/publications";
 
-export default function AppelOffrePage() {
-  const appelOffres = [
-    {
-      id: 1,
-      titre: "Fourniture de médicaments essentiels pour les centres de santé",
-      reference: "AO/FPS/2024/001",
-      datePublication: "15 Janvier 2024",
-      dateLimite: "28 Février 2024",
-      statut: "Ouvert",
-      montant: "2,500,000 USD",
-      lieu: "Kinshasa, RDC",
-      description: "Appel d'offres pour la fourniture de médicaments essentiels destinés aux centres de santé partenaires du FPS dans 5 provinces prioritaires."
-    },
-    {
-      id: 2,
-      titre: "Acquisition d'équipements médicaux pour hôpitaux généraux",
-      reference: "AO/FPS/2024/002",
-      datePublication: "22 Janvier 2024",
-      dateLimite: "15 Mars 2024",
-      statut: "Ouvert",
-      montant: "1,800,000 USD",
-      lieu: "Lubumbashi, RDC",
-      description: "Fourniture et installation d'équipements médicaux modernes pour 12 hôpitaux généraux de référence."
-    },
-    {
-      id: 3,
-      titre: "Services de formation du personnel de santé",
-      reference: "AO/FPS/2024/003",
-      datePublication: "05 Février 2024",
-      dateLimite: "20 Mars 2024",
-      statut: "Ouvert",
-      montant: "450,000 USD",
-      lieu: "Goma, RDC",
-      description: "Prestation de services de formation continue pour le personnel de santé dans les provinces du Nord et Sud-Kivu."
-    },
-    {
-      id: 4,
-      titre: "Construction d'un centre de santé moderne",
-      reference: "AO/FPS/2023/045",
-      datePublication: "10 Décembre 2023",
-      dateLimite: "25 Janvier 2024",
-      statut: "Fermé",
-      montant: "850,000 USD",
-      lieu: "Mbuji-Mayi, RDC",
-      description: "Construction clé en main d'un centre de santé moderne avec équipements complets dans la province du Kasaï-Oriental."
-    }
-  ];
+export const revalidate = 60;
+
+export default async function AppelOffrePage() {
+  const appelOffres = await getAppels();
+  const ouverts = appelOffres.filter(ao => ao.statut === "Ouvert");
+  const millions = ouverts.reduce((total, ao) => total + (Number(ao.montant.replace(/[^0-9]/g, "")) || 0), 0) / 1_000_000;
 
   return (
     <MainLayout>
@@ -77,7 +37,7 @@ export default function AppelOffrePage() {
               <div className="flex items-center space-x-4">
                 <h2 className="text-2xl font-bold text-gray-900">Appels d'offres disponibles</h2>
                 <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                  {appelOffres.filter(ao => ao.statut === "Ouvert").length} ouverts
+                  {ouverts.length} ouverts
                 </span>
               </div>
               <div className="flex space-x-2">
@@ -95,11 +55,11 @@ export default function AppelOffrePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="bg-blue-50 p-4 rounded-lg text-center">
-                <div className="text-2xl font-bold text-blue-600">3</div>
+                <div className="text-2xl font-bold text-blue-600">{ouverts.length}</div>
                 <div className="text-sm text-gray-600">Appels ouverts</div>
               </div>
               <div className="bg-green-50 p-4 rounded-lg text-center">
-                <div className="text-2xl font-bold text-green-600">5.75M</div>
+                <div className="text-2xl font-bold text-green-600">{Number(millions.toFixed(2))}M</div>
                 <div className="text-sm text-gray-600">USD en cours</div>
               </div>
               <div className="bg-purple-50 p-4 rounded-lg text-center">
@@ -154,10 +114,17 @@ export default function AppelOffrePage() {
                     <div className="text-right ml-6">
                       <div className="text-2xl font-bold text-blue-600 mb-2">{ao.montant}</div>
                       <div className="space-y-2">
+                        {ao.fileUrl ? (
+                        <a href={ao.fileUrl} target="_blank" rel="noopener noreferrer" className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center">
+                          <Download className="h-4 w-4 mr-2" />
+                          Télécharger
+                        </a>
+                        ) : (
                         <button className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center">
                           <Download className="h-4 w-4 mr-2" />
                           Télécharger
                         </button>
+                        )}
                         <button className="w-full bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors">
                           Voir détails
                         </button>

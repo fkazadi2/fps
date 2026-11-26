@@ -1,0 +1,159 @@
+{
+ "offres": [
+  {
+   "id": "1",
+   "titre": "Avis de Recrutement Officiel - FPS",
+   "departement": "Multi-départements",
+   "lieu": "Kinshasa & Provinces",
+   "type": "CDI / CDD",
+   "niveau": "Divers profils",
+   "experience": "Selon profil",
+   "datePublication": "03 Avril 2026",
+   "dateLimite": "Voir PDF",
+   "salaire": "Selon grille barémique",
+   "description": "Appel à candidatures pour divers postes au sein du Fonds de Promotion de la Santé. Veuillez consulter le document officiel pour le détail des postes et les modalités de soumission.",
+   "pdfUrl": "/uploads/documents/FPS_AVIS DE RECRUTEMENT OFFICIEL 3 Avril 2026.pdf",
+   "requirements": [
+    "Consulter l'avis de recrutement complet (PDF)",
+    "Dossier de candidature complet",
+    "Disponibilité immédiate souhaitée"
+   ]
+  }
+ ],
+ "appels": [
+  {
+   "id": "1",
+   "titre": "Fourniture de médicaments essentiels pour les centres de santé",
+   "reference": "AO/FPS/2024/001",
+   "datePublication": "15 Janvier 2024",
+   "dateLimite": "28 Février 2024",
+   "statut": "Ouvert",
+   "montant": "2,500,000 USD",
+   "lieu": "Kinshasa, RDC",
+   "description": "Appel d'offres pour la fourniture de médicaments essentiels destinés aux centres de santé partenaires du FPS dans 5 provinces prioritaires."
+  },
+  {
+   "id": "2",
+   "titre": "Acquisition d'équipements médicaux pour hôpitaux généraux",
+   "reference": "AO/FPS/2024/002",
+   "datePublication": "22 Janvier 2024",
+   "dateLimite": "15 Mars 2024",
+   "statut": "Ouvert",
+   "montant": "1,800,000 USD",
+   "lieu": "Lubumbashi, RDC",
+   "description": "Fourniture et installation d'équipements médicaux modernes pour 12 hôpitaux généraux de référence."
+  },
+  {
+   "id": "3",
+   "titre": "Services de formation du personnel de santé",
+   "reference": "AO/FPS/2024/003",
+   "datePublication": "05 Février 2024",
+   "dateLimite": "20 Mars 2024",
+   "statut": "Ouvert",
+   "montant": "450,000 USD",
+   "lieu": "Goma, RDC",
+   "description": "Prestation de services de formation continue pour le personnel de santé dans les provinces du Nord et Sud-Kivu."
+  },
+  {
+   "id": "4",
+   "titre": "Construction d'un centre de santé moderne",
+   "reference": "AO/FPS/2023/045",
+   "datePublication": "10 Décembre 2023",
+   "dateLimite": "25 Janvier 2024",
+   "statut": "Fermé",
+   "montant": "850,000 USD",
+   "lieu": "Mbuji-Mayi, RDC",
+   "description": "Construction clé en main d'un centre de santé moderne avec équipements complets dans la province du Kasaï-Oriental."
+  }
+ ],
+ "documents": [
+  {
+   "id": "doc-2023-annuel",
+   "title": "Rapport Annuel 2023 - Activités et Réalisations",
+   "category": "Rapport Annuel",
+   "date": "15 Janvier 2024",
+   "description": "Rapport complet des activités et réalisations du FPS pour l'année 2023, incluant les statistiques de performance et les projets réalisés.",
+   "fileUrl": "/uploads/documents/Rapport annuel FPS 2023.pdf",
+   "fileSize": "2.5 MB",
+   "format": "PDF",
+   "downloads": 1250
+  },
+  {
+   "id": "doc-gratuite-accouchements",
+   "title": "Rapport sur la Gratuité des Accouchements",
+   "category": "Rapport Technique",
+   "date": "10 Mars 2024",
+   "description": "Analyse de l'impact du programme de gratuité des accouchements sur la santé maternelle et néonatale en RDC.",
+   "fileUrl": "/uploads/documents/Rapport - Gratuité des accouchements.pdf",
+   "fileSize": "1.8 MB",
+   "format": "PDF",
+   "downloads": 890
+  },
+  {
+   "id": "doc-loi-csu-2023",
+   "title": "Loi relative à la CSU - N°23/006",
+   "category": "Texte Légal",
+   "date": "03 Mars 2023",
+   "description": "Loi portant modification et complétant certaines dispositions relatives à la Couverture Santé Universelle (CSU).",
+   "fileUrl": "/uploads/documents/loi_csu_23_006_du_03_mars_2023.pdf",
+   "fileSize": "1.2 MB",
+   "format": "PDF",
+   "downloads": 450
+  },
+  {
+   "id": "doc-decret-fps-tps1",
+   "title": "Décret N°25/028 du 17 JUIL 2025",
+   "category": "Décret",
+   "date": "Mars 2024",
+   "description": "Décret fixant les modalités de fonctionnement et d'organisation technique du Fonds de Promotion de la Santé.",
+   "fileUrl": "/uploads/documents/Décret FPS TPS-1.pdf",
+   "fileSize": "0.8 MB",
+   "format": "PDF",
+   "downloads": 320
+  },
+  {
+   "id": "doc-decrets-journal",
+   "title": "Journal des Décrets FPS",
+   "category": "Bulletin Officiel",
+   "date": "Avril 2024",
+   "description": "Recueil officiel regroupant l'ensemble des décrets et ordonnances relatifs au fonctionnement du Fonds de Promotion de la Santé.",
+   "fileUrl": "/uploads/documents/Decrets Journal FPS.pdf",
+   "fileSize": "3.1 MB",
+   "format": "PDF",
+   "downloads": 150
+  },
+  {
+   "id": "doc-constitution-rdc",
+   "title": "Constitution de la RDC",
+   "category": "Texte Légal",
+   "date": "Révision 2011",
+   "description": "Constitution de la République Démocratique du Congo (révision de certains articles par la loi n°11/002 du 20 janvier 2011).",
+   "fileUrl": "/uploads/documents/Constitution%20de%20la%20RDC.pdf",
+   "fileSize": "—",
+   "format": "PDF",
+   "downloads": 0
+  },
+  {
+   "id": "doc-loi-18-035-2018",
+   "title": "Loi n° 18/035 du 13 décembre 2018",
+   "category": "Texte Légal",
+   "date": "13 Décembre 2018",
+   "description": "Loi fixant les principes fondamentaux relatifs à l’organisation de la santé publique en République Démocratique du Congo.",
+   "fileUrl": "/uploads/documents/Loi%2018%3A035.pdf",
+   "fileSize": "—",
+   "format": "PDF",
+   "downloads": 0
+  },
+  {
+   "id": "doc-ordonnance-cncsu-21-032-2021",
+   "title": "Ordonnance n° 21/032 du 1er juin 2021 (CNCSU)",
+   "category": "Texte Légal",
+   "date": "1er Juin 2021",
+   "description": "Ordonnance portant création, organisation et fonctionnement du Conseil National de la Couverture Santé Universelle (CNCSU).",
+   "fileUrl": "/uploads/documents/830.06.21-Ordonnance-du-1er-juin-2021_CNCSU.pdf",
+   "fileSize": "—",
+   "format": "PDF",
+   "downloads": 0
+  }
+ ]
+}

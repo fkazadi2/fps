@@ -227,12 +227,16 @@ const defaultHomepageContent = {
 type HomeClientProps = {
   latestNews?: any[];
   upcomingEvents?: any[];
+  albums?: any[];
+  diapos?: any[];
   initialSections?: any;
 };
 
 export default function HomeClient({
   latestNews = [],
   upcomingEvents = [],
+  albums = [],
+  diapos = [],
   initialSections = null
 }: HomeClientProps) {
   // État pour contrôler l'animation des cartes
@@ -292,7 +296,7 @@ export default function HomeClient({
   return (
     <MainLayout>
       {/* Hero Slider Section */}
-      {homepageContent.sectionsVisibility.heroSlider && <HeroSlider customSlides={homepageContent.heroSlider.slides} />}
+      {homepageContent.sectionsVisibility.heroSlider && <HeroSlider customSlides={diapos.length ? diapos : homepageContent.heroSlider.slides} />}
 
       {/* Featured Section - Design Moderne avec Géométrie */}
       {homepageContent.sectionsVisibility.mission && (
@@ -578,7 +582,7 @@ export default function HomeClient({
       {/* Media Gallery Section */}
       {homepageContent.sectionsVisibility.mediaGallery && (
         <AnimatedSection direction="right" delay={200}>
-          <MediaGallery forceInit={true} />
+          <MediaGallery albums={albums} />
         </AnimatedSection>
       )}
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { useAnnonces } from "@/components/layout/AnnoncesContext";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -79,6 +80,7 @@ const navigation = [
 ];
 
 export default function Header() {
+  const annonces = useAnnonces();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<number | null>(null);
   const [mobileActiveSubmenu, setMobileActiveSubmenu] = useState<number | null>(null);
@@ -175,22 +177,28 @@ export default function Header() {
 
   return (
     <header className="fixed w-full z-50 shadow-lg">
-      {/* Top Bar défilante (Annonces) */}
-      <div className="bg-red-600 text-white py-2 overflow-hidden border-b border-red-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
-          <div className="flex-shrink-0 bg-white text-red-600 text-[10px] uppercase font-bold px-2 py-0.5 rounded mr-4 z-10 animate-pulse">
-            Annonce
-          </div>
-          <div className="relative flex-1 overflow-hidden h-6 flex items-center">
-            <Link
-              href="/publications/offre-emploi"
-              className="animate-marquee hover:underline block cursor-pointer whitespace-nowrap text-sm font-medium"
-            >
-              🚀 Consultez nos nouvelles offres d'emploi dans la section Publications et Rejoignez l'équipe du Fonds de Promotion de la Santé (FPS) ! &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 🚀 Consultez nos avis de recrutement et contribuez à l'accès de tous aux soins de santé !
-            </Link>
+      {/* Top Bar défilante (Annonces) — messages gérés dans WordPress */}
+      {annonces.length > 0 && (
+        <div className="bg-red-600 text-white py-2 overflow-hidden border-b border-red-700">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+            <div className="flex-shrink-0 bg-white text-red-600 text-[10px] uppercase font-bold px-2 py-0.5 rounded mr-4 z-10 animate-pulse">
+              Annonce
+            </div>
+            <div className="relative flex-1 overflow-hidden h-6 flex items-center">
+              <div className="animate-marquee block cursor-pointer whitespace-nowrap text-sm font-medium">
+                {annonces.map((annonce, i) => (
+                  <span key={annonce.id}>
+                    {i > 0 && <>&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; </>}
+                    <Link href={annonce.lien || "/"} className="hover:underline">
+                      {annonce.texte}
+                    </Link>
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Bande supérieure redessinée */}
       <div className="bg-gradient-to-r from-white via-gray-50 to-white border-b-2 border-[var(--accent)]">

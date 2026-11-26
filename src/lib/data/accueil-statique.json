@@ -1,0 +1,54 @@
+{
+ "diapos": [
+  {
+   "id": 1,
+   "title": "Mise en œuvre de la CSU",
+   "description": "Nous envisageons la mise en œuvre du système de la CSU comme un processus en tenant compte de la diversité des contextes géographiques, socio-culturels et économiques.",
+   "image": "/images/slides/new-slides/mise-en-œuvre-de-la-CSU.jpg",
+   "buttonText": "En savoir plus",
+   "buttonLink": "/programmes",
+   "secondaryButtonText": "Contactez-nous",
+   "secondaryButtonLink": "/contact"
+  },
+  {
+   "id": 2,
+   "title": "Accès aux soins pour les vulnérables",
+   "description": "L'accès aux prestations de santé pour les indigents et les vulnérables sur toute l'étendue de la RDC.",
+   "image": "/images/slides/new-slides/acces-aux-soins-pour-les-vulnerables.jpg",
+   "buttonText": "Découvrir le FPS",
+   "buttonLink": "/a-propos"
+  },
+  {
+   "id": 3,
+   "title": "Équité dans l'accès aux soins",
+   "description": "L'accès aux soins des populations, des familles et des individus en assurant l'équité, en enlevant les barrières de toutes sortes.",
+   "image": "/images/slides/new-slides/equite-dans-l-acces-aux-soins.jpg",
+   "buttonText": "Voir les programmes",
+   "buttonLink": "/programmes",
+   "secondaryButtonText": "Partenaires",
+   "secondaryButtonLink": "/financement#partenaires"
+  },
+  {
+   "id": 4,
+   "title": "Participation communautaire",
+   "description": "La participation communautaire suppose que la communauté s'organise pour créer une dynamique en faveur du processus de la CSU.",
+   "image": "/images/slides/new-slides/participation-communautaire.jpg",
+   "buttonText": "Nos initiatives",
+   "buttonLink": "/programmes#capacites",
+   "secondaryButtonText": "Contactez-nous",
+   "secondaryButtonLink": "/contact"
+  }
+ ],
+ "annonces": [
+  {
+   "id": "1",
+   "texte": "🚀 Consultez nos nouvelles offres d'emploi dans la section Publications et Rejoignez l'équipe du Fonds de Promotion de la Santé (FPS) !",
+   "lien": "/publications/offre-emploi"
+  },
+  {
+   "id": "2",
+   "texte": "🚀 Consultez nos avis de recrutement et contribuez à l'accès de tous aux soins de santé !",
+   "lien": "/publications/offre-emploi"
+  }
+ ]
+}

@@ -6,108 +6,23 @@ import { ArrowLeft, Camera, Images } from 'lucide-react';
 import MainLayout from '@/components/layout/MainLayout';
 import PageHeader from '@/components/layout/PageHeader';
 import FeaturedImageBox from '@/components/ui/FeaturedImageBox';
+import { getAlbums, dateAlbum } from '@/lib/data/albums';
 
-export const revalidate = 3600; // 1 heure
+export const revalidate = 60;
 
-// Données des albums stockées en statique (en attendant un modèle MongoDB Album)
-// Ces albums contiennent des photos locales dans /public/images/albums/
-const albumsData: Record<string, {
-  title: string;
-  date: string;
-  description: string;
-  photos: { id: string; src: string; alt: string; caption?: string }[];
-}> = {
-  'reunion-dg-hebdomadaire-dga': {
-    title: 'Réunion hebdomadaire de la Direction générale du FPS',
-    date: '05 mai 2025',
-    description: 'Réunion hebdomadaire de la Direction générale du FPS sous la conduite de sa DGA, Professeure Claudine Tshimanga.',
-    photos: [
-      {
-        id: 'reunion-dg-hebdomadaire-dga-1',
-        src: '/images/albums/album1/01.jpg',
-        alt: 'Réunion de la Direction générale sous la conduite de la DGA',
-        caption: 'Professeure Claudine Tshimanga dirigeant la réunion hebdomadaire'
-      },
-      {
-        id: 'reunion-dg-hebdomadaire-dga-2',
-        src: '/images/albums/album1/495355173_601736906255249_6749656125338518196_n.jpg',
-        alt: 'Participants à la réunion de la Direction générale',
-        caption: "Équipe de direction pendant les discussions"
-      },
-      {
-        id: 'reunion-dg-hebdomadaire-dga-3',
-        src: '/images/albums/album1/495467965_601736722921934_7215218402358744623_n.jpg',
-        alt: 'Séance de travail à la Direction générale',
-        caption: 'Analyse des dossiers en cours'
-      },
-      {
-        id: 'reunion-dg-hebdomadaire-dga-4',
-        src: '/images/albums/album1/495110069_601736726255267_4654519226464166977_n.jpg',
-        alt: 'Discussion entre les cadres du FPS',
-        caption: 'Échange sur les projets prioritaires'
-      },
-      {
-        id: 'reunion-dg-hebdomadaire-dga-5',
-        src: '/images/albums/album1/494639974_601736622921944_5814473378881736652_n.jpg',
-        alt: 'Vue générale de la réunion de la Direction',
-        caption: "Coordination des activités hebdomadaires"
-      }
-    ]
-  },
-  'reunion-hebdomadaire-dg-fps': {
-    title: 'Réunion hebdomadaire de la Direction générale du FPS',
-    date: '07 avril 2025',
-    description: 'Réunion hebdomadaire de la Direction générale du FPS par Professeure Claudine Tshimanga, DGA.',
-    photos: [
-      {
-        id: 'reunion-hebdomadaire-dg-fps-1',
-        src: '/images/albums/album2/01.jpg',
-        alt: 'Réunion de coordination hebdomadaire',
-        caption: 'La DGA présentant les objectifs de la semaine'
-      },
-      {
-        id: 'reunion-hebdomadaire-dg-fps-2',
-        src: '/images/albums/album2/488909830_579644991797774_1772670195890762873_n.jpg',
-        alt: 'Équipe de direction en concertation',
-        caption: 'Analyse des résultats des programmes en cours'
-      },
-      {
-        id: 'reunion-hebdomadaire-dg-fps-3',
-        src: '/images/albums/album2/488912023_579645075131099_660984792756912370_n.jpg',
-        alt: 'Cadres du FPS en réunion',
-        caption: "Discussion sur l'allocation des ressources"
-      },
-      {
-        id: 'reunion-hebdomadaire-dg-fps-4',
-        src: '/images/albums/album2/488917061_579644915131115_2945468185851778057_n.jpg',
-        alt: "Présentation des rapports d'activités",
-        caption: 'Revue des indicateurs de performance'
-      },
-      {
-        id: 'reunion-hebdomadaire-dg-fps-5',
-        src: '/images/albums/album2/489571909_579645045131102_8758764895091984017_n.jpg',
-        alt: 'Session de planification stratégique',
-        caption: "Élaboration du plan d'action mensuel"
-      }
-    ]
-  }
-};
-
-// Génération des chemins statiques
+// Génération des chemins connus au build ; les nouveaux albums sont créés à la première visite
 export async function generateStaticParams() {
-  return Object.keys(albumsData).map(albumId => ({ albumId }));
+  return (await getAlbums()).map(a => ({ albumId: a.id }));
 }
 
 interface AlbumPageProps {
-  params: {
-    albumId: string;
-  };
+  params: Promise<{ albumId: string }>;
 }
 
-export default function AlbumPage({ params }: AlbumPageProps) {
-  const { albumId } = params;
+export default async function AlbumPage({ params }: AlbumPageProps) {
+  const { albumId } = await params;
 
-  const album = albumsData[albumId];
+  const album = (await getAlbums()).find(a => a.id === albumId);
 
   if (!album) {
     notFound();
@@ -141,7 +56,7 @@ export default function AlbumPage({ params }: AlbumPageProps) {
         <div className="mb-10 flex flex-wrap items-center justify-between gap-4 bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm">
           <div className="flex items-center text-gray-600">
             <span className="font-semibold text-gray-900 mr-2">Date :</span>
-            <span>{album.date}</span>
+            <span>{dateAlbum(album.date)}</span>
             <span className="mx-3 text-gray-300">|</span>
             <span className="font-semibold text-gray-900 mr-2">Nombre de photos :</span>
             <span>{photos.length} photos</span>

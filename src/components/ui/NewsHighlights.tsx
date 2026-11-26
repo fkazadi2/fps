@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, ChevronRight, ExternalLink, Newspaper } from "lucide-react";
+import { Calendar, ChevronLeft, ChevronRight, ExternalLink, Newspaper, Pause, Play } from "lucide-react";
 
 // Type pour les articles
 type Article = {
@@ -47,6 +47,43 @@ export default function NewsHighlights({
 
   const isVisible = (id: string) => visibleItems.includes(id);
 
+  // Défilement des cartes : automatique, en pause au survol, au clavier ou avec le bouton
+  const piste = useRef<HTMLDivElement>(null);
+  const [peutDefiler, setPeutDefiler] = useState(false);
+  const [arrete, setArrete] = useState(false);
+  const [survole, setSurvole] = useState(false);
+
+  const defiler = useCallback((sens: 1 | -1) => {
+    const el = piste.current;
+    const carte = el?.firstElementChild as HTMLElement | null;
+    if (!el || !carte) return;
+    const fin = el.scrollWidth - el.clientWidth;
+    if (sens === 1 && el.scrollLeft >= fin - 4) el.scrollTo({ left: 0, behavior: "smooth" });
+    else if (sens === -1 && el.scrollLeft <= 4) el.scrollTo({ left: fin, behavior: "smooth" });
+    else el.scrollBy({ left: sens * (carte.offsetWidth + 32), behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    const mesurer = () => {
+      const el = piste.current;
+      setPeutDefiler(!!el && el.scrollWidth > el.clientWidth + 4);
+    };
+    mesurer();
+    window.addEventListener("resize", mesurer);
+    return () => window.removeEventListener("resize", mesurer);
+  }, [articles]);
+
+  useEffect(() => {
+    // Respecte le réglage « réduire les animations » du visiteur
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) setArrete(true);
+  }, []);
+
+  useEffect(() => {
+    if (!peutDefiler || arrete || survole) return;
+    const minuterie = setInterval(() => defiler(1), 5000);
+    return () => clearInterval(minuterie);
+  }, [peutDefiler, arrete, survole, defiler]);
+
   // Utiliser la date pré-formatée par le backend (optimisation Phase 4)
   const getFormattedDate = (article: Article) => {
     return article.formattedDate || article.publishedAt || article.createdAt;
@@ -88,18 +125,30 @@ export default function NewsHighlights({
             <p className="text-gray-500 text-lg">Aucune actualité disponible pour le moment.</p>
           </div>
         ) : (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {articles.slice(0, 3).map((article, index) => (
+          <div
+            onMouseEnter={() => setSurvole(true)}
+            onMouseLeave={() => setSurvole(false)}
+            onFocus={() => setSurvole(true)}
+            onBlur={() => setSurvole(false)}
+          >
+          {/* Les marges négatives laissent la place aux ombres et au soulèvement des cartes */}
+          <div
+            ref={piste}
+            className="flex gap-8 overflow-x-auto snap-x snap-mandatory -mx-4 px-4 scroll-px-4 -my-6 py-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            aria-label="Actualités, défilement horizontal"
+          >
+            {articles.map((article, index) => (
               <article
                 key={article._id}
                 className={`
+                  shrink-0 snap-start basis-full md:basis-[calc((100%-2rem)/2)] lg:basis-[calc((100%-4rem)/3)]
                   group bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-700 ease-out hover:shadow-2xl hover:-translate-y-2
                   ${isVisible(article._id)
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-12'
                   }
                 `}
-                style={{ transitionDelay: `${index * 150}ms` }}
+                style={{ transitionDelay: `${Math.min(index, 2) * 150}ms` }}
               >
                 {/* Image avec overlay dégradé */}
                 <div className="h-56 relative overflow-hidden">
@@ -148,6 +197,28 @@ export default function NewsHighlights({
                 </div>
               </article>
             ))}
+          </div>
+
+          {peutDefiler && (
+            <div className="mt-10 flex justify-center gap-4">
+              {[
+                { nom: "Actualité précédente", action: () => defiler(-1), Icone: ChevronLeft },
+                { nom: arrete ? "Reprendre le défilement" : "Mettre en pause", action: () => setArrete(v => !v), Icone: arrete ? Play : Pause },
+                { nom: "Actualité suivante", action: () => defiler(1), Icone: ChevronRight },
+              ].map(({ nom, action, Icone }, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={action}
+                  aria-label={nom}
+                  title={nom}
+                  className="w-12 h-12 rounded-full bg-white shadow-lg border border-gray-100 text-[var(--primary)] flex items-center justify-center hover:bg-[var(--primary)] hover:text-white transition-colors cursor-pointer"
+                >
+                  <Icone className="w-5 h-5" />
+                </button>
+              ))}
+            </div>
+          )}
           </div>
         )}
 

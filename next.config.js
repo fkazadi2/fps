@@ -23,6 +23,11 @@ const nextConfig = {
     // Qualité par défaut
     minimumCacheTTL: 60,
   },
+  // Photos publiées dans WordPress : servies sous la même adresse que le site
+  async rewrites() {
+    const wp = process.env.WORDPRESS_URL?.replace(/\/$/, '');
+    return wp ? [{ source: '/wp-content/uploads/:path*', destination: `${wp}/wp-content/uploads/:path*` }] : [];
+  },
   // Compression des assets
   compress: true,
   turbopack: {

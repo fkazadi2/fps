@@ -1,18 +1,14 @@
-"use client";
-
 import MainLayout from "@/components/layout/MainLayout";
 import Link from "next/link";
 import { Search, Calendar, Filter, Camera } from "lucide-react";
-import { useState, useEffect } from "react";
-import { initPhotoAlbums } from '@/lib/services/photoAlbumService';
+import { getAlbums, dateAlbum } from "@/lib/data/albums";
 import PageHeader from "@/components/layout/PageHeader";
 import FeaturedImageBox from "@/components/ui/FeaturedImageBox";
 
-export default function Galerie() {
-  // Initialiser les albums au chargement de la page
-  useEffect(() => {
-    initPhotoAlbums();
-  }, []);
+export const revalidate = 60;
+
+export default async function Galerie() {
+  const albums = await getAlbums();
 
   return (
     <MainLayout>
@@ -80,215 +76,41 @@ export default function Galerie() {
             </div>
             
             <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {/* Album 1 */}
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              {albums.map(album => (
+              <div key={album.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
                 <div className="relative">
                   <div className="h-64 bg-gray-200 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
                     <img
-                      src="/images/albums/album1/01.jpg"
-                      alt="Réunion hebdomadaire de la Direction générale du FPS"
+                      src={album.coverImage}
+                      alt={album.title}
                       className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                     />
                   </div>
                   <div className="absolute bottom-0 left-0 p-4 z-20">
                     <div className="flex items-center text-white mb-1">
                       <Calendar className="h-4 w-4 mr-2" />
-                      <span className="text-sm">05 mai 2025</span>
+                      <span className="text-sm">{dateAlbum(album.date)}</span>
                     </div>
-                    <h3 className="text-xl font-semibold text-white">Réunion hebdomadaire de la Direction générale du FPS</h3>
+                    <h3 className="text-xl font-semibold text-white">{album.title}</h3>
                   </div>
                 </div>
                 <div className="p-4">
                   <p className="text-gray-600 mb-4">
-                    Réunion hebdomadaire de la Direction générale du FPS sous la conduite de sa DGA, Professeure Claudine Tshimanga.
+                    {album.description}
                   </p>
                   <div className="flex justify-between items-center">
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--accent)]/20 text-[var(--secondary)]">
                       <Camera className="h-3 w-3 mr-1" />
-                      5 photos
+                      {album.photos.length} photos
                     </span>
-                    <Link href="/actualites/galerie/reunion-dg-hebdomadaire-dga" className="text-[var(--primary)] font-medium hover:text-[var(--accent)]">
+                    <Link href={`/centre-presse/galerie/${album.id}`} className="text-[var(--primary)] font-medium hover:text-[var(--accent)]">
                       Voir l'album
                     </Link>
                   </div>
                 </div>
               </div>
-
-              {/* Album 2 */}
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="relative">
-                  <div className="h-64 bg-gray-200 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                    <img
-                      src="/images/albums/album2/01.jpg"
-                      alt="Réunion hebdomadaire de la Direction générale du FPS"
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    />
-                  </div>
-                  <div className="absolute bottom-0 left-0 p-4 z-20">
-                    <div className="flex items-center text-white mb-1">
-                      <Calendar className="h-4 w-4 mr-2" />
-                      <span className="text-sm">07 avril 2025</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-white">Réunion hebdomadaire de la Direction générale du FPS</h3>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <p className="text-gray-600 mb-4">
-                    Réunion hebdomadaire de la Direction générale du FPS par Professeure Claudine Tshimanga, DGA.
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--accent)]/20 text-[var(--secondary)]">
-                      <Camera className="h-3 w-3 mr-1" />
-                      5 photos
-                    </span>
-                    <Link href="/actualites/galerie/reunion-hebdomadaire-dg-fps" className="text-[var(--primary)] font-medium hover:text-[var(--accent)]">
-                      Voir l'album
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Album 3 */}
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="relative">
-                  <div className="h-64 bg-gray-200 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                    <img
-                      src="/images/albums/album3/1.jpg"
-                      alt="Briefing hebdomadaire de la Direction Générale du FPS"
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    />
-                  </div>
-                  <div className="absolute bottom-0 left-0 p-4 z-20">
-                    <div className="flex items-center text-white mb-1">
-                      <Calendar className="h-4 w-4 mr-2" />
-                      <span className="text-sm">17 mars 2025</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-white">Briefing hebdomadaire de la Direction générale du FPS</h3>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <p className="text-gray-600 mb-4">
-                    Briefing hebdomadaire de la Direction générale du FPS présidé par le DGE Marius MIKA NYEMBO ce 17.03.2025.
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--accent)]/20 text-[var(--secondary)]">
-                      <Camera className="h-3 w-3 mr-1" />
-                      5 photos
-                    </span>
-                    <Link href="/actualites/galerie/briefing-dg-marius-mika" className="text-[var(--primary)] font-medium hover:text-[var(--accent)]">
-                      Voir l'album
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Album 4 */}
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="relative">
-                  <div className="h-64 bg-gray-200 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                    <img
-                      src="/images/albums/album4/01.jpg"
-                      alt="Réunion Hebdomadaire de la Direction Générale du FPS"
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    />
-                  </div>
-                  <div className="absolute bottom-0 left-0 p-4 z-20">
-                    <div className="flex items-center text-white mb-1">
-                      <Calendar className="h-4 w-4 mr-2" />
-                      <span className="text-sm">27 janvier 2025</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-white">Réunion Hebdomadaire de la Direction Générale du FPS</h3>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <p className="text-gray-600 mb-4">
-                    Réunion hebdomadaire de la Direction générale du Fonds de Promotion de la Santé dirigée par le DG du FPS Marius MIKA NYEMBO. 27.01.2025
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--accent)]/20 text-[var(--secondary)]">
-                      <Camera className="h-3 w-3 mr-1" />
-                      4 photos
-                    </span>
-                    <Link href="/actualites/galerie/reunion-dg-marius-mika-janvier" className="text-[var(--primary)] font-medium hover:text-[var(--accent)]">
-                      Voir l'album
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Album 5 */}
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="relative">
-                  <div className="h-64 bg-gray-200 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                    <img
-                      src="/images/albums/album5/1.jpg"
-                      alt="Réunion hebdomadaire de la direction générale"
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    />
-                  </div>
-                  <div className="absolute bottom-0 left-0 p-4 z-20">
-                    <div className="flex items-center text-white mb-1">
-                      <Calendar className="h-4 w-4 mr-2" />
-                      <span className="text-sm">18 novembre 2024</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-white">Réunion hebdomadaire de la direction générale</h3>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <p className="text-gray-600 mb-4">
-                    Réunion hebdomadaire de la Direction générale présidée par professeure #TSHIMANGA #MBUYI Claudine, DGA du Fonds de Promotion de la Santé. 18.11.2024
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--accent)]/20 text-[var(--secondary)]">
-                      <Camera className="h-3 w-3 mr-1" />
-                      3 photos
-                    </span>
-                    <Link href="/actualites/galerie/reunion-dga-tshimanga-mbuyi" className="text-[var(--primary)] font-medium hover:text-[var(--accent)]">
-                      Voir l'album
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Album 6 */}
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="relative">
-                  <div className="h-64 bg-gray-200 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                    <img
-                      src="/images/albums/album6/01.jpg"
-                      alt="Réunion hebdomadaire de la Direction Générale"
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    />
-                  </div>
-                  <div className="absolute bottom-0 left-0 p-4 z-20">
-                    <div className="flex items-center text-white mb-1">
-                      <Calendar className="h-4 w-4 mr-2" />
-                      <span className="text-sm">11 juin 2024</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-white">Réunion hebdomadaire de la Direction Générale</h3>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <p className="text-gray-600 mb-4">
-                    Réunion hebdomadaire de la Direction générale. La préparation de la conférence FPS-FEC ce mardi 11 juin 2024 a été à l'ordre du jour.
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--accent)]/20 text-[var(--secondary)]">
-                      <Camera className="h-3 w-3 mr-1" />
-                      4 photos
-                    </span>
-                    <Link href="/actualites/galerie/reunion-preparation-conference-fps-fec" className="text-[var(--primary)] font-medium hover:text-[var(--accent)]">
-                      Voir l'album
-                    </Link>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
 
             {/* Pagination */}

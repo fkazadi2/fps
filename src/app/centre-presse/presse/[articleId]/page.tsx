@@ -9,12 +9,17 @@ import FeaturedImageBox from '@/components/ui/FeaturedImageBox';
 import SocialShareButtons from '@/components/ui/SocialShareButtons';
 import connectDB from '@/lib/mongodb';
 import Article from '@/lib/models/Article';
+import { getArticles, getArticleBySlug } from '@/lib/data/articles';
+import { wordpressActif } from '@/lib/data/wordpress';
 
 // Désactivation ISR — contenu stable, mise à jour à chaque déploiement
 export const revalidate = 3600; // 1 heure
 
 // Génération des slugs connus au build time
 export async function generateStaticParams() {
+  if (wordpressActif) {
+    return (await getArticles(200)).map((a: any) => ({ articleId: a.slug }));
+  }
   try {
     await connectDB();
     const articles = await Article.find({ published: true })
@@ -40,11 +45,15 @@ interface ArticlePageProps {
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { articleId } = await params;
 
-  // Lecture depuis MongoDB (Server Component — pas de localStorage)
+  // Lecture depuis WordPress s'il est configuré, sinon MongoDB (Server Component)
   let article: any = null;
   try {
-    await connectDB();
-    article = await Article.findOne({ slug: articleId, published: true }).lean();
+    if (wordpressActif) {
+      article = await getArticleBySlug(articleId);
+    } else {
+      await connectDB();
+      article = await Article.findOne({ slug: articleId, published: true }).lean();
+    }
   } catch (error) {
     console.error('[ArticlePage] Erreur DB:', error);
   }

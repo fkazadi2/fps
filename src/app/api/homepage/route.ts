@@ -16,17 +16,22 @@ import { getArticles } from '@/lib/data/articles';
  */
 export async function GET() {
     try {
-        await connectDB();
-
         // Récupérer toutes les sections actives, triées par ordre d'affichage
-        const sections = await HomepageSection
-            .find({ active: true })
-            .sort({ displayOrder: 1 })
-            .lean();
+        // (si la base est injoignable, on continue : les actualités viennent d'ailleurs)
+        let sections: any[] = [];
+        try {
+            await connectDB();
+            sections = await HomepageSection
+                .find({ active: true })
+                .sort({ displayOrder: 1 })
+                .lean();
+        } catch (e) {
+            console.warn("⚠️ Mode Resilience : sections de la Homepage indisponibles.");
+        }
 
         // Récupérer les articles et événements en parallèle
         const [latestNews, upcomingEvents] = await Promise.all([
-            getArticles(3, 'communique'),
+            getArticles(9, 'communique'),
             getArticles(3, 'evenement')
         ]);
 

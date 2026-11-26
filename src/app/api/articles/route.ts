@@ -2,14 +2,23 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Article from "@/lib/models/Article";
 import { requireAdmin } from "@/lib/auth/require-admin";
+import { lireArticlesWordPress } from "@/lib/data/wordpress";
 
 export async function GET(request: Request) {
     try {
-        await connectDB();
         const { searchParams } = new URL(request.url);
         const category = searchParams.get("category");
         const status = searchParams.get("status");
         const limit = parseInt(searchParams.get("limit") || "50");
+
+        // WordPress ne publie que les articles en ligne : les brouillons restent lus dans MongoDB
+        const wp = status === "draft" ? null : await lireArticlesWordPress();
+        if (wp) {
+            const selection = category && category !== "all" ? wp.filter(a => a.category === category) : wp;
+            return NextResponse.json(selection.slice(0, limit));
+        }
+
+        await connectDB();
 
         const query: any = {};
         if (category && category !== "all") query.category = category;
