@@ -3,101 +3,12 @@ import MainLayout from "@/components/layout/MainLayout";
 import PageHeader from "@/components/layout/PageHeader";
 import FeaturedImageBox from "@/components/ui/FeaturedImageBox";
 import Link from "next/link";
+import { getDocuments } from "@/lib/data/publications";
 
-// Données des documents en "local" pour ne pas dépendre de MongoDB
-const DOCUMENTS_DATA = [
-  {
-    id: "doc-2023-annuel",
-    title: "Rapport Annuel 2023 - Activités et Réalisations",
-    category: "Rapport Annuel",
-    date: "15 Janvier 2024",
-    description: "Rapport complet des activités et réalisations du FPS pour l'année 2023, incluant les statistiques de performance et les projets réalisés.",
-    fileUrl: "/uploads/documents/Rapport annuel FPS 2023.pdf",
-    fileSize: "2.5 MB",
-    format: "PDF",
-    downloads: 1250,
-  },
-  {
-    id: "doc-gratuite-accouchements",
-    title: "Rapport sur la Gratuité des Accouchements",
-    category: "Rapport Technique",
-    date: "10 Mars 2024",
-    description: "Analyse de l'impact du programme de gratuité des accouchements sur la santé maternelle et néonatale en RDC.",
-    fileUrl: "/uploads/documents/Rapport - Gratuité des accouchements.pdf",
-    fileSize: "1.8 MB",
-    format: "PDF",
-    downloads: 890,
-  },
-  {
-    id: "doc-loi-csu-2023",
-    title: "Loi relative à la CSU - N°23/006",
-    category: "Texte Légal",
-    date: "03 Mars 2023",
-    description: "Loi portant modification et complétant certaines dispositions relatives à la Couverture Santé Universelle (CSU).",
-    fileUrl: "/uploads/documents/loi_csu_23_006_du_03_mars_2023.pdf",
-    fileSize: "1.2 MB",
-    format: "PDF",
-    downloads: 450,
-  },
-  {
-    id: "doc-decret-fps-tps1",
-    title: "Décret N°25/028 du 17 JUIL 2025",
-    category: "Décret",
-    date: "Mars 2024",
-    description: "Décret fixant les modalités de fonctionnement et d'organisation technique du Fonds de Promotion de la Santé.",
-    fileUrl: "/uploads/documents/Décret FPS TPS-1.pdf",
-    fileSize: "0.8 MB",
-    format: "PDF",
-    downloads: 320,
-  },
-  {
-    id: "doc-decrets-journal",
-    title: "Journal des Décrets FPS",
-    category: "Bulletin Officiel",
-    date: "Avril 2024",
-    description: "Recueil officiel regroupant l'ensemble des décrets et ordonnances relatifs au fonctionnement du Fonds de Promotion de la Santé.",
-    fileUrl: "/uploads/documents/Decrets Journal FPS.pdf",
-    fileSize: "3.1 MB",
-    format: "PDF",
-    downloads: 150,
-  },
-  {
-    id: "doc-constitution-rdc",
-    title: "Constitution de la RDC",
-    category: "Texte Légal",
-    date: "Révision 2011",
-    description: "Constitution de la République Démocratique du Congo (révision de certains articles par la loi n°11/002 du 20 janvier 2011).",
-    fileUrl: "/uploads/documents/Constitution%20de%20la%20RDC.pdf",
-    fileSize: "—",
-    format: "PDF",
-    downloads: 0,
-  },
-  {
-    id: "doc-loi-18-035-2018",
-    title: "Loi n° 18/035 du 13 décembre 2018",
-    category: "Texte Légal",
-    date: "13 Décembre 2018",
-    description: "Loi fixant les principes fondamentaux relatifs à l’organisation de la santé publique en République Démocratique du Congo.",
-    fileUrl: "/uploads/documents/Loi%2018%3A035.pdf",
-    fileSize: "—",
-    format: "PDF",
-    downloads: 0,
-  },
-  {
-    id: "doc-ordonnance-cncsu-21-032-2021",
-    title: "Ordonnance n° 21/032 du 1er juin 2021 (CNCSU)",
-    category: "Texte Légal",
-    date: "1er Juin 2021",
-    description: "Ordonnance portant création, organisation et fonctionnement du Conseil National de la Couverture Santé Universelle (CNCSU).",
-    fileUrl: "/uploads/documents/830.06.21-Ordonnance-du-1er-juin-2021_CNCSU.pdf",
-    fileSize: "—",
-    format: "PDF",
-    downloads: 0,
-  }
-];
+export const revalidate = 60;
 
-export default function RapportsDocumentationsPage() {
-  const documents = DOCUMENTS_DATA;
+export default async function RapportsDocumentationsPage() {
+  const documents = await getDocuments();
 
   // Grouper par catégorie pour les filtres
   const categoriesMap = documents.reduce((acc: any, doc: any) => {

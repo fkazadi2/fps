@@ -5,29 +5,12 @@ import MainLayout from "@/components/layout/MainLayout";
 import PageHeader from "@/components/layout/PageHeader";
 import FeaturedImageBox from "@/components/ui/FeaturedImageBox";
 import Image from "next/image";
+import { getOffres } from "@/lib/data/publications";
 
-export default function OffreEmploiPage() {
-  const offresEmploi = [
-    {
-      id: 1,
-      titre: "Avis de Recrutement Officiel - FPS",
-      departement: "Multi-départements",
-      lieu: "Kinshasa & Provinces",
-      type: "CDI / CDD",
-      niveau: "Divers profils",
-      experience: "Selon profil",
-      datePublication: "03 Avril 2026",
-      dateLimite: "Voir PDF",
-      salaire: "Selon grille barémique",
-      description: "Appel à candidatures pour divers postes au sein du Fonds de Promotion de la Santé. Veuillez consulter le document officiel pour le détail des postes et les modalités de soumission.",
-      pdfUrl: "/uploads/documents/FPS_AVIS DE RECRUTEMENT OFFICIEL 3 Avril 2026.pdf",
-      requirements: [
-        "Consulter l'avis de recrutement complet (PDF)",
-        "Dossier de candidature complet",
-        "Disponibilité immédiate souhaitée"
-      ]
-    }
-  ];
+export const revalidate = 60;
+
+export default async function OffreEmploiPage() {
+  const offresEmploi = await getOffres();
 
   return (
     <MainLayout>
@@ -73,12 +56,12 @@ export default function OffreEmploiPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="bg-green-50 p-4 rounded-lg text-center">
-                <div className="text-2xl font-bold text-green-600">1</div>
-                <div className="text-sm text-gray-600">Offre active</div>
+                <div className="text-2xl font-bold text-green-600">{offresEmploi.length}</div>
+                <div className="text-sm text-gray-600">{offresEmploi.length > 1 ? "Offres actives" : "Offre active"}</div>
               </div>
               <div className="bg-blue-50 p-4 rounded-lg text-center">
-                <div className="text-2xl font-bold text-blue-600">1</div>
-                <div className="text-sm text-gray-600">Document officiel</div>
+                <div className="text-2xl font-bold text-blue-600">{offresEmploi.filter(o => o.pdfUrl).length}</div>
+                <div className="text-sm text-gray-600">{offresEmploi.filter(o => o.pdfUrl).length > 1 ? "Documents officiels" : "Document officiel"}</div>
               </div>
               <div className="bg-purple-50 p-4 rounded-lg text-center">
                 <div className="text-2xl font-bold text-purple-600">National</div>
@@ -119,6 +102,9 @@ export default function OffreEmploiPage() {
 
           {/* Liste des offres */}
           <div className="space-y-6">
+            {offresEmploi.length === 0 && (
+              <p className="text-center text-gray-500 py-8">Aucune offre en cours pour le moment.</p>
+            )}
             {offresEmploi.map((offre) => (
               <div key={offre.id} className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
                 <div className="p-6">
@@ -171,6 +157,7 @@ export default function OffreEmploiPage() {
                       <div className="text-lg font-bold text-green-600 mb-2">{offre.salaire}</div>
                       <div className="text-sm text-gray-500 mb-4">par mois</div>
                       <div className="space-y-3">
+                        {offre.pdfUrl && (
                         <a
                           href={offre.pdfUrl}
                           target="_blank"
@@ -182,6 +169,7 @@ export default function OffreEmploiPage() {
                           </svg>
                           Télécharger l'avis
                         </a>
+                        )}
                         <Link
                           href="/contact"
                           className="w-full bg-blue-50 text-blue-700 border border-blue-200 px-6 py-2 rounded-lg hover:bg-blue-100 transition-colors flex items-center justify-center text-sm"

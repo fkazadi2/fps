@@ -1,0 +1,48 @@
+# WordPress du FPS sur le serveur (outil de saisie, la façade reste le site Next.js)
+name: fps-wordpress
+
+services:
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+    mem_limit: 512m
+    cpus: 1.0
+
+  wordpress:
+    image: wordpress:php8.3-apache
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      # 127.0.0.1 uniquement : Docker contourne le pare-feu, ne jamais retirer ce préfixe
+      - "127.0.0.1:8081:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_CONFIG_EXTRA: |
+        define('DISALLOW_FILE_EDIT', true);
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content:/var/www/html/wp-content
+      - ./php.ini:/usr/local/etc/php/conf.d/fps.ini:ro
+    mem_limit: 768m
+    cpus: 1.5
+
+volumes:
+  db_data:
+  wp_data:

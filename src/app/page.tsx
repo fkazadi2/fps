@@ -3,6 +3,8 @@ import HomeClient from './HomeClient';
 import connectDB from '@/lib/mongodb';
 import HomepageSection from '@/lib/models/HomepageSection';
 import { getArticles } from '@/lib/data/articles';
+import { getAlbums } from '@/lib/data/albums';
+import { getDiapos } from '@/lib/data/accueil';
 
 export const revalidate = 60; // Revalider toutes les minutes (ISR)
 
@@ -12,19 +14,21 @@ export const revalidate = 60; // Revalider toutes les minutes (ISR)
  */
 export default async function Home() {
     try {
-        await connectDB();
-
         // Récupérer les sections, les articles et les événements en parallèle
+        // La base des sections peut être injoignable sans priver l'accueil des actualités
         let sections: any[] = [];
         try {
+            await connectDB();
             sections = await HomepageSection.find({ active: true }).sort({ displayOrder: 1 }).lean();
         } catch (e) {
             console.warn("⚠️ Mode Resilience : Impossible de charger les sections de la Homepage depuis la DB.");
         }
 
-        const [latestNews, upcomingEvents] = await Promise.all([
-            getArticles(3, 'communique'),
-            getArticles(3, 'evenement')
+        const [latestNews, upcomingEvents, albums, diapos] = await Promise.all([
+            getArticles(9, 'communique'),
+            getArticles(3, 'evenement'),
+            getAlbums(),
+            getDiapos()
         ]);
 
         // Transformer les sections pour le format attendu par HomeClient
@@ -70,6 +74,8 @@ export default async function Home() {
             <HomeClient
                 latestNews={latestNews}
                 upcomingEvents={upcomingEvents}
+                albums={albums.slice(0, 6)}
+                diapos={diapos}
                 initialSections={homepageContent}
             />
         );

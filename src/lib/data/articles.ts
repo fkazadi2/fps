@@ -4,6 +4,7 @@ import { cache } from "react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { MOCK_ARTICLES } from "./mock-data";
+import { lireArticlesWordPress } from "./wordpress";
 
 const normalizeMatadiImagePath = (src: string) =>
     src.replace(/^\/images\/articles\/fps-matadi-csu\/(.+)\.jpeg$/, "/images/articles/fps-matadi-csu/$1.jpg");
@@ -61,6 +62,12 @@ function formatArticle(article: any) {
 }
 
 export const getArticles = cache(async (limit = 50, category?: string) => {
+    const wp = await lireArticlesWordPress();
+    if (wp) {
+        const selection = category && category !== "all" ? wp.filter(a => a.category === category) : wp;
+        return selection.slice(0, limit).map(formatArticle);
+    }
+
     try {
         await connectDB();
         const query: any = { published: true };
@@ -87,6 +94,13 @@ export const getArticles = cache(async (limit = 50, category?: string) => {
 });
 
 export const getArticleBySlug = cache(async (slug: string) => {
+    const wp = await lireArticlesWordPress();
+    if (wp) {
+        const cherche = slug.replace("/actualites/", "").replace(/^\//, "");
+        const trouve = wp.find(a => a.slug === cherche);
+        return trouve ? formatArticle(trouve) : null;
+    }
+
     try {
         await connectDB();
         const cleanSlug = slug.replace("/actualites/", "").replace(/^\//, "");

@@ -1,4 +1,6 @@
 import "./globals.css";
+import AnnoncesProvider from "@/components/layout/AnnoncesContext";
+import { getAnnonces } from "@/lib/data/accueil";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Poppins, Roboto } from "next/font/google";
@@ -38,11 +40,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const annonces = await getAnnonces();
+
   return (
     <html lang="fr" className={`scroll-smooth bg-white ${poppins.variable} ${roboto.variable}`}>
       <head>
@@ -50,7 +54,7 @@ export default function RootLayout({
       </head>
       <body className={`${roboto.className} antialiased text-gray-800 bg-white`}>
         <QueryProvider>
-          {children}
+          <AnnoncesProvider annonces={annonces}>{children}</AnnoncesProvider>
 
           {/* Initialisation du CMS côté client avec le composant client */}
           <ClientCmsInitializer />

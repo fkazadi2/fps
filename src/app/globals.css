@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "./colors.css";
+/* Fichiers WordPress (PHP, scripts) : à ne pas analyser par Tailwind */
+@source not "../../wordpress";
 
 :root {
   --background: #ffffff;

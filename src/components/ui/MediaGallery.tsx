@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Calendar, Camera } from 'lucide-react';
-import { usePhotoAlbums, initPhotoAlbums, PhotoAlbum } from '@/lib/services/photoAlbumService';
+import type { PhotoAlbumSite } from '@/lib/data/albums';
+import { dateAlbum } from '@/lib/data/dates-albums';
 
 // Type pour les éléments média
 type MediaItem = {
@@ -18,185 +19,33 @@ type MediaItem = {
   link?: string;
 };
 
-// Données de démonstration pour la galerie - à utiliser si le localStorage n'est pas disponible
-const defaultMediaItems: MediaItem[] = [
-  {
-    id: 'reunion-dg-hebdomadaire-dga',
-    type: 'image',
-    src: '/images/albums/album1/01.jpg',
-    thumbnail: '/images/albums/album1/01.jpg',
-    title: 'Réunion hebdomadaire de la Direction générale du FPS',
-    description: 'Réunion hebdomadaire de la Direction générale du FPS sous la conduite de sa DGA, Professeure Claudine Tshimanga.',
-    date: '05 mai 2025',
-    link: '/actualites/galerie/reunion-dg-hebdomadaire-dga'
-  },
-  {
-    id: 'reunion-hebdomadaire-dg-fps',
-    type: 'image',
-    src: '/images/albums/album2/01.jpg',
-    thumbnail: '/images/albums/album2/01.jpg',
-    title: 'Réunion hebdomadaire de la Direction générale du FPS',
-    description: 'Réunion hebdomadaire de la Direction générale du FPS par Professeure Claudine Tshimanga, DGA.',
-    date: '07 avril 2025',
-    link: '/actualites/galerie/reunion-hebdomadaire-dg-fps'
-  },
-  {
-    id: 'briefing-dg-marius-mika',
-    type: 'image',
-    src: '/images/albums/album3/1.jpg',
-    thumbnail: '/images/albums/album3/1.jpg',
-    title: 'Briefing hebdomadaire de la Direction générale du FPS',
-    description: 'Briefing hebdomadaire de la Direction générale du FPS présidé par le DGE Marius MIKA NYEMBO ce 17.03.2025.',
-    date: '17 mars 2025',
-    link: '/actualites/galerie/briefing-dg-marius-mika'
-  },
-  {
-    id: 'reunion-dg-marius-mika-janvier',
-    type: 'image',
-    src: '/images/albums/album4/01.jpg',
-    thumbnail: '/images/albums/album4/01.jpg',
-    title: 'Réunion hebdomadaire de la Direction générale du FPS',
-    description: 'Réunion hebdomadaire de la Direction générale du Fonds de Promotion de la Santé dirigée par le DGE Marius MIKA NYEMBO. 27.01.2025',
-    date: '27 janvier 2025',
-    link: '/actualites/galerie/reunion-dg-marius-mika-janvier'
-  },
-  {
-    id: 'reunion-dga-tshimanga-mbuyi',
-    type: 'image',
-    src: '/images/albums/album5/1.jpg',
-    thumbnail: '/images/albums/album5/1.jpg',
-    title: 'Réunion hebdomadaire de la direction générale',
-    description: 'Réunion hebdomadaire de la Direction générale présidée par professeure TSHIMANGA MBUYI Claudine, DGA du Fonds de Promotion de la Santé.',
-    date: '18 novembre 2024',
-    link: '/actualites/galerie/reunion-dga-tshimanga-mbuyi'
-  },
-  {
-    id: 'reunion-preparation-conference-fps-fec',
-    type: 'image',
-    src: '/images/albums/album6/01.jpg',
-    thumbnail: '/images/albums/album6/01.jpg',
-    title: 'Réunion hebdomadaire de la Direction générale',
-    description: 'Réunion hebdomadaire de la Direction générale. La préparation de la conférence FPS-FEC ce mardi 11 juin 2024 a été à l\'ordre du jour.',
-    date: '11 juin 2024',
-    link: '/actualites/galerie/reunion-preparation-conference-fps-fec'
-  }
-];
-
 // Fonction pour convertir un album photo en élément média
-const albumToMediaItem = (album: PhotoAlbum): MediaItem => {
-  // Convertir format date "05/05/2025" en "05 mai 2025"
-  let formattedDate = album.date;
-  try {
-    const [day, month, year] = album.date.split('/');
-    const monthNames = [
-      'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
-      'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'
-    ];
-    const monthIndex = parseInt(month, 10) - 1;
-    if (monthNames[monthIndex]) {
-      formattedDate = `${day} ${monthNames[monthIndex]} ${year}`;
-    }
-  } catch (e) {
-    console.error("Erreur de formatage de date:", e);
-  }
-
-  return {
-    id: album.id,
-    type: 'image',
-    src: album.coverImage,
-    thumbnail: album.coverImage,
-    title: album.title,
-    description: album.description,
-    date: formattedDate,
-    link: `/actualites/galerie/${album.id}`
-  };
-};
+const albumToMediaItem = (album: PhotoAlbumSite): MediaItem => ({
+  id: album.id,
+  type: 'image',
+  src: album.coverImage,
+  thumbnail: album.coverImage,
+  title: album.title,
+  description: album.description,
+  date: dateAlbum(album.date),
+  link: `/centre-presse/galerie/${album.id}`
+});
 
 // Type pour les propriétés du composant
 type MediaGalleryProps = {
-  mediaItems?: MediaItem[];
+  albums?: PhotoAlbumSite[];
   title?: string;
   subtitle?: string;
-  forceInit?: boolean; // Nouveau prop pour forcer l'initialisation
 };
 
-export default function MediaGallery({ 
-  mediaItems = [],
+export default function MediaGallery({
+  albums = [],
   title = "Galerie média",
   subtitle = "Découvrez en images les activités et réalisations du Fonds de Promotion de la Santé",
-  forceInit = false // Valeur par défaut
 }: MediaGalleryProps) {
   const [selectedItem, setSelectedItem] = useState<MediaItem | null>(null);
-  const [displayItems, setDisplayItems] = useState<MediaItem[]>(defaultMediaItems);
-  const { albums, loading } = usePhotoAlbums();
-
-  // Charger les albums au démarrage et quand forceInit change
-  useEffect(() => {
-    // Si forceInit est true, réinitialisons complètement les albums
-    if (forceInit && typeof window !== 'undefined') {
-      // Supprimer les données existantes
-      localStorage.removeItem('fps_photo_albums');
-      // Réinitialiser
-      initPhotoAlbums();
-    } else {
-      // Initialisation normale
-      initPhotoAlbums();
-    }
-  }, [forceInit]);
-
-  // Mettre à jour les éléments média quand les albums sont chargés
-  useEffect(() => {
-    if (albums && albums.length > 0) {
-      console.log("Albums chargés dans MediaGallery:", albums);
-      
-      // Triez les albums par date (du plus récent au plus ancien)
-      const sortedAlbums = [...albums].sort((a, b) => {
-        try {
-          // Format attendu: "DD/MM/YYYY" (par exemple "05/05/2025")
-          const [dayA, monthA, yearA] = a.date.split('/');
-          const [dayB, monthB, yearB] = b.date.split('/');
-          
-          // Créer des objets Date (format: YYYY-MM-DD)
-          const dateA = new Date(`${yearA}-${monthA}-${dayA}`);
-          const dateB = new Date(`${yearB}-${monthB}-${dayB}`);
-          
-          // Vérifier si les dates sont valides
-          if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
-            console.error("Dates invalides:", a.date, b.date);
-            return 0; // Pas de changement d'ordre si dates invalides
-          }
-          
-          // Trier du plus récent au plus ancien
-          return dateB.getTime() - dateA.getTime();
-        } catch (error) {
-          console.error("Erreur lors du tri des dates:", error);
-          return 0;
-        }
-      });
-      
-      // Log pour vérifier le tri
-      console.log("Albums triés:", sortedAlbums.map(a => ({ id: a.id, date: a.date })));
-      
-      // Convertir les albums en éléments média
-      const albumItems = sortedAlbums.map(albumToMediaItem);
-      
-      // Limiter à 6 éléments maximum
-      setDisplayItems(albumItems.slice(0, 6));
-    }
-  }, [albums]);
-
-  // Effet pour forcer une actualisation du composant
-  useEffect(() => {
-    // Créer un petit délai pour s'assurer que le localStorage est bien initialisé
-    if (forceInit) {
-      const timer = setTimeout(() => {
-        // Forcer une mise à jour du composant
-        setDisplayItems([...defaultMediaItems]);
-      }, 500);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [forceInit]);
+  // Albums déjà triés du plus récent au plus ancien ; 6 au maximum sur l'accueil
+  const displayItems = albums.slice(0, 6).map(albumToMediaItem);
 
   // Fonction pour ouvrir la vue détaillée
   const openModal = (item: MediaItem) => {
@@ -243,14 +92,7 @@ export default function MediaGallery({
           </p>
         </div>
 
-        {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <div className="relative">
-              <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[var(--accent)]"></div>
-              <div className="absolute inset-0 rounded-full border-4 border-gray-200"></div>
-            </div>
-          </div>
-        ) : (
+        {(
           <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {displayItems.map((item, index) => (
               <div 
